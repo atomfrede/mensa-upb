@@ -18,7 +18,11 @@
  */
 package de.atomfrede.android.mensa.activity;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +40,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public static String TAG = "LocationSelectionActivity";
 
 	String[] locations;
+	SharedPreferences settings;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -46,7 +51,8 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, locations);
 		setListAdapter(adapter);
 
-		downloadData();
+		if(refreshRequired())
+			downloadData();
 	}
 
 	@Override
@@ -65,6 +71,24 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		}
 	}
 
+	private boolean refreshRequired(){
+		settings = getSharedPreferences(MensaConstants.MENSA_PREFS, LocationSelectionActivity.MODE_PRIVATE);
+	
+		if(!settings.contains(MensaConstants.LAST_UPDATE_KEY))
+			return false;
+		
+		int lastUpdate = settings.getInt(MensaConstants.LAST_UPDATE_KEY, -1);
+		if(getWeekOfYear() > lastUpdate)
+			return true;
+		return false;
+		
+	}
+	
+	private int getWeekOfYear(){
+		Calendar now = Calendar.getInstance();
+		return now.get(Calendar.WEEK_OF_YEAR);
+	}
+	
 	public void downloadData() {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
 		task.execute();
@@ -91,6 +115,10 @@ public class LocationSelectionActivity extends SherlockListActivity {
 				e.printStackTrace();
 			}
 			return null;
+		}
+		
+		protected void onPostExecute(MealPlan result) {
+			settings.edit().putInt(MensaConstants.LAST_UPDATE_KEY, getWeekOfYear());
 		}
 
 	}

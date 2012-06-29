@@ -34,4 +34,10 @@ public final class MensaConstants {
 	public static final String PUB_URL = "http://www.studentenwerk-pb.de/fileadmin/xml/gownsmenspub.xml";
 	public static final String HOTSPOT_URL = "http://www.studentenwerk-pb.de/fileadmin/xml/palmengarten.xml";
 	
+	/**
+	 * Key for preferences that saves the week of year when the last update of mensa data was done. e.g. 26
+	 */
+	public static final String LAST_UPDATE_KEY = "lastUpdate";
+	
+	public static final String MENSA_PREFS = "mensaPrefs";
 }
