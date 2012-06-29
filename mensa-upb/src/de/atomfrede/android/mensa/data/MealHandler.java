@@ -25,7 +25,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class MealHandler extends DefaultHandler {
 
 	enum TagNames {
-		kw, von, bis, tag, datum, wochentag, menue, menu, speisentyp, text, beilage, preis, ausgabe
+		kw, von, bis, tag, datum, wochentag, menue, menu, speisentyp, text, beilage, preis, ausgabe, txt, filiale
 	}
 
 	private WeeklyMeal parsedMeal = new WeeklyMeal();
@@ -34,6 +34,8 @@ public class MealHandler extends DefaultHandler {
 	private Menu currentMenu;
 
 	private TagNames currentTag;
+
+	private boolean isPub = false;
 
 	public WeeklyMeal getParsedMeal() {
 		return parsedMeal;
@@ -50,6 +52,9 @@ public class MealHandler extends DefaultHandler {
 
 	@Override
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException {
+		if (localName.equals(TagNames.filiale.toString())) {
+			currentTag = TagNames.filiale;
+		}
 		if (localName.equals(TagNames.kw.toString())) {
 			currentTag = TagNames.kw;
 		}
@@ -64,18 +69,20 @@ public class MealHandler extends DefaultHandler {
 			currentDailyMeal = new DailyMeal();
 			if (parsedMeal != null)
 				parsedMeal.addMeal(currentDailyMeal);
+
 		}
 		if (localName.equals(TagNames.datum.toString())) {
 			currentTag = TagNames.datum;
 		}
 		if (localName.equals(TagNames.wochentag.toString())) {
 			currentTag = TagNames.wochentag;
+
 		}
 		if (localName.equals(TagNames.menue.toString())) {
 			currentTag = TagNames.menue;
-			currentMenu = new Menu();
-			if (currentDailyMeal != null)
-				currentDailyMeal.addMenu(currentMenu);
+				currentMenu = new Menu();
+				if (currentDailyMeal != null)
+					currentDailyMeal.addMenu(currentMenu);
 		}
 		if (localName.equals(TagNames.menu.toString())) {
 			currentTag = TagNames.menu;
@@ -94,6 +101,9 @@ public class MealHandler extends DefaultHandler {
 		}
 		if (localName.equals(TagNames.ausgabe.toString())) {
 			currentTag = TagNames.ausgabe;
+		}
+		if (localName.equals(TagNames.txt.toString())) {
+			currentTag = TagNames.txt;
 		}
 	}
 
@@ -116,6 +126,14 @@ public class MealHandler extends DefaultHandler {
 			case text:
 				currentMenu.setText(new String(ch, start, length));
 				break;
+			case txt:
+				if(currentMenu == null){
+					currentMenu = new Menu();
+					currentDailyMeal.addMenu(currentMenu);
+				}
+				currentMenu.setText(new String(ch, start, length));
+				currentMenu=null;
+				break;
 			case beilage:
 				currentMenu.addSideDish(new String(ch, start, length));
 				break;
@@ -129,5 +147,4 @@ public class MealHandler extends DefaultHandler {
 			}
 		}
 	}
-
 }

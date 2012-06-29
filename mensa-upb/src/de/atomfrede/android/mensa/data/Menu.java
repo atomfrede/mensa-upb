@@ -101,7 +101,8 @@ public class Menu {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(name).append("\n");
+		if(name != null)
+			sb.append(name).append("\n");
 		
 		if(text != null)
 			sb.append(text).append("\n");
