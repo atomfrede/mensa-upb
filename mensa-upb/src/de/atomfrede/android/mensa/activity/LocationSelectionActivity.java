@@ -31,6 +31,7 @@ import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
 
 import de.atomfrede.android.mensa.MensaConstants;
 import de.atomfrede.android.mensa.R;
@@ -81,6 +82,17 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	    MenuInflater inflater = getSupportMenuInflater();
 	    inflater.inflate(R.menu.main, menu);
 	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case R.id.menu_refresh:
+	            downloadData();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 
 	private boolean refreshRequired(){
