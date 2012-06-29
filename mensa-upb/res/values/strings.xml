@@ -23,4 +23,5 @@
     <string name="mensa_title">Mensa</string>
     <string name="pub_title">Pub</string>
     <string name="bistro_title">Hot-Spot</string>
+    <string name="menu_refresh">Refresh</string>
 </resources>
