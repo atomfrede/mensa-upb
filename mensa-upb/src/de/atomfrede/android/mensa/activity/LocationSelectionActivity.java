@@ -19,17 +19,18 @@
 package de.atomfrede.android.mensa.activity;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.view.MenuInflater;
 
 import de.atomfrede.android.mensa.MensaConstants;
 import de.atomfrede.android.mensa.R;
@@ -38,7 +39,8 @@ import de.atomfrede.android.mensa.data.*;
 public class LocationSelectionActivity extends SherlockListActivity {
 
 	public static String TAG = "LocationSelectionActivity";
-
+	
+	private static final boolean refreshAlways = true;
 	String[] locations;
 	SharedPreferences settings;
 
@@ -51,8 +53,11 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, locations);
 		setListAdapter(adapter);
 
-		if(refreshRequired())
+		settings = getSharedPreferences(MensaConstants.MENSA_PREFS, LocationSelectionActivity.MODE_PRIVATE);
+		
+		if(refreshAlways || refreshRequired())
 			downloadData();
+		
 	}
 
 	@Override
@@ -70,12 +75,17 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			startActivity(pubIntent);
 		}
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+	    MenuInflater inflater = getSupportMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+	    return true;
+	}
 
 	private boolean refreshRequired(){
-		settings = getSharedPreferences(MensaConstants.MENSA_PREFS, LocationSelectionActivity.MODE_PRIVATE);
-	
 		if(!settings.contains(MensaConstants.LAST_UPDATE_KEY))
-			return false;
+			return true;
 		
 		int lastUpdate = settings.getInt(MensaConstants.LAST_UPDATE_KEY, -1);
 		if(getWeekOfYear() > lastUpdate)
@@ -92,7 +102,8 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public void downloadData() {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
 		task.execute();
-
+		//Log.d(TAG, "Week of year "+getWeekOfYear());
+		//settings.edit().putInt(MensaConstants.LAST_UPDATE_KEY, getWeekOfYear()).commit();
 	}
 
 	private class LoadAndParseXmlTask extends AsyncTask<Void, Integer, MealPlan> {
@@ -101,14 +112,22 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		protected MealPlan doInBackground(Void... params) {
 			try {
 				MealPlan mealPlan = MealPlan.getInstance();
-				WeeklyMeal mensaMeal = MealParser.parseXmlString(Loader.downloadXml(MensaConstants.MENSA_URL));
-				mealPlan.setMensaMeal(mensaMeal);
-
-				WeeklyMeal hotSpotMeal = MealParser.parseXmlString(Loader.downloadXml(MensaConstants.HOTSPOT_URL));
-				mealPlan.setHotspotMeal(hotSpotMeal);
 				
-				WeeklyMeal pubMeal = MealParser.parseXmlString(Loader.downloadXml(MensaConstants.PUB_URL));
+				String mensaXml = Loader.downloadXml(MensaConstants.MENSA_URL);
+				WeeklyMeal mensaMeal = MealParser.parseXmlString(mensaXml);
+				mealPlan.setMensaMeal(mensaMeal);
+				settings.edit().putString(MensaConstants.MENSA_XML_KEY, mensaXml).commit();
+
+				String hotspotXml = Loader.downloadXml(MensaConstants.HOTSPOT_URL); 
+				WeeklyMeal hotSpotMeal = MealParser.parseXmlString(hotspotXml);
+				mealPlan.setHotspotMeal(hotSpotMeal);
+				settings.edit().putString(MensaConstants.HOTSPOT_XML_KEY, hotspotXml).commit();
+				
+				String pubXml = Loader.downloadXml(MensaConstants.PUB_URL);
+				WeeklyMeal pubMeal = MealParser.parseXmlString(pubXml);
 				mealPlan.setPubMeal(pubMeal);
+				settings.edit().putString(MensaConstants.PUB_XML_KEY, pubXml).commit();
+				
 				return mealPlan;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -118,7 +137,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		}
 		
 		protected void onPostExecute(MealPlan result) {
-			settings.edit().putInt(MensaConstants.LAST_UPDATE_KEY, getWeekOfYear());
+			settings.edit().putInt(MensaConstants.LAST_UPDATE_KEY, getWeekOfYear()).commit();
 		}
 
 	}

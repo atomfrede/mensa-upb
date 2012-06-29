@@ -38,6 +38,9 @@ public final class MensaConstants {
 	 * Key for preferences that saves the week of year when the last update of mensa data was done. e.g. 26
 	 */
 	public static final String LAST_UPDATE_KEY = "lastUpdate";
+	public static final String MENSA_XML_KEY = "mensaXml";
+	public static final String HOTSPOT_XML_KEY = "hotspotXml";
+	public static final String PUB_XML_KEY = "pubXml";
 	
 	public static final String MENSA_PREFS = "mensaPrefs";
 }
