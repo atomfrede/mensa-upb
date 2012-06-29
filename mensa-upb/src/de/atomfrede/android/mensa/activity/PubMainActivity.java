@@ -28,7 +28,7 @@ import de.atomfrede.android.mensa.MensaConstants;
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.adapter.WeekdayPagerAdapter;
 
-public class PubMainActivity extends AbstractWeeklyMailActivity {
+public class PubMainActivity extends AbstractWeeklyMealActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,5 +43,7 @@ public class PubMainActivity extends AbstractWeeklyMailActivity {
 		indicator.setViewPager(mPager);
 		indicator.setFooterIndicatorStyle(IndicatorStyle.Triangle);
 		mIndicator = indicator;
+		
+		selectInitialDay();
 	}
 }
