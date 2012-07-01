@@ -31,8 +31,9 @@
         <item name="android:actionDropDownStyle">@style/mensa_DropDownNav</item>
         <item name="android:actionBarStyle">@style/mensa_solid_ActionBar</item>
         <item name="android:panelBackground">@drawable/menu_hardkey_panel_mensa</item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
-    <style name="mensa_solid_ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
+    <style name="mensa_solid_ActionBar" parent="@style/Widget.Sherlock.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_mensa</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_mensa</item>
         <item name="backgroundSplit">@drawable/ab_bottom_solid_mensa</item>
@@ -42,29 +43,32 @@
         <item name="android:backgroundSplit">@drawable/ab_bottom_solid_mensa</item>
         <item name="android:progressBarStyle">@style/mensa_ProgressBar</item>
     </style>
-    <style name="mensa_transparent_ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar">
+    <style name="mensa_transparent_ActionBar" parent="@style/Widget.Sherlock.ActionBar">
         <item name="background">@drawable/ab_transparent_mensa</item>
         <item name="progressBarStyle">@style/mensa_ProgressBar</item>
         <item name="android:background">@drawable/ab_transparent_mensa</item>
         <item name="android:progressBarStyle">@style/mensa_ProgressBar</item>
     </style>
-    <style name="mensa_PopupMenu" parent="@android:style/Widget.Holo.Light.ListPopupWindow">
+    <style name="mensa_PopupMenu" parent="@android:style/Widget.Holo.ListPopupWindow">
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_mensa</item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
-    <style name="mensa_DropDownListView" parent="@style/Widget.Sherlock.Light.ListView.DropDown">
+    <style name="mensa_DropDownListView" parent="@style/Widget.Sherlock.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_mensa</item>
+        <item name="android:textColor">@color/text_color</item>
     </style>
-    <style name="mensa_ActionBarTabStyle" parent="@style/Widget.Sherlock.Light.ActionBar.TabView">
+    <style name="mensa_ActionBarTabStyle" parent="@style/Widget.Sherlock.ActionBar.TabView">
         <item name="background">@drawable/tab_indicator_ab_mensa</item>
         <item name="android:background">@drawable/tab_indicator_ab_mensa</item>
     </style>
-    <style name="mensa_DropDownNav" parent="@style/Widget.Sherlock.Light.Spinner.DropDown.ActionBar">
+    <style name="mensa_DropDownNav" parent="@style/Widget.Sherlock.Spinner.DropDown.ActionBar">
         <item name="background">@drawable/spinner_background_ab_mensa</item>
         <item name="android:background">@drawable/spinner_background_ab_mensa</item>
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_mensa</item>
         <item name="android:dropDownSelector">@drawable/selectable_background_mensa</item>
+        <item name="android:textColor">@color/upb_grey</item>
     </style>
-    <style name="mensa_ProgressBar" parent="@style/Widget.Sherlock.Light.ProgressBar.Horizontal">
+    <style name="mensa_ProgressBar" parent="@style/Widget.Sherlock.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_mensa</item>
     </style>
     <style name="mensa_listItem" parent="@android:style/Widget.ListView">
