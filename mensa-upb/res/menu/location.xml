@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
     <item
         android:id="@+id/location"
-        android:icon="@drawable/ic_location_place_light"
+        android:icon="@drawable/ic_location_place"
         android:showAsAction="ifRoom">
         <menu>
             <item
@@ -17,5 +16,4 @@
                 android:title="@string/menu_pub"/>
         </menu>
     </item>
-
 </menu>
