@@ -20,10 +20,12 @@ package de.atomfrede.android.mensa.activity;
 
 import java.util.Calendar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.viewpagerindicator.PageIndicator;
 
@@ -52,9 +54,28 @@ public class AbstractWeeklyMealActivity extends SherlockFragmentActivity {
 		case android.R.id.home:
 			super.onBackPressed();
 			return true;
+		case R.id.menu_mensa:
+			Intent mensaIntent = new Intent(this, MensaMainActivity.class);
+			startActivity(mensaIntent);
+			return true;
+		case R.id.menu_pub:
+			Intent pubIntent = new Intent(this, PubMainActivity.class);
+			startActivity(pubIntent);
+			return true;
+		case R.id.menu_hotspot:
+			Intent hotspotIntent = new Intent(this, BistroMainActivity.class);
+			startActivity(hotspotIntent);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.location, menu);
+		return true;
 	}
 
 	/**

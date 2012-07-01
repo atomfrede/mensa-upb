@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/location"
+        android:icon="@drawable/ic_location_place_light"
+        android:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/menu_mensa"
+                android:title="@string/menu_mensa"/>
+            <item
+                android:id="@+id/menu_hotspot"
+                android:title="@string/menu_hotspot"/>
+            <item
+                android:id="@+id/menu_pub"
+                android:title="@string/menu_pub"/>
+        </menu>
+    </item>
+
+</menu>

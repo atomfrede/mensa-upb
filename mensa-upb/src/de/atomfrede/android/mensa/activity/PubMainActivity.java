@@ -18,9 +18,11 @@
  */
 package de.atomfrede.android.mensa.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
+import com.actionbarsherlock.view.MenuItem;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
@@ -45,5 +47,26 @@ public class PubMainActivity extends AbstractWeeklyMealActivity {
 		mIndicator = indicator;
 		
 		selectInitialDay();
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			super.onBackPressed();
+			return true;
+		case R.id.menu_mensa:
+			Intent mensaIntent = new Intent(this, MensaMainActivity.class);
+			startActivity(mensaIntent);
+			return true;
+		case R.id.menu_pub:
+			return true;
+		case R.id.menu_hotspot:
+			Intent hotspotIntent = new Intent(this, BistroMainActivity.class);
+			startActivity(hotspotIntent);
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }

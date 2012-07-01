@@ -24,4 +24,7 @@
     <string name="pub_title">Pub</string>
     <string name="bistro_title">Hot-Spot</string>
     <string name="menu_refresh">Refresh</string>
+    <string name="menu_mensa">Mensa</string>
+    <string name="menu_hotspot">Hotspot</string>
+    <string name="menu_pub">Pub</string>
 </resources>
