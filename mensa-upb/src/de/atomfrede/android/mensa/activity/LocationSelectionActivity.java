@@ -51,7 +51,8 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 		locations = getResources().getStringArray(R.array.locations);
 
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, locations);
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, locations);
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item_loc, android.R.id.text1, locations);
 		setListAdapter(adapter);
 
 		settings = getSharedPreferences(MensaConstants.MENSA_PREFS, LocationSelectionActivity.MODE_PRIVATE);
@@ -60,6 +61,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			downloadData(true);
 		else
 			downloadData(refreshRequired());
+		
 
 	}
 

@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="Theme.mensa" parent="@style/Theme.Sherlock.Light">
+    <style name="Theme.mensa" parent="@style/Theme.Sherlock">
         <item name="actionBarItemBackground">@drawable/selectable_background_mensa</item>
         <item name="popupMenuStyle">@style/mensa_PopupMenu</item>
         <item name="dropDownListViewStyle">@style/mensa_DropDownListView</item>
@@ -66,5 +66,8 @@
     </style>
     <style name="mensa_ProgressBar" parent="@style/Widget.Sherlock.Light.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_horizontal_mensa</item>
+    </style>
+    <style name="mensa_listItem" parent="@android:style/Widget.ListView">
+        <item name="android:textColor">@color/text_color</item>
     </style>
 </resources>

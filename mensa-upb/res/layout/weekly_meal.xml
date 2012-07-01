@@ -22,6 +22,7 @@
     xmlns:app1="http://schemas.android.com/apk/res/de.atomfrede.android.mensa"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/upb_grey"
     android:orientation="vertical" >
     <com.viewpagerindicator.TitlePageIndicator
         android:id="@+id/indicator"
