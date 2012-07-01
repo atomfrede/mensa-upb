@@ -57,11 +57,11 @@ public class WeekdayPagerAdapter extends FragmentPagerAdapter {
 	public CharSequence getPageTitle(int position) {
 		switch(location){
 		case MensaConstants.LOC_MENSA:
-			return weekdays[position]+" "+MealPlan.getInstance().getMensaMeal().getMeals().get(position).getDate();
+			return weekdays[position]+" "+MealPlan.getInstance().getMensaMeal().getMeals().get(position).getShortDate();
 		case MensaConstants.LOC_HOT_SPOT:
-			return weekdays[position]+" "+MealPlan.getInstance().getHotspotMeal().getMeals().get(position).getDate();
+			return weekdays[position]+" "+MealPlan.getInstance().getHotspotMeal().getMeals().get(position).getShortDate();
 		case MensaConstants.LOC_PUB:
-			return weekdays[position]+" "+MealPlan.getInstance().getPubMeal().getMeals().get(position).getDate();
+			return weekdays[position]+" "+MealPlan.getInstance().getPubMeal().getMeals().get(position).getShortDate();
 		default:
 			return weekdays[position];
 		}

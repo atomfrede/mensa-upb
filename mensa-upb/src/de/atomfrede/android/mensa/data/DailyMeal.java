@@ -36,6 +36,11 @@ public class DailyMeal {
 	public String getDate() {
 		return date;
 	}
+	
+	public String getShortDate(){
+		String[] dates = date.split("\\.");
+		return dates[0]+"."+dates[1];
+	}
 
 	public void setDate(String date) {
 		this.date = date;
