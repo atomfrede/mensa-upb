@@ -44,7 +44,8 @@ public class AbstractWeeklyMealActivity extends SherlockFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weekly_meal);
-		weekdays = getResources().getStringArray(R.array.weekdays);
+		//weekdays = getResources().getStringArray(R.array.weekdays);
+		weekdays = getResources().getStringArray(R.array.weekdays_short);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 

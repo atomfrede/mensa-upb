@@ -30,12 +30,11 @@
         <item>Thursday</item>
         <item>Friday</item>
     </string-array>
-    <string-array name="mensaDummyMeals">
-        <item>Mensa 1</item>
-        <item>Mensa 2</item>
-    </string-array>
-    <string-array name="hotSpotDummyMeals">
-        <item>HotSpot 1</item>
-        <item>HotSpot 2</item>
+    <string-array name="weekdays_short">
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thur</item>
+        <item>Fri</item>
     </string-array>
 </resources>

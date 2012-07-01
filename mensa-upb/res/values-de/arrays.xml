@@ -30,4 +30,11 @@
         <item>Donnerstag</item>
         <item>Freitag</item>
     </string-array>
+    <string-array name="weekdays_short">
+        <item>Mon</item>
+        <item>Die</item>
+        <item>Mit</item>
+        <item>Don</item>
+        <item>Fre</item>
+    </string-array>
 </resources>
