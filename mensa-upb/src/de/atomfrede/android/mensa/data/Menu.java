@@ -121,6 +121,6 @@ public class Menu implements Serializable{
 
 		if (type != null && !type.equals(""))
 			sb.append(type).append("");
-		return sb.toString();
+		return sb.append("\n").toString();
 	}
 }
