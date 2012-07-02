@@ -21,8 +21,8 @@
     <string name="hello">Hello World, MensaActivity!</string>
     <string name="app_name">Mensa UPB</string>
     <string name="mensa_title">Mensa</string>
-    <string name="pub_title">Pub</string>
-    <string name="bistro_title">Hot-Spot</string>
+    <string name="pub_title">Gownsmen's Pub</string>
+    <string name="bistro_title">Bistro Hotspot</string>
     <string name="menu_refresh">Refresh</string>
     <string name="menu_mensa">Mensa</string>
     <string name="menu_hotspot">Hotspot</string>
