@@ -35,8 +35,6 @@ public class MealHandler extends DefaultHandler {
 
 	private TagNames currentTag;
 
-	private boolean isPub = false;
-
 	public WeeklyMeal getParsedMeal() {
 		return parsedMeal;
 	}
@@ -80,9 +78,9 @@ public class MealHandler extends DefaultHandler {
 		}
 		if (localName.equals(TagNames.menue.toString())) {
 			currentTag = TagNames.menue;
-				currentMenu = new Menu();
-				if (currentDailyMeal != null)
-					currentDailyMeal.addMenu(currentMenu);
+			currentMenu = new Menu();
+			if (currentDailyMeal != null)
+				currentDailyMeal.addMenu(currentMenu);
 		}
 		if (localName.equals(TagNames.menu.toString())) {
 			currentTag = TagNames.menu;
@@ -127,12 +125,12 @@ public class MealHandler extends DefaultHandler {
 				currentMenu.setText(new String(ch, start, length));
 				break;
 			case txt:
-				if(currentMenu == null){
+				if (currentMenu == null) {
 					currentMenu = new Menu();
 					currentDailyMeal.addMenu(currentMenu);
 				}
 				currentMenu.setText(new String(ch, start, length));
-				currentMenu=null;
+				currentMenu = null;
 				break;
 			case beilage:
 				currentMenu.addSideDish(new String(ch, start, length));
@@ -147,4 +145,5 @@ public class MealHandler extends DefaultHandler {
 			}
 		}
 	}
+
 }
