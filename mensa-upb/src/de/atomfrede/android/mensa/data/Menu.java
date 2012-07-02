@@ -101,24 +101,25 @@ public class Menu {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		if(name != null)
+		if (name != null)
 			sb.append(name).append("\n");
-		
-		if(text != null)
+
+		if (text != null)
 			sb.append(text).append("\n");
-		
+
 		if (!getSideDishes().isEmpty()) {
 			for (String sideDish : getSideDishes())
 				sb.append(sideDish).append("\n");
+
 		}
-		
-		if (atCounter != null)
+
+		if (atCounter != null && !atCounter.equals(""))
 			sb.append(atCounter).append("\n");
 		if (price != null)
 			sb.append(price);
-		
-		if (type != null)
-			sb.append(type).append("\n");
+
+		if (type != null && !type.equals(""))
+			sb.append(type).append("");
 		return sb.toString();
 	}
 }
