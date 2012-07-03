@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.activity;
+package de.atomfrede.android.mensa.upb.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,19 +26,19 @@ import com.actionbarsherlock.view.MenuItem;
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
-import de.atomfrede.android.mensa.MensaConstants;
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.adapter.WeekdayPagerAdapter;
+import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.adapter.WeekdayPagerAdapter;
 
-public class BistroMainActivity extends AbstractWeeklyMealActivity {
+public class PubMainActivity extends AbstractWeeklyMealActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getSupportActionBar().setTitle(getResources().getString(R.string.bistro_title));
+		getSupportActionBar().setTitle(getResources().getString(R.string.pub_title));
 		
 		mPager = (ViewPager) findViewById(R.id.pager);
-		mAdapter = new WeekdayPagerAdapter(getSupportFragmentManager(), weekdays, MensaConstants.LOC_HOT_SPOT);
+		mAdapter = new WeekdayPagerAdapter(getSupportFragmentManager(), weekdays, MensaConstants.LOC_PUB);
 		mPager.setAdapter(mAdapter);
 
 		TitlePageIndicator indicator = (TitlePageIndicator) findViewById(R.id.indicator);
@@ -60,10 +60,10 @@ public class BistroMainActivity extends AbstractWeeklyMealActivity {
 			startActivity(mensaIntent);
 			return true;
 		case R.id.menu_pub:
-			Intent pubIntent = new Intent(this, PubMainActivity.class);
-			startActivity(pubIntent);
 			return true;
 		case R.id.menu_hotspot:
+			Intent hotspotIntent = new Intent(this, BistroMainActivity.class);
+			startActivity(hotspotIntent);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

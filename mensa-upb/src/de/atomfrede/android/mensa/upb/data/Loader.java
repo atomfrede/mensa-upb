@@ -17,7 +17,7 @@
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.atomfrede.android.mensa.data;
+package de.atomfrede.android.mensa.upb.data;
 
 import java.io.*;
 import java.net.HttpURLConnection;

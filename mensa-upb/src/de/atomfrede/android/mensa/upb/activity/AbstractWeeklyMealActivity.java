@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.activity;
+package de.atomfrede.android.mensa.upb.activity;
 
 import java.util.Calendar;
 
@@ -30,7 +30,7 @@ import com.actionbarsherlock.view.MenuItem;
 import com.viewpagerindicator.PageIndicator;
 
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.adapter.WeekdayPagerAdapter;
+import de.atomfrede.android.mensa.upb.adapter.WeekdayPagerAdapter;
 
 public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivity {
 

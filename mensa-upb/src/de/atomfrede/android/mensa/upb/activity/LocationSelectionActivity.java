@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.activity;
+package de.atomfrede.android.mensa.upb.activity;
 
 import java.util.Calendar;
 
@@ -32,9 +32,9 @@ import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
-import de.atomfrede.android.mensa.MensaConstants;
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.data.*;
+import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.data.*;
 
 public class LocationSelectionActivity extends SherlockListActivity {
 

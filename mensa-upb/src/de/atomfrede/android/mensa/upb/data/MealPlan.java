@@ -1,4 +1,4 @@
-package de.atomfrede.android.mensa.data;
+package de.atomfrede.android.mensa.upb.data;
 
 public class MealPlan {
 

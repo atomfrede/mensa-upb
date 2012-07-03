@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.adapter;
+package de.atomfrede.android.mensa.upb.adapter;
 
 import java.util.List;
 
@@ -25,7 +25,7 @@ import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.data.Menu;
+import de.atomfrede.android.mensa.upb.data.Menu;
 
 public class MenuListAdapter extends ArrayAdapter<Menu> {
 

@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.data;
+package de.atomfrede.android.mensa.upb.data;
 
 import java.io.Serializable;
 import java.util.ArrayList;

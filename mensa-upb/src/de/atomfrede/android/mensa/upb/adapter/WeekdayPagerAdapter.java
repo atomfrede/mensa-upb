@@ -16,12 +16,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.adapter;
+package de.atomfrede.android.mensa.upb.adapter;
 
 import android.support.v4.app.*;
-import de.atomfrede.android.mensa.MensaConstants;
-import de.atomfrede.android.mensa.data.*;
-import de.atomfrede.android.mensa.fragment.DailyMealListFragment;
+import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.data.*;
+import de.atomfrede.android.mensa.upb.fragment.DailyMealListFragment;
 
 public class WeekdayPagerAdapter extends FragmentPagerAdapter {
 
