@@ -5,6 +5,9 @@ A simple application for quering the meals for the mensa at Uni Paderborn.
 
 **See http://atomfrede.github.com/mensa-upb/ for more information.**
 
+![Location Selection Screen][1]
+![Example Meal Plan Screen][2]
+
 License
 ========
 
@@ -21,4 +24,7 @@ License
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+[1]: http://dl.dropbox.com/u/159886/mensa-upb/mensa-upb-v1-screen1.png
+[2]: http://dl.dropbox.com/u/159886/mensa-upb/mensa-upb-v1-screen2.png
 
