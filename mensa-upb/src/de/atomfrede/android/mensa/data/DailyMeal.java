@@ -18,10 +18,11 @@
  */
 package de.atomfrede.android.mensa.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DailyMeal {
+public class DailyMeal implements Serializable{
 
 	String date;
 	String weekday;

@@ -19,7 +19,6 @@
 package de.atomfrede.android.mensa.fragment;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
@@ -40,8 +39,8 @@ public class DailyMealListFragment extends SherlockListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		MenuListAdapter menuListAdapter = new MenuListAdapter(this.getActivity(), R.layout.list_item, meal.getMenues());
-//		MenuListAdapter menuListAdapter = new MenuListAdapter(this.getActivity(), android.R.layout.simple_list_item_1, meal.getMenues());
 		setListAdapter(menuListAdapter);
-		
+		setRetainInstance(true);
 	}
+
 }

@@ -20,8 +20,8 @@
 <resources>
     <string-array name="locations">
         <item>Mensa</item>
-        <item>Bistro Hot-Spot</item>
-        <item>Gwonsmens Pub</item>
+        <item>Bistro Hotspot</item>
+        <item>Gownsmen\'s Pub</item>
     </string-array>
     <string-array name="weekdays">
         <item>Monday</item>

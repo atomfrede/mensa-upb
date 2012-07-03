@@ -1,7 +1,8 @@
 package de.atomfrede.android.mensa.data;
 
 import java.io.*;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import android.util.Log;
 
@@ -10,17 +11,20 @@ public class Loader {
 	static final String TAG = "Loader";
 
 	private static String readTextFromServer(HttpURLConnection connection) throws IOException {
-		InputStreamReader inputStreamreader = new InputStreamReader(connection.getInputStream());
+		// The XML File is Cp1252 encoded!
+		InputStreamReader inputStreamreader = new InputStreamReader(connection.getInputStream(), "Cp1252");
 		BufferedReader bufferedReader = new BufferedReader(inputStreamreader);
 
 		StringBuilder sb = new StringBuilder();
+
 		String line = bufferedReader.readLine();
 		while (line != null) {
 			sb.append(line);
 			line = bufferedReader.readLine();
 		}
 
-		return sb.toString();
+		String s = sb.toString();
+		return s;
 	}
 
 	public static String downloadXml(String downloadUrl) {

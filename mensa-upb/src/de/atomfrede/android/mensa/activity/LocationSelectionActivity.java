@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -51,7 +50,6 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 		locations = getResources().getStringArray(R.array.locations);
 
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, android.R.id.text1, locations);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item_loc, android.R.id.text1, locations);
 		setListAdapter(adapter);
 
@@ -61,8 +59,6 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			downloadData(true);
 		else
 			downloadData(refreshRequired());
-		
-
 	}
 
 	@Override
@@ -161,26 +157,9 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			try {
 				MealPlan mealPlan = MealPlan.getInstance();
 				boolean reload = params[0];
-				// String mensaXml =
-				// Loader.downloadXml(MensaConstants.MENSA_URL);
-				// WeeklyMeal mensaMeal = MealParser.parseXmlString(mensaXml);
 				mealPlan.setMensaMeal(loadMensaMeal(reload));
-				// settings.edit().putString(MensaConstants.MENSA_XML_KEY,
-				// mensaXml).commit();
-
-				// String hotspotXml =
-				// Loader.downloadXml(MensaConstants.HOTSPOT_URL);
-				// WeeklyMeal hotSpotMeal =
-				// MealParser.parseXmlString(hotspotXml);
 				mealPlan.setHotspotMeal(loadHotspotMeal(reload));
-				// settings.edit().putString(MensaConstants.HOTSPOT_XML_KEY,
-				// hotspotXml).commit();
-
-//				String pubXml = Loader.downloadXml(MensaConstants.PUB_URL);
-//				WeeklyMeal pubMeal = MealParser.parseXmlString(pubXml);
 				mealPlan.setPubMeal(loadPubMeal(reload));
-//				settings.edit().putString(MensaConstants.PUB_XML_KEY, pubXml).commit();
-
 				return mealPlan;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
