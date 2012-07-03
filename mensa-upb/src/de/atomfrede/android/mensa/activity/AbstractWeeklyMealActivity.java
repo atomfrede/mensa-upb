@@ -32,7 +32,7 @@ import com.viewpagerindicator.PageIndicator;
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.adapter.WeekdayPagerAdapter;
 
-public class AbstractWeeklyMealActivity extends SherlockFragmentActivity {
+public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivity {
 
 	protected String[] weekdays;
 
