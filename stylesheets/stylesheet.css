@@ -140,7 +140,7 @@ a.button {
 }
 a.button small {
   display: block;
-  font-size: 11px;
+  font-size: 15px;
 }
 header a.button {
   position: absolute;
@@ -154,7 +154,21 @@ aside a.button {
   display: block;
   background: transparent url(../images/download-button.png) 0 0 no-repeat;
   margin-bottom: 20px;
-  font-size: 21px;
+  font-size: 23px;
+}
+
+aside a.info {
+width: 138px;
+  padding-left: 80px;
+  display: block;
+  background: transparent url(../images/info-button.png) 0 0 no-repeat;
+  margin-bottom: 20px;
+  font-size: 23px;
+}
+
+a.info small{
+display: block;
+  font-size: 15px;
 }
 
 code, pre {
