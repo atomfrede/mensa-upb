@@ -9,6 +9,8 @@ public class MealPlan {
     }
 	
 	WeeklyMeal mensaMeal, hotspotMeal, pubMeal;
+	Quicklunch mensulaQuicklunch;
+	StandardMeal wokMeal, oneWaySnackMeal;
 
 	private MealPlan(){}
 	
@@ -34,6 +36,30 @@ public class MealPlan {
 
 	public void setPubMeal(WeeklyMeal pubMeal) {
 		this.pubMeal = pubMeal;
+	}
+
+	public Quicklunch getMensulaQuicklunch() {
+		return mensulaQuicklunch;
+	}
+
+	public void setMensulaQuicklunch(Quicklunch mensulaQuicklunch) {
+		this.mensulaQuicklunch = mensulaQuicklunch;
+	}
+
+	public StandardMeal getWokMeal() {
+		return wokMeal;
+	}
+
+	public void setWokMeal(StandardMeal wokMeal) {
+		this.wokMeal = wokMeal;
+	}
+
+	public StandardMeal getOneWaySnackMeal() {
+		return oneWaySnackMeal;
+	}
+
+	public void setOneWaySnackMeal(StandardMeal oneWaySnackMeal) {
+		this.oneWaySnackMeal = oneWaySnackMeal;
 	}
 
 }
