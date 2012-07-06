@@ -23,6 +23,9 @@ public final class MensaConstants {
 	public static final int LOC_MENSA = 0;
 	public static final int LOC_HOT_SPOT = 1;
 	public static final int LOC_PUB = 2;
+	public static final int LOC_WOK = 3;
+	public static final int LOC_ONE_WAY_SNACK = 4;
+	public static final int LOC_MENSULA = 5;
 	
 	public static final int DAY_MONDAY = 0;
 	public static final int DAY_TUESDAY = 1;
