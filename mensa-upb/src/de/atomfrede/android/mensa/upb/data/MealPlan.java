@@ -1,5 +1,8 @@
 package de.atomfrede.android.mensa.upb.data;
 
+import de.atomfrede.android.mensa.data.Quicklunch;
+import de.atomfrede.android.mensa.data.StandardMeal;
+
 public class MealPlan {
 
 	private static final MealPlan instance = new MealPlan();
