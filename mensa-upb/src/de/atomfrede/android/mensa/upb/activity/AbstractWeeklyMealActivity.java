@@ -22,6 +22,7 @@ import java.util.Calendar;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.*;
 import android.support.v4.view.ViewPager;
@@ -33,8 +34,7 @@ import com.viewpagerindicator.PageIndicator;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
-import de.atomfrede.android.mensa.upb.data.MealPlan;
-import de.atomfrede.android.mensa.upb.data.WeeklyMeal;
+import de.atomfrede.android.mensa.upb.data.*;
 import de.atomfrede.android.mensa.upb.fragment.DailyMealListFragment;
 
 public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivity {
@@ -45,6 +45,7 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 	protected ViewPager mPager;
 	protected PageIndicator mIndicator;
 	protected AlertDialog mDialog;
+	protected SharedPreferences settings;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,27 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 		setContentView(R.layout.weekly_meal);
 		weekdays = getResources().getStringArray(R.array.weekdays_short);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		settings = getSharedPreferences(MensaConstants.MENSA_PREFS, LocationSelectionActivity.MODE_PRIVATE);
+	}
+
+	@Override
+	public void onResume() {
+		if (MealPlan.getInstance().getMensaMeal() == null) {
+			// now reload the data 'cause we resume from somewhere and the
+			// application was killed
+			reloadData();
+		}
+
+	}
+
+	protected void reloadData() {
+		try {
+			MealPlan.getInstance().setMensaMeal(MealParser.parseXmlString(settings.getString(MensaConstants.MENSA_XML_KEY, "")));
+			MealPlan.getInstance().setHotspotMeal(MealParser.parseXml(settings.getString(MensaConstants.HOTSPOT_XML_KEY, "")));
+			MealPlan.getInstance().setPubMeal(MealParser.parseXml(settings.getString(MensaConstants.PUB_XML_KEY, "")));
+		} catch (Exception e) {
+
+		}
 	}
 
 	@Override
@@ -76,14 +98,14 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.location, menu);
 		return true;
 	}
-	
+
 	/**
 	 * This methods selects either today, or if today is weekend selects monday
 	 * on inital display of the meal overview. Keep in mind: SUNDAY = 1 MONDAY =
@@ -115,20 +137,20 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 			break;
 		}
 	}
-	
+
 	protected abstract void showOpeningTimes();
-	
+
 	public static class WeekdayPagerAdapter extends FragmentPagerAdapter {
-		
+
 		private String[] weekdays;
 		private int location;
-		
+
 		public WeekdayPagerAdapter(FragmentManager fm, String[] weekdays, int location) {
 			super(fm);
 			this.weekdays = weekdays;
 			this.location = location;
 		}
-		
+
 		@Override
 		public Fragment getItem(int tab) {
 			switch (location) {
@@ -150,19 +172,19 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			switch(location){
+			switch (location) {
 			case MensaConstants.LOC_MENSA:
-				return weekdays[position]+" "+MealPlan.getInstance().getMensaMeal().getMeals().get(position).getShortDate();
+				return weekdays[position] + " " + MealPlan.getInstance().getMensaMeal().getMeals().get(position).getShortDate();
 			case MensaConstants.LOC_HOT_SPOT:
-				return weekdays[position]+" "+MealPlan.getInstance().getHotspotMeal().getMeals().get(position).getShortDate();
+				return weekdays[position] + " " + MealPlan.getInstance().getHotspotMeal().getMeals().get(position).getShortDate();
 			case MensaConstants.LOC_PUB:
-				return weekdays[position]+" "+MealPlan.getInstance().getPubMeal().getMeals().get(position).getShortDate();
+				return weekdays[position] + " " + MealPlan.getInstance().getPubMeal().getMeals().get(position).getShortDate();
 			default:
 				return weekdays[position];
 			}
 		}
-		
-		private DailyMealListFragment getDataFragment(WeeklyMeal weeklyMeal, int tab){
+
+		private DailyMealListFragment getDataFragment(WeeklyMeal weeklyMeal, int tab) {
 			switch (tab) {
 			case 0:
 				return DailyMealListFragment.newInstance(weeklyMeal.getMeals().get(tab));

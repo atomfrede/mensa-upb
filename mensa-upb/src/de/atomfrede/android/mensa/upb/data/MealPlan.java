@@ -20,9 +20,6 @@ public class MealPlan {
 	private MealPlan(){}
 	
 	public WeeklyMeal getMensaMeal() {
-		if(mensaMeal == null){
-			
-		}
 		return mensaMeal;
 	}
 
