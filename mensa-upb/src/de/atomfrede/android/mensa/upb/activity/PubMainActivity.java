@@ -77,6 +77,9 @@ public class PubMainActivity extends AbstractWeeklyMealActivity {
 		case android.R.id.home:
 			super.onBackPressed();
 			return true;
+		case R.id.menu_about:
+			showAboutDialog();
+			return true;
 		case R.id.menu_information:
 			showOpeningTimes();
 			return true;

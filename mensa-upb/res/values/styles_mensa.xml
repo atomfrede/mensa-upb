@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-    <style name="Theme.mensa" parent="@style/Theme.Sherlock">
+    <style name="Theme.mensa" parent="@style/Theme.Sherlock.Light.DarkActionBar">
         <item name="actionBarItemBackground">@drawable/selectable_background_mensa</item>
         <item name="popupMenuStyle">@style/mensa_PopupMenu</item>
         <item name="dropDownListViewStyle">@style/mensa_DropDownListView</item>
@@ -52,7 +52,6 @@
     <style name="mensa_PopupMenu" parent="@android:style/Widget.Holo.ListPopupWindow">
         <item name="android:popupBackground">@drawable/menu_dropdown_panel_mensa</item>
         <item name="android:textColor">@color/upb_dark_grey</item>
-        <item name="android:background">@color/upb_dark_grey</item>
     </style>
     <style name="mensa_DropDownListView" parent="@style/Widget.Sherlock.ListView.DropDown">
         <item name="android:listSelector">@drawable/selectable_background_mensa</item>
