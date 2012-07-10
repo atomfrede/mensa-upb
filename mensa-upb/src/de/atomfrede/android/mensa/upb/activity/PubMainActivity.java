@@ -29,6 +29,8 @@ import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.data.MealParser;
+import de.atomfrede.android.mensa.upb.data.MealPlan;
 
 public class PubMainActivity extends AbstractWeeklyMealActivity {
 
@@ -47,6 +49,26 @@ public class PubMainActivity extends AbstractWeeklyMealActivity {
 		mIndicator = indicator;
 		
 		selectInitialDay();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (MealPlan.getInstance().getPubMeal() == null) {
+			// now reload the data 'cause we resume from somewhere and the
+			// application was killed
+			reloadData();
+		}
+
+	}
+	
+	@Override
+	protected void reloadData() {
+		try {
+			MealPlan.getInstance().setPubMeal(MealParser.parseXmlString(settings.getString(MensaConstants.PUB_XML_KEY, "")));
+		} catch (Exception e) {
+
+		}
 	}
 	
 	@Override

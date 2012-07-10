@@ -29,6 +29,8 @@ import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.data.MealParser;
+import de.atomfrede.android.mensa.upb.data.MealPlan;
 
 public class BistroMainActivity extends AbstractWeeklyMealActivity {
 
@@ -36,7 +38,7 @@ public class BistroMainActivity extends AbstractWeeklyMealActivity {
 		super.onCreate(savedInstanceState);
 
 		getSupportActionBar().setTitle(getResources().getString(R.string.bistro_title));
-		
+
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mAdapter = new WeekdayPagerAdapter(getSupportFragmentManager(), weekdays, MensaConstants.LOC_HOT_SPOT);
 		mPager.setAdapter(mAdapter);
@@ -45,10 +47,30 @@ public class BistroMainActivity extends AbstractWeeklyMealActivity {
 		indicator.setViewPager(mPager);
 		indicator.setFooterIndicatorStyle(IndicatorStyle.Triangle);
 		mIndicator = indicator;
-		
+
 		selectInitialDay();
 	}
-	
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (MealPlan.getInstance().getHotspotMeal() == null) {
+			// now reload the data 'cause we resume from somewhere and the
+			// application was killed
+			reloadData();
+		}
+
+	}
+
+	@Override
+	protected void reloadData() {
+		try {
+			MealPlan.getInstance().setHotspotMeal(MealParser.parseXmlString(settings.getString(MensaConstants.HOTSPOT_XML_KEY, "")));
+		} catch (Exception e) {
+
+		}
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -72,16 +94,16 @@ public class BistroMainActivity extends AbstractWeeklyMealActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	@Override
 	protected void showOpeningTimes() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		
+
 		builder.setCancelable(true);
 		builder.setTitle(R.string.title_opening_times);
 		String[] hotspotOpeningTimes = getResources().getStringArray(R.array.hotspot_opening_times);
-		builder.setMessage(hotspotOpeningTimes[0]+"\n"+hotspotOpeningTimes[1]);
-		
+		builder.setMessage(hotspotOpeningTimes[0] + "\n" + hotspotOpeningTimes[1]);
+
 		mDialog = builder.create();
 		mDialog.show();
 	}

@@ -59,23 +59,12 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (MealPlan.getInstance().getMensaMeal() == null) {
-			// now reload the data 'cause we resume from somewhere and the
-			// application was killed
-			reloadData();
-		}
-
 	}
 
-	protected void reloadData() {
-		try {
-			MealPlan.getInstance().setMensaMeal(MealParser.parseXmlString(settings.getString(MensaConstants.MENSA_XML_KEY, "")));
-			MealPlan.getInstance().setHotspotMeal(MealParser.parseXml(settings.getString(MensaConstants.HOTSPOT_XML_KEY, "")));
-			MealPlan.getInstance().setPubMeal(MealParser.parseXml(settings.getString(MensaConstants.PUB_XML_KEY, "")));
-		} catch (Exception e) {
+	protected abstract void reloadData();
+	
+		
 
-		}
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
