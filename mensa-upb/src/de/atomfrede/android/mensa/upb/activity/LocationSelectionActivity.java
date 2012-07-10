@@ -78,7 +78,11 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			Intent pubIntent = new Intent(this, PubMainActivity.class);
 			startActivity(pubIntent);
 		}
-		if(position == 4){
+		if(position == 3){
+			Intent wokIntent = new Intent(this, WokActivity.class);
+			startActivity(wokIntent);
+		}
+		if (position == 4) {
 			Intent onewaySnackIntent = new Intent(this, OneWaySnackActivity.class);
 			startActivity(onewaySnackIntent);
 		}
@@ -222,6 +226,27 @@ public class LocationSelectionActivity extends SherlockListActivity {
 						oneWaySnackMeals.add(newMeal);
 					}
 					mealPlan.setOneWaySnacks(oneWaySnackMeals);
+				}
+
+				if (mealPlan.getWokMeals() == null || mealPlan.getWokMeals().isEmpty()) {
+					String[] wokMeals = getResources().getStringArray(R.array.wok_meals);
+
+					List<WokMeal> wokMealList = new ArrayList<WokMeal>();
+
+					for (String wokMeal : wokMeals) {
+						WokMeal newMeal = new WokMeal();
+						String text = wokMeal.split("#")[0];
+						String price = wokMeal.split("#")[1];
+						String priceXxl = wokMeal.split("#")[2];
+
+						newMeal.setText(text);
+						newMeal.setPrice(price);
+						newMeal.setPriceXXL(priceXxl);
+
+						wokMealList.add(newMeal);
+					}
+
+					mealPlan.setWokMeals(wokMealList);
 				}
 				return mealPlan;
 			} catch (Exception e) {

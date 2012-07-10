@@ -59,6 +59,9 @@
     <string-array name="one_way_snack_opening_times">
         <item>Montag-Freitag 11:00-14:30 Uhr</item>
     </string-array>
+    <string-array name="wok_opening_times">
+        <item>Montag-Freitag 11:30-14:30 Uhr</item>
+    </string-array>
     <string-array name="one_way_snacks">
         <item>Sandwich \"Italia\"#1,90€</item>
         <item>Sandwich \"Turkey-Bacon\"#1,90€</item>
@@ -71,6 +74,6 @@
         <item>Asiatische Nudeln vegetarisch#2,50€#4,20€</item>
         <item>versch. Sorten Fleisch (Hühnchen, Schwein, Rind), Cashew-Kerne, Erdnüsse \"neu\"#+0,70€#+0,95€</item>
         <item>Garnelen#+1,00€#1,50€</item>
-        <item>Asiatische Gemüsesuppe (vegetarisch) 0,25 ltr.#1,00€# </item>
+        <item>Asiatische Gemüsesuppe (vegetarisch) 0,25 ltr.#1,00€#--</item>
     </string-array>
 </resources>
