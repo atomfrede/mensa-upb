@@ -20,6 +20,7 @@ package de.atomfrede.android.mensa.upb.activity;
 
 import java.util.Calendar;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -90,11 +91,24 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		case R.id.menu_refresh:
 			downloadData(true);
 			return true;
+		case R.id.menu_about:
+			showAboutDialog();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
 
+	private void showAboutDialog(){
+		Dialog dialog = new Dialog(this);
+		
+		dialog.setContentView(R.layout.about_dialog);
+		dialog.setTitle(getResources().getString(R.string.menu_about)+" "+getResources().getString(R.string.app_name));
+		dialog.setCancelable(true);
+		
+		dialog.show();
+	}
+	
 	private boolean refreshRequired() {
 		if (!settings.contains(MensaConstants.LAST_UPDATE_KEY))
 			return true;
