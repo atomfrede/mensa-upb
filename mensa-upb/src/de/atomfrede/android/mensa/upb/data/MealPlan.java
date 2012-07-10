@@ -15,7 +15,7 @@ public class MealPlan {
 	WeeklyMeal mensaMeal, hotspotMeal, pubMeal;
 	Quicklunch mensulaQuicklunch;
 	List<StandardMeal> oneWaySnacks;
-	WokMeal wokMeal;
+	List<WokMeal> wokMeals;
 
 	private MealPlan() {
 	}
@@ -52,20 +52,20 @@ public class MealPlan {
 		this.mensulaQuicklunch = mensulaQuicklunch;
 	}
 
-	public WokMeal getWokMeal() {
-		return wokMeal;
-	}
-
-	public void setWokMeal(WokMeal wokMeal) {
-		this.wokMeal = wokMeal;
-	}
-
 	public List<StandardMeal> getOneWaySnacks() {
 		return oneWaySnacks;
 	}
 
 	public void setOneWaySnacks(List<StandardMeal> oneWaySnacks) {
 		this.oneWaySnacks = oneWaySnacks;
+	}
+
+	public List<WokMeal> getWokMeals() {
+		return wokMeals;
+	}
+
+	public void setWokMeals(List<WokMeal> wokMeals) {
+		this.wokMeals = wokMeals;
 	}
 
 }
