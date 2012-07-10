@@ -18,7 +18,7 @@
  */
 package de.atomfrede.android.mensa.upb.activity;
 
-import java.util.Calendar;
+import java.util.*;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -78,6 +78,10 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			Intent pubIntent = new Intent(this, PubMainActivity.class);
 			startActivity(pubIntent);
 		}
+		if(position == 4){
+			Intent onewaySnackIntent = new Intent(this, OneWaySnackActivity.class);
+			startActivity(onewaySnackIntent);
+		}
 	}
 
 	@Override
@@ -117,7 +121,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			}
 		});
 
-		String app_ver ="";
+		String app_ver = "";
 		try {
 			app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
 		} catch (NameNotFoundException e) {
@@ -125,14 +129,14 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		}
 
 		TextView versionName = (TextView) dialog.findViewById(R.id.textView1);
-		versionName.setText("Version "+app_ver);
+		versionName.setText("Version " + app_ver);
 		dialog.show();
 	}
 
 	protected void sendFeedbackMail() {
 		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 		emailIntent.setType("plain/text");
-		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"atomfrede@gmail.com"});
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "atomfrede@gmail.com" });
 
 		startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.feedback_provide_by)));
 	}
@@ -202,6 +206,23 @@ public class LocationSelectionActivity extends SherlockListActivity {
 				mealPlan.setMensaMeal(loadMensaMeal(reload));
 				mealPlan.setHotspotMeal(loadHotspotMeal(reload));
 				mealPlan.setPubMeal(loadPubMeal(reload));
+
+				if (mealPlan.getOneWaySnacks() == null || mealPlan.getOneWaySnacks().isEmpty()) {
+					String[] oneWaySnacks = getResources().getStringArray(R.array.one_way_snacks);
+
+					List<StandardMeal> oneWaySnackMeals = new ArrayList<StandardMeal>();
+
+					for (String oneWaySnack : oneWaySnacks) {
+						StandardMeal newMeal = new StandardMeal();
+						String price = oneWaySnack.split("#")[1];
+						String text = oneWaySnack.split("#")[0];
+						newMeal.setPrice(price);
+						newMeal.setText(text);
+
+						oneWaySnackMeals.add(newMeal);
+					}
+					mealPlan.setOneWaySnacks(oneWaySnackMeals);
+				}
 				return mealPlan;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

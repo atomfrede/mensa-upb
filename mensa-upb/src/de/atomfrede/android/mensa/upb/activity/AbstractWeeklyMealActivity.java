@@ -114,6 +114,9 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 		case android.R.id.home:
 			super.onBackPressed();
 			return true;
+		case R.id.menu_about:
+			showAboutDialog();
+			return true;
 		case R.id.menu_mensa:
 			Intent mensaIntent = new Intent(this, MensaMainActivity.class);
 			startActivity(mensaIntent);
