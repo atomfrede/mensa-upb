@@ -26,8 +26,8 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.View.OnClickListener;
+import android.widget.*;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.MenuInflater;
@@ -99,16 +99,33 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		}
 	}
 
-	private void showAboutDialog(){
+	private void showAboutDialog() {
 		Dialog dialog = new Dialog(this);
-		
+
 		dialog.setContentView(R.layout.about_dialog);
-		dialog.setTitle(getResources().getString(R.string.menu_about)+" "+getResources().getString(R.string.app_name));
+		dialog.setTitle(getResources().getString(R.string.menu_about) + " " + getResources().getString(R.string.app_name));
 		dialog.setCancelable(true);
-		
+
+		Button feedbackButton = (Button)dialog.findViewById(R.id.feedbackButton);
+		feedbackButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				sendFeedbackMail();
+			}
+		});
 		dialog.show();
 	}
-	
+
+	private void sendFeedbackMail() {
+		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+		emailIntent.setType("plain/text");
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, "atomfrede@gmail.com");
+
+		startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.feedback_provide_by)));
+
+	}
+
 	private boolean refreshRequired() {
 		if (!settings.contains(MensaConstants.LAST_UPDATE_KEY))
 			return true;
