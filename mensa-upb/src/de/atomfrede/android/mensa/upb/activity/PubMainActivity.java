@@ -28,7 +28,6 @@ import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
-import de.atomfrede.android.mensa.upb.adapter.WeekdayPagerAdapter;
 
 public class PubMainActivity extends AbstractWeeklyMealActivity {
 

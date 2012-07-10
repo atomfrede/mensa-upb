@@ -1,13 +1,15 @@
 package de.atomfrede.android.mensa.upb.data;
 
-import de.atomfrede.android.mensa.data.Quicklunch;
-import de.atomfrede.android.mensa.data.StandardMeal;
+import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.activity.LocationSelectionActivity;
 
 public class MealPlan {
 
-	private static final MealPlan instance = new MealPlan();
+	private static MealPlan instance = new MealPlan();
 	
 	public static MealPlan getInstance() {
+		if(instance == null)
+			instance = new MealPlan();
         return instance;
     }
 	
@@ -18,6 +20,9 @@ public class MealPlan {
 	private MealPlan(){}
 	
 	public WeeklyMeal getMensaMeal() {
+		if(mensaMeal == null){
+			
+		}
 		return mensaMeal;
 	}
 
