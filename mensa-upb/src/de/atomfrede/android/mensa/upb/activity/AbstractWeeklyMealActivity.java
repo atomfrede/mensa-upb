@@ -58,6 +58,7 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 
 	@Override
 	public void onResume() {
+		super.onResume();
 		if (MealPlan.getInstance().getMensaMeal() == null) {
 			// now reload the data 'cause we resume from somewhere and the
 			// application was killed
