@@ -18,6 +18,7 @@
  */
 package de.atomfrede.android.mensa.upb.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -54,6 +55,9 @@ public class PubMainActivity extends AbstractWeeklyMealActivity {
 		case android.R.id.home:
 			super.onBackPressed();
 			return true;
+		case R.id.menu_information:
+			showOpeningTimes();
+			return true;
 		case R.id.menu_mensa:
 			Intent mensaIntent = new Intent(this, MensaMainActivity.class);
 			startActivity(mensaIntent);
@@ -67,5 +71,18 @@ public class PubMainActivity extends AbstractWeeklyMealActivity {
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+	
+	@Override
+	protected void showOpeningTimes() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+		builder.setCancelable(true);
+		builder.setTitle(R.string.title_opening_times);
+		String[] pubOpeningTimes = getResources().getStringArray(R.array.pub_opening_times);
+		builder.setMessage(pubOpeningTimes[0]+"\n"+pubOpeningTimes[1]+"\n"+pubOpeningTimes[2]);
+		
+		mDialog = builder.create();
+		mDialog.show();
 	}
 }

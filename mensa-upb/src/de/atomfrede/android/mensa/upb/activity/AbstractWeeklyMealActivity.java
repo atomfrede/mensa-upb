@@ -20,6 +20,7 @@ package de.atomfrede.android.mensa.upb.activity;
 
 import java.util.Calendar;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.*;
@@ -43,6 +44,7 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 	protected WeekdayPagerAdapter mAdapter;
 	protected ViewPager mPager;
 	protected PageIndicator mIndicator;
+	protected AlertDialog mDialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,8 @@ public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivit
 			break;
 		}
 	}
+	
+	protected abstract void showOpeningTimes();
 	
 	public static class WeekdayPagerAdapter extends FragmentPagerAdapter {
 		

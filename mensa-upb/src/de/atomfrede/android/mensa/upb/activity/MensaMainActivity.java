@@ -18,6 +18,7 @@
  */
 package de.atomfrede.android.mensa.upb.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -31,11 +32,12 @@ import de.atomfrede.android.mensa.upb.MensaConstants;
 
 public class MensaMainActivity extends AbstractWeeklyMealActivity {
 
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		getSupportActionBar().setTitle(getResources().getString(R.string.mensa_title));
-		
+
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mAdapter = new WeekdayPagerAdapter(getSupportFragmentManager(), weekdays, MensaConstants.LOC_MENSA);
 		mPager.setAdapter(mAdapter);
@@ -44,15 +46,18 @@ public class MensaMainActivity extends AbstractWeeklyMealActivity {
 		indicator.setViewPager(mPager);
 		indicator.setFooterIndicatorStyle(IndicatorStyle.Triangle);
 		mIndicator = indicator;
-		
+
 		selectInitialDay();
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			super.onBackPressed();
+			return true;
+		case R.id.menu_information:
+			showOpeningTimes();
 			return true;
 		case R.id.menu_mensa:
 			return true;
@@ -68,6 +73,18 @@ public class MensaMainActivity extends AbstractWeeklyMealActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
-	
+
+	@Override
+	protected void showOpeningTimes() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		
+		builder.setCancelable(true);
+		builder.setTitle(R.string.title_opening_times);
+		String[] mensaOpeningTimes = getResources().getStringArray(R.array.mensa_opening_times);
+		builder.setMessage(mensaOpeningTimes[0]+"\n"+mensaOpeningTimes[1]);
+		
+		mDialog = builder.create();
+		mDialog.show();
+	}
+
 }

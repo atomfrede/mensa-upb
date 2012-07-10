@@ -18,6 +18,7 @@
    along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <resources>
+
     <string-array name="locations">
         <item>Mensa</item>
         <item>Bistro Hotspot</item>
@@ -40,4 +41,21 @@
         <item>Thu</item>
         <item>Fri</item>
     </string-array>
+    <string-array name="mensa_opening_times">
+        <item>Montag-Donnerstag 11:15-14:00 Uhr</item>
+        <item>Freitag 11:15-13:30 Uhr</item>
+    </string-array>
+    <string-array name="mensula_opening_times">
+        <item>Montag-Freitag 11:30-14:00 Uhr</item>
+    </string-array>
+    <string-array name="pub_opening_times">
+        <item>Montag-Donnerstag 08:00-23:00 Uhr</item>
+        <item>Freitag 08:00-18:00 Uhr</item>
+        <item>Samstag-Sonntag geschlossen</item>
+    </string-array>
+    <string-array name="hotspot_opening_times">
+        <item>Montag-Freitag 09:00-17:00 Uhr</item>
+        <item>Samstag, Sonntag und an Feiertagen 11:00-17:00 Uhr</item>
+    </string-array>
+
 </resources>
