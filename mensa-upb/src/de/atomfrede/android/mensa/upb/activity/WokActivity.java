@@ -113,6 +113,10 @@ public class WokActivity extends SherlockListActivity {
 			Intent hotspotIntent = new Intent(this, BistroMainActivity.class);
 			startActivity(hotspotIntent);
 			return true;
+		case R.id.menu_other_locations:
+			Intent mainActivity = new Intent(this, LocationSelectionActivity.class);
+			startActivity(mainActivity);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

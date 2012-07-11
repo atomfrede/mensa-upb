@@ -29,6 +29,7 @@
     <string name="menu_mensa">Mensa</string>
     <string name="menu_hotspot">Hotspot</string>
     <string name="menu_pub">Pub</string>
+    <string name="menu_loc_other">Other...</string>
     <string name="menu_information">Opening Times</string>
     <string name="title_opening_times">Opening Times</string>
     <string name="about_version_info">Version 1.8-SNAPSHOT</string>

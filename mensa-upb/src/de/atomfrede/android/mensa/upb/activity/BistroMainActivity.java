@@ -93,6 +93,10 @@ public class BistroMainActivity extends AbstractWeeklyMealActivity {
 			return true;
 		case R.id.menu_hotspot:
 			return true;
+		case R.id.menu_other_locations:
+			Intent mainActivity = new Intent(this, LocationSelectionActivity.class);
+			startActivity(mainActivity);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}

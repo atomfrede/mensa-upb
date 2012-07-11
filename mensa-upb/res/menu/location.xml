@@ -18,6 +18,9 @@
             <item
                 android:id="@+id/menu_pub"
                 android:title="@string/menu_pub"/>
+            <item 
+                android:id="@+id/menu_other_locations"
+                android:title="@string/menu_loc_other"/>
         </menu>
     </item>
     <item
