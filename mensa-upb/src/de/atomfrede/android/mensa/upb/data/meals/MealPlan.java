@@ -1,8 +1,7 @@
-package de.atomfrede.android.mensa.upb.data;
+package de.atomfrede.android.mensa.upb.data.meals;
 
 import java.util.List;
 
-import de.atomfrede.android.mensa.upb.common.StandardMeal;
 import de.atomfrede.android.mensa.upb.wok.WokMeal;
 
 public class MealPlan {

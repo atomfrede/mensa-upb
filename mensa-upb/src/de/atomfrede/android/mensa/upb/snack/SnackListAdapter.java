@@ -25,7 +25,7 @@ import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.upb.common.StandardMeal;
+import de.atomfrede.android.mensa.upb.data.meals.StandardMeal;
 
 public class SnackListAdapter extends ArrayAdapter<StandardMeal> {
 

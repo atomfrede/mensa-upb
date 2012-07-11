@@ -18,7 +18,7 @@
  */
 package de.atomfrede.android.mensa.upb.wok;
 
-import de.atomfrede.android.mensa.upb.common.StandardMeal;
+import de.atomfrede.android.mensa.upb.data.meals.StandardMeal;
 
 public class WokMeal extends StandardMeal {
 

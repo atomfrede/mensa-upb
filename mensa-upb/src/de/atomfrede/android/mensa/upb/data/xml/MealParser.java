@@ -28,7 +28,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import de.atomfrede.android.mensa.upb.data.WeeklyMeal;
+import de.atomfrede.android.mensa.upb.data.meals.WeeklyMeal;
 
 import android.util.Log;
 

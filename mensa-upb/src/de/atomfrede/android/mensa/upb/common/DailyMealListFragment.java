@@ -16,14 +16,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.fragment;
+package de.atomfrede.android.mensa.upb.common;
 
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
-import de.atomfrede.android.mensa.upb.adapter.MenuListAdapter;
-import de.atomfrede.android.mensa.upb.data.DailyMeal;
+import de.atomfrede.android.mensa.upb.data.meals.DailyMeal;
 
 public class DailyMealListFragment extends SherlockListFragment {
 

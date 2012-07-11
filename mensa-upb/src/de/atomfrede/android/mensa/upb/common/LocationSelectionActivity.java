@@ -37,8 +37,7 @@ import com.actionbarsherlock.view.MenuItem;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
-import de.atomfrede.android.mensa.upb.activity.*;
-import de.atomfrede.android.mensa.upb.data.*;
+import de.atomfrede.android.mensa.upb.data.meals.*;
 import de.atomfrede.android.mensa.upb.data.xml.Loader;
 import de.atomfrede.android.mensa.upb.data.xml.MealParser;
 import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
