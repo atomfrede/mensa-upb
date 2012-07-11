@@ -37,6 +37,11 @@
     <string name="about_homepage">www.atomfrede.github.com/mensa-upb</string>
     <string name="about_copyright">Copyright Frederik Hahne 2012</string>
     <string name="about_gpl">Released under GPLv3</string>
+    <string name="about_homepage_title">Homepage</string>
+    <string name="about_using">Open Source Contributions</string>
+    <string name="about_abs">ActionBarSherlock</string>
+    <string name="about_viewpager">ViewPagerIndicator</string>
+    <string name="about_jake">developed by Jake Wharton</string>
     <string name="menu_about">About</string>
     <string name="about_feedback">Feedback</string>
     <string name="feedback_provide_by">Send with...</string>
