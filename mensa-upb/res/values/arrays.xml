@@ -73,7 +73,7 @@
     <string-array name="wok_meals">
         <item>Asiatische Nudeln vegetarisch#2,50€#4,20€</item>
         <item>versch. Sorten Fleisch (Hühnchen, Schwein, Rind), Cashew-Kerne, Erdnüsse \"neu\"#+0,70€#+0,95€</item>
-        <item>Garnelen#+1,00€#1,50€</item>
+        <item>Garnelen#+1,00€#+1,50€</item>
         <item>Asiatische Gemüsesuppe (vegetarisch) 0,25 ltr.#1,00€#--</item>
     </string-array>
 </resources>
