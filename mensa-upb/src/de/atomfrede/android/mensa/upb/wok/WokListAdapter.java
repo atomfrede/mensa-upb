@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.adapter;
+package de.atomfrede.android.mensa.upb.wok;
 
 import java.util.List;
 
@@ -25,7 +25,6 @@ import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.upb.data.WokMeal;
 
 public class WokListAdapter extends ArrayAdapter<WokMeal>{
 

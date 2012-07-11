@@ -14,24 +14,24 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.mensa" >
         <activity
-            android:name=".upb.activity.MensaMainActivity"
+            android:name=".upb.mensa.MensaMainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name=".upb.activity.LocationSelectionActivity"
+            android:name=".upb.common.LocationSelectionActivity"
             android.activity.LocationSelectionActivitynActivity="" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".upb.activity.BistroMainActivity" >
+        <activity android:name=".upb.hotspot.BistroMainActivity" >
         </activity>
-        <activity android:name=".upb.activity.PubMainActivity" >
+        <activity android:name=".upb.pub.PubMainActivity" >
         </activity>
-        <activity android:name=".upb.activity.OneWaySnackActivity" >
+        <activity android:name=".upb.snack.OneWaySnackActivity" >
         </activity>
-        <activity android:name=".upb.activity.WokActivity" >
+        <activity android:name=".upb.wok.WokActivity" >
         </activity>
     </application>
 </manifest>

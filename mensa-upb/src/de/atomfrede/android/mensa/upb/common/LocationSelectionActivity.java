@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.activity;
+package de.atomfrede.android.mensa.upb.common;
 
 import java.util.*;
 
@@ -37,7 +37,16 @@ import com.actionbarsherlock.view.MenuItem;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.activity.*;
 import de.atomfrede.android.mensa.upb.data.*;
+import de.atomfrede.android.mensa.upb.data.xml.Loader;
+import de.atomfrede.android.mensa.upb.data.xml.MealParser;
+import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
+import de.atomfrede.android.mensa.upb.mensa.MensaMainActivity;
+import de.atomfrede.android.mensa.upb.pub.PubMainActivity;
+import de.atomfrede.android.mensa.upb.snack.OneWaySnackActivity;
+import de.atomfrede.android.mensa.upb.wok.WokActivity;
+import de.atomfrede.android.mensa.upb.wok.WokMeal;
 
 public class LocationSelectionActivity extends SherlockListActivity {
 

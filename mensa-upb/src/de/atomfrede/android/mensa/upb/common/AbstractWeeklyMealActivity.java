@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.activity;
+package de.atomfrede.android.mensa.upb.common;
 
 import java.util.Calendar;
 
@@ -43,6 +43,9 @@ import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
 import de.atomfrede.android.mensa.upb.data.*;
 import de.atomfrede.android.mensa.upb.fragment.DailyMealListFragment;
+import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
+import de.atomfrede.android.mensa.upb.mensa.MensaMainActivity;
+import de.atomfrede.android.mensa.upb.pub.PubMainActivity;
 
 public abstract class AbstractWeeklyMealActivity extends SherlockFragmentActivity {
 

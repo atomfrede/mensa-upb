@@ -2,6 +2,9 @@ package de.atomfrede.android.mensa.upb.data;
 
 import java.util.List;
 
+import de.atomfrede.android.mensa.upb.common.StandardMeal;
+import de.atomfrede.android.mensa.upb.wok.WokMeal;
+
 public class MealPlan {
 
 	private static MealPlan instance = new MealPlan();

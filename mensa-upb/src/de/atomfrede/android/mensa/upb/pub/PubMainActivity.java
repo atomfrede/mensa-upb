@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.activity;
+package de.atomfrede.android.mensa.upb.pub;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -29,8 +29,13 @@ import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
-import de.atomfrede.android.mensa.upb.data.MealParser;
+import de.atomfrede.android.mensa.upb.common.AbstractWeeklyMealActivity;
+import de.atomfrede.android.mensa.upb.common.LocationSelectionActivity;
+import de.atomfrede.android.mensa.upb.common.AbstractWeeklyMealActivity.WeekdayPagerAdapter;
 import de.atomfrede.android.mensa.upb.data.MealPlan;
+import de.atomfrede.android.mensa.upb.data.xml.MealParser;
+import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
+import de.atomfrede.android.mensa.upb.mensa.MensaMainActivity;
 
 public class PubMainActivity extends AbstractWeeklyMealActivity {
 
