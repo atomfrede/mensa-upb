@@ -18,25 +18,16 @@
  */
 package de.atomfrede.android.mensa.upb.data;
 
-public class StandardMeal {
+public class WokMeal extends StandardMeal {
 
-	protected String text;
-	protected String price;
+	protected String priceXXL;
 
-	public String getText() {
-		return text;
+	public String getPriceXXL() {
+		return priceXXL;
 	}
 
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
+	public void setPriceXXL(String priceXXL) {
+		this.priceXXL = priceXXL;
 	}
 
 }

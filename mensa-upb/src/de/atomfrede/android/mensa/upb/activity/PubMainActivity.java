@@ -29,6 +29,8 @@ import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.data.MealParser;
+import de.atomfrede.android.mensa.upb.data.MealPlan;
 
 public class PubMainActivity extends AbstractWeeklyMealActivity {
 
@@ -50,10 +52,33 @@ public class PubMainActivity extends AbstractWeeklyMealActivity {
 	}
 	
 	@Override
+	public void onResume() {
+		super.onResume();
+		if (MealPlan.getInstance().getPubMeal() == null) {
+			// now reload the data 'cause we resume from somewhere and the
+			// application was killed
+			reloadData();
+		}
+
+	}
+	
+	@Override
+	protected void reloadData() {
+		try {
+			MealPlan.getInstance().setPubMeal(MealParser.parseXmlString(settings.getString(MensaConstants.PUB_XML_KEY, "")));
+		} catch (Exception e) {
+
+		}
+	}
+	
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			super.onBackPressed();
+			return true;
+		case R.id.menu_about:
+			showAboutDialog();
 			return true;
 		case R.id.menu_information:
 			showOpeningTimes();
@@ -67,6 +92,10 @@ public class PubMainActivity extends AbstractWeeklyMealActivity {
 		case R.id.menu_hotspot:
 			Intent hotspotIntent = new Intent(this, BistroMainActivity.class);
 			startActivity(hotspotIntent);
+			return true;
+		case R.id.menu_other_locations:
+			Intent mainActivity = new Intent(this, LocationSelectionActivity.class);
+			startActivity(mainActivity);
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

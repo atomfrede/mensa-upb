@@ -18,15 +18,18 @@
  */
 package de.atomfrede.android.mensa.upb.activity;
 
-import java.util.Calendar;
+import java.util.*;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.View.OnClickListener;
+import android.widget.*;
 
 import com.actionbarsherlock.app.SherlockListActivity;
 import com.actionbarsherlock.view.MenuInflater;
@@ -75,6 +78,14 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			Intent pubIntent = new Intent(this, PubMainActivity.class);
 			startActivity(pubIntent);
 		}
+		if(position == 3){
+			Intent wokIntent = new Intent(this, WokActivity.class);
+			startActivity(wokIntent);
+		}
+		if (position == 4) {
+			Intent onewaySnackIntent = new Intent(this, OneWaySnackActivity.class);
+			startActivity(onewaySnackIntent);
+		}
 	}
 
 	@Override
@@ -90,9 +101,48 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		case R.id.menu_refresh:
 			downloadData(true);
 			return true;
+		case R.id.menu_about:
+			showAboutDialog();
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	protected void showAboutDialog() {
+		Dialog dialog = new Dialog(this);
+
+		dialog.setContentView(R.layout.about_dialog);
+		dialog.setTitle(getResources().getString(R.string.menu_about) + " " + getResources().getString(R.string.app_name));
+		dialog.setCancelable(true);
+
+		Button feedbackButton = (Button) dialog.findViewById(R.id.feedbackButton);
+		feedbackButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				sendFeedbackMail();
+			}
+		});
+
+		String app_ver = "";
+		try {
+			app_ver = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+		} catch (NameNotFoundException e) {
+			Log.v(TAG, e.getMessage());
+		}
+
+		TextView versionName = (TextView) dialog.findViewById(R.id.textView1);
+		versionName.setText("Version " + app_ver);
+		dialog.show();
+	}
+
+	protected void sendFeedbackMail() {
+		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+		emailIntent.setType("plain/text");
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "atomfrede@gmail.com" });
+
+		startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.feedback_provide_by)));
 	}
 
 	private boolean refreshRequired() {
@@ -160,6 +210,44 @@ public class LocationSelectionActivity extends SherlockListActivity {
 				mealPlan.setMensaMeal(loadMensaMeal(reload));
 				mealPlan.setHotspotMeal(loadHotspotMeal(reload));
 				mealPlan.setPubMeal(loadPubMeal(reload));
+
+				if (mealPlan.getOneWaySnacks() == null || mealPlan.getOneWaySnacks().isEmpty()) {
+					String[] oneWaySnacks = getResources().getStringArray(R.array.one_way_snacks);
+
+					List<StandardMeal> oneWaySnackMeals = new ArrayList<StandardMeal>();
+
+					for (String oneWaySnack : oneWaySnacks) {
+						StandardMeal newMeal = new StandardMeal();
+						String price = oneWaySnack.split("#")[1];
+						String text = oneWaySnack.split("#")[0];
+						newMeal.setPrice(price);
+						newMeal.setText(text);
+
+						oneWaySnackMeals.add(newMeal);
+					}
+					mealPlan.setOneWaySnacks(oneWaySnackMeals);
+				}
+
+				if (mealPlan.getWokMeals() == null || mealPlan.getWokMeals().isEmpty()) {
+					String[] wokMeals = getResources().getStringArray(R.array.wok_meals);
+
+					List<WokMeal> wokMealList = new ArrayList<WokMeal>();
+
+					for (String wokMeal : wokMeals) {
+						WokMeal newMeal = new WokMeal();
+						String text = wokMeal.split("#")[0];
+						String price = wokMeal.split("#")[1];
+						String priceXxl = wokMeal.split("#")[2];
+
+						newMeal.setText(text);
+						newMeal.setPrice(price);
+						newMeal.setPriceXXL(priceXxl);
+
+						wokMealList.add(newMeal);
+					}
+
+					mealPlan.setWokMeals(wokMealList);
+				}
 				return mealPlan;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

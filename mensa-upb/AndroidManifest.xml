@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.atomfrede.android.mensa"
-    android:versionCode="5"
-    android:versionName="1.7" >
+    android:versionCode="6"
+    android:versionName="1.8" >
     <uses-sdk
         android:maxSdkVersion="15"
         android:minSdkVersion="10"
@@ -28,6 +28,10 @@
         <activity android:name=".upb.activity.BistroMainActivity" >
         </activity>
         <activity android:name=".upb.activity.PubMainActivity" >
+        </activity>
+        <activity android:name=".upb.activity.OneWaySnackActivity" >
+        </activity>
+        <activity android:name=".upb.activity.WokActivity" >
         </activity>
     </application>
 </manifest>

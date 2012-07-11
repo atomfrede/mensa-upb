@@ -1,28 +1,26 @@
 package de.atomfrede.android.mensa.upb.data;
 
-import de.atomfrede.android.mensa.upb.MensaConstants;
-import de.atomfrede.android.mensa.upb.activity.LocationSelectionActivity;
+import java.util.List;
 
 public class MealPlan {
 
 	private static MealPlan instance = new MealPlan();
-	
+
 	public static MealPlan getInstance() {
-		if(instance == null)
+		if (instance == null)
 			instance = new MealPlan();
-        return instance;
-    }
-	
+		return instance;
+	}
+
 	WeeklyMeal mensaMeal, hotspotMeal, pubMeal;
 	Quicklunch mensulaQuicklunch;
-	StandardMeal wokMeal, oneWaySnackMeal;
+	List<StandardMeal> oneWaySnacks;
+	List<WokMeal> wokMeals;
 
-	private MealPlan(){}
-	
+	private MealPlan() {
+	}
+
 	public WeeklyMeal getMensaMeal() {
-		if(mensaMeal == null){
-			
-		}
 		return mensaMeal;
 	}
 
@@ -54,20 +52,20 @@ public class MealPlan {
 		this.mensulaQuicklunch = mensulaQuicklunch;
 	}
 
-	public StandardMeal getWokMeal() {
-		return wokMeal;
+	public List<StandardMeal> getOneWaySnacks() {
+		return oneWaySnacks;
 	}
 
-	public void setWokMeal(StandardMeal wokMeal) {
-		this.wokMeal = wokMeal;
+	public void setOneWaySnacks(List<StandardMeal> oneWaySnacks) {
+		this.oneWaySnacks = oneWaySnacks;
 	}
 
-	public StandardMeal getOneWaySnackMeal() {
-		return oneWaySnackMeal;
+	public List<WokMeal> getWokMeals() {
+		return wokMeals;
 	}
 
-	public void setOneWaySnackMeal(StandardMeal oneWaySnackMeal) {
-		this.oneWaySnackMeal = oneWaySnackMeal;
+	public void setWokMeals(List<WokMeal> wokMeals) {
+		this.wokMeals = wokMeals;
 	}
 
 }
