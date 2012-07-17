@@ -22,7 +22,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import de.atomfrede.android.mensa.upb.data.*;
 import de.atomfrede.android.mensa.upb.data.meals.*;
 
 public class MealHandler extends DefaultHandler {

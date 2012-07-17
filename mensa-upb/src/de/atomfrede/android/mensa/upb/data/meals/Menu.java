@@ -34,6 +34,11 @@ public class Menu implements Serializable{
 	 * (1)</beilage></menue>
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -114613620389336188L;
+	
 	private String name;
 	// Can be null!
 	private String type;

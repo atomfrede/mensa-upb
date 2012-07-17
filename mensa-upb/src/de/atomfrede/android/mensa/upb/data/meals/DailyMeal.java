@@ -24,6 +24,11 @@ import java.util.List;
 
 public class DailyMeal implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8529892181781523985L;
+	
 	String date;
 	String weekday;
 	List<Menu> menues;

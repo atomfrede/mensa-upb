@@ -31,7 +31,6 @@ import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
 import de.atomfrede.android.mensa.upb.common.AbstractWeeklyMealActivity;
 import de.atomfrede.android.mensa.upb.common.LocationSelectionActivity;
-import de.atomfrede.android.mensa.upb.common.AbstractWeeklyMealActivity.WeekdayPagerAdapter;
 import de.atomfrede.android.mensa.upb.data.meals.MealPlan;
 import de.atomfrede.android.mensa.upb.data.xml.MealParser;
 import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
