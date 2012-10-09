@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.activity;
+package de.atomfrede.android.mensa.upb.pub;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -29,48 +29,52 @@ import com.viewpagerindicator.TitlePageIndicator.IndicatorStyle;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
-import de.atomfrede.android.mensa.upb.data.MealParser;
-import de.atomfrede.android.mensa.upb.data.MealPlan;
+import de.atomfrede.android.mensa.upb.common.AbstractWeeklyMealActivity;
+import de.atomfrede.android.mensa.upb.common.LocationSelectionActivity;
+import de.atomfrede.android.mensa.upb.data.meals.MealPlan;
+import de.atomfrede.android.mensa.upb.data.xml.MealParser;
+import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
+import de.atomfrede.android.mensa.upb.mensa.MensaMainActivity;
 
-public class BistroMainActivity extends AbstractWeeklyMealActivity {
+public class PubMainActivity extends AbstractWeeklyMealActivity {
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getSupportActionBar().setTitle(getResources().getString(R.string.bistro_title));
-
+		getSupportActionBar().setTitle(getResources().getString(R.string.pub_title));
+		
 		mPager = (ViewPager) findViewById(R.id.pager);
-		mAdapter = new WeekdayPagerAdapter(getSupportFragmentManager(), weekdays, MensaConstants.LOC_HOT_SPOT);
+		mAdapter = new WeekdayPagerAdapter(getSupportFragmentManager(), weekdays, MensaConstants.LOC_PUB);
 		mPager.setAdapter(mAdapter);
 
 		TitlePageIndicator indicator = (TitlePageIndicator) findViewById(R.id.indicator);
 		indicator.setViewPager(mPager);
 		indicator.setFooterIndicatorStyle(IndicatorStyle.Triangle);
 		mIndicator = indicator;
-
+		
 		selectInitialDay();
 	}
-
+	
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (MealPlan.getInstance().getHotspotMeal() == null) {
+		if (MealPlan.getInstance().getPubMeal() == null) {
 			// now reload the data 'cause we resume from somewhere and the
 			// application was killed
 			reloadData();
 		}
 
 	}
-
+	
 	@Override
 	protected void reloadData() {
 		try {
-			MealPlan.getInstance().setHotspotMeal(MealParser.parseXmlString(settings.getString(MensaConstants.HOTSPOT_XML_KEY, "")));
+			MealPlan.getInstance().setPubMeal(MealParser.parseXmlString(settings.getString(MensaConstants.PUB_XML_KEY, "")));
 		} catch (Exception e) {
 
 		}
 	}
-
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -88,10 +92,10 @@ public class BistroMainActivity extends AbstractWeeklyMealActivity {
 			startActivity(mensaIntent);
 			return true;
 		case R.id.menu_pub:
-			Intent pubIntent = new Intent(this, PubMainActivity.class);
-			startActivity(pubIntent);
 			return true;
 		case R.id.menu_hotspot:
+			Intent hotspotIntent = new Intent(this, BistroMainActivity.class);
+			startActivity(hotspotIntent);
 			return true;
 		case R.id.menu_other_locations:
 			Intent mainActivity = new Intent(this, LocationSelectionActivity.class);
@@ -101,16 +105,16 @@ public class BistroMainActivity extends AbstractWeeklyMealActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-
+	
 	@Override
 	protected void showOpeningTimes() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
+		
 		builder.setCancelable(true);
 		builder.setTitle(R.string.title_opening_times);
-		String[] hotspotOpeningTimes = getResources().getStringArray(R.array.hotspot_opening_times);
-		builder.setMessage(hotspotOpeningTimes[0] + "\n" + hotspotOpeningTimes[1]);
-
+		String[] pubOpeningTimes = getResources().getStringArray(R.array.pub_opening_times);
+		builder.setMessage(pubOpeningTimes[0]+"\n"+pubOpeningTimes[1]+"\n"+pubOpeningTimes[2]);
+		
 		mDialog = builder.create();
 		mDialog.show();
 	}

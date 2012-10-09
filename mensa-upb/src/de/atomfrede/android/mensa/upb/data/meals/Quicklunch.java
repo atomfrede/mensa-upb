@@ -16,27 +16,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.data;
+package de.atomfrede.android.mensa.upb.data.meals;
 
-public class StandardMeal {
+public class Quicklunch {
 
-	protected String text;
-	protected String price;
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public String getPrice() {
-		return price;
-	}
-
-	public void setPrice(String price) {
-		this.price = price;
-	}
-
+	String date;
 }

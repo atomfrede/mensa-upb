@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.activity;
+package de.atomfrede.android.mensa.upb.common;
 
 import java.util.*;
 
@@ -37,13 +37,21 @@ import com.actionbarsherlock.view.MenuItem;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
-import de.atomfrede.android.mensa.upb.data.*;
+import de.atomfrede.android.mensa.upb.data.meals.*;
+import de.atomfrede.android.mensa.upb.data.xml.Loader;
+import de.atomfrede.android.mensa.upb.data.xml.MealParser;
+import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
+import de.atomfrede.android.mensa.upb.mensa.MensaMainActivity;
+import de.atomfrede.android.mensa.upb.pub.PubMainActivity;
+import de.atomfrede.android.mensa.upb.snack.OneWaySnackActivity;
+import de.atomfrede.android.mensa.upb.wok.WokActivity;
+import de.atomfrede.android.mensa.upb.wok.WokMeal;
 
 public class LocationSelectionActivity extends SherlockListActivity {
 
 	public static String TAG = "LocationSelectionActivity";
 
-	private static final boolean refreshAlways = false;
+	private static final boolean refreshAlways = true;
 	String[] locations;
 	SharedPreferences settings;
 
@@ -169,33 +177,39 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	private class LoadAndParseXmlTask extends AsyncTask<Boolean, Integer, MealPlan> {
 
 		private WeeklyMeal loadMensaMeal(boolean reload) throws Exception {
+//			Log.d(TAG, "Loading Mensa Meal");
 			String mensaXml;
 			if (reload)
 				mensaXml = Loader.downloadXml(MensaConstants.MENSA_URL);
 			else
 				mensaXml = settings.getString(MensaConstants.MENSA_XML_KEY, "");
+//			Log.d(TAG, "MensaXML is "+mensaXml);
 			WeeklyMeal mensaMeal = MealParser.parseXmlString(mensaXml);
 			settings.edit().putString(MensaConstants.MENSA_XML_KEY, mensaXml).commit();
 			return mensaMeal;
 		}
 
 		private WeeklyMeal loadHotspotMeal(boolean reload) throws Exception {
+//			Log.d(TAG, "Loading Hotspot Meal");
 			String hotspotXml;
 			if (reload)
 				hotspotXml = Loader.downloadXml(MensaConstants.HOTSPOT_URL);
 			else
 				hotspotXml = settings.getString(MensaConstants.HOTSPOT_XML_KEY, "");
+//			Log.d(TAG, "HotspotXML is "+hotspotXml);
 			WeeklyMeal hotSpotMeal = MealParser.parseXmlString(hotspotXml);
 			settings.edit().putString(MensaConstants.HOTSPOT_XML_KEY, hotspotXml).commit();
 			return hotSpotMeal;
 		}
 
 		private WeeklyMeal loadPubMeal(boolean reload) throws Exception {
+//			Log.d(TAG, "Loading PubMeal");
 			String pubXml;
 			if (reload)
 				pubXml = Loader.downloadXml(MensaConstants.PUB_URL);
 			else
 				pubXml = settings.getString(MensaConstants.PUB_XML_KEY, "");
+//			Log.d(TAG, "PubXML is "+pubXml);
 			WeeklyMeal pubMeal = MealParser.parseXmlString(pubXml);
 			settings.edit().putString(MensaConstants.PUB_XML_KEY, pubXml).commit();
 

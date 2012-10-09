@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.data;
+package de.atomfrede.android.mensa.upb.data.meals;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -34,6 +34,11 @@ public class Menu implements Serializable{
 	 * (1)</beilage></menue>
 	 */
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -114613620389336188L;
+	
 	private String name;
 	// Can be null!
 	private String type;

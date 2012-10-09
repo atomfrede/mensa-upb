@@ -1,8 +1,9 @@
-package de.atomfrede.android.mensa.upb.activity;
+package de.atomfrede.android.mensa.upb.common;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,30 +12,37 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.upb.adapter.SnackListAdapter;
-import de.atomfrede.android.mensa.upb.data.MealPlan;
+import de.atomfrede.android.mensa.upb.MensaConstants;
+import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
+import de.atomfrede.android.mensa.upb.mensa.MensaMainActivity;
+import de.atomfrede.android.mensa.upb.pub.PubMainActivity;
 
-public class OneWaySnackActivity extends SherlockListActivity {
+public abstract class AbstractMealActivity extends SherlockFragmentActivity {
 
-	static final String TAG = "OneWaySnackActivity";
+	public static String TAG = "AbstractMealActivity";
 
 	protected AlertDialog mDialog;
-	
+	protected SharedPreferences settings;
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.location_selection);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-		getSupportActionBar().setTitle(getResources().getString(R.string.one_way_title));
-
-		setListAdapter(new SnackListAdapter(this, MealPlan.getInstance().getOneWaySnacks()));
+		settings = getSharedPreferences(MensaConstants.MENSA_PREFS, LocationSelectionActivity.MODE_PRIVATE);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.location, menu);
+		return true;
+	}
+
+	protected abstract void showOpeningTimes();
+	
 	protected void showAboutDialog() {
 		Dialog dialog = new Dialog(this);
 
@@ -95,31 +103,8 @@ public class OneWaySnackActivity extends SherlockListActivity {
 			Intent hotspotIntent = new Intent(this, BistroMainActivity.class);
 			startActivity(hotspotIntent);
 			return true;
-		case R.id.menu_other_locations:
-			Intent mainActivity = new Intent(this, LocationSelectionActivity.class);
-			startActivity(mainActivity);
-			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.location, menu);
-		return true;
-	}
-	
-	protected void showOpeningTimes() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-		builder.setCancelable(true);
-		builder.setTitle(R.string.title_opening_times);
-		String[] onewaySnackOpeningTimes = getResources().getStringArray(R.array.one_way_snack_opening_times);
-		builder.setMessage(onewaySnackOpeningTimes[0]);
-
-		mDialog = builder.create();
-		mDialog.show();
 	}
 }

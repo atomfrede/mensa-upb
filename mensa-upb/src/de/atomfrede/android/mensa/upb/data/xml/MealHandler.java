@@ -16,11 +16,13 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.data;
+package de.atomfrede.android.mensa.upb.data.xml;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import de.atomfrede.android.mensa.upb.data.meals.*;
 
 public class MealHandler extends DefaultHandler {
 

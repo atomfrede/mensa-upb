@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.adapter;
+package de.atomfrede.android.mensa.upb.wok;
 
 import java.util.List;
 
@@ -25,29 +25,30 @@ import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import de.atomfrede.android.mensa.R;
-import de.atomfrede.android.mensa.upb.data.StandardMeal;
 
-public class SnackListAdapter extends ArrayAdapter<StandardMeal> {
+public class WokListAdapter extends ArrayAdapter<WokMeal>{
 
-	List<StandardMeal> values;
+	List<WokMeal> values;
 	Context context;
-
-	public SnackListAdapter(Context context, List<StandardMeal> values) {
-		super(context, R.layout.one_way_row_layout, values);
+	
+	public WokListAdapter(Context context, List<WokMeal> values) {
+		super(context, R.layout.wok_row_layout, values);
 		this.context = context;
 		this.values = values;
 	}
-
+	
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-		View rowView = inflater.inflate(R.layout.one_way_row_layout, parent, false);
+		View rowView = inflater.inflate(R.layout.wok_row_layout, parent, false);
 
-		TextView titleTxtView = (TextView)rowView.findViewById(R.id.meal_title);
-		TextView priceTxtView = (TextView)rowView.findViewById(R.id.meal_price);
+		TextView titleTxtView = (TextView)rowView.findViewById(R.id.wok_text);
+		TextView priceTxtView = (TextView)rowView.findViewById(R.id.price_normal);
+		TextView priceXXLTxtView = (TextView)rowView.findViewById(R.id.price_xxl);
 		
 		titleTxtView.setText(values.get(position).getText());
 		priceTxtView.setText(values.get(position).getPrice());
+		priceXXLTxtView.setText("XXL "+values.get(position).getPriceXXL());
 		return rowView;
 	}
 }

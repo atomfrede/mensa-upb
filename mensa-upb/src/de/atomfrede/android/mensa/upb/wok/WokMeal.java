@@ -16,9 +16,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.data;
+package de.atomfrede.android.mensa.upb.wok;
 
-public class Quicklunch {
+import de.atomfrede.android.mensa.upb.data.meals.StandardMeal;
 
-	String date;
+public class WokMeal extends StandardMeal {
+
+	protected String priceXXL;
+
+	public String getPriceXXL() {
+		return priceXXL;
+	}
+
+	public void setPriceXXL(String priceXXL) {
+		this.priceXXL = priceXXL;
+	}
+
 }

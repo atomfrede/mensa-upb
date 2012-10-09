@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.data;
+package de.atomfrede.android.mensa.upb.data.xml;
 
 import java.io.InputStream;
 import java.io.StringReader;
@@ -27,6 +27,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
+
+import de.atomfrede.android.mensa.upb.data.meals.WeeklyMeal;
 
 import android.util.Log;
 

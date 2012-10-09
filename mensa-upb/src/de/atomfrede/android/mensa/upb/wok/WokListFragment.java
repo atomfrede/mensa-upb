@@ -16,31 +16,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.atomfrede.android.mensa.upb.fragment;
+package de.atomfrede.android.mensa.upb.wok;
 
 import android.os.Bundle;
 
 import com.actionbarsherlock.app.SherlockListFragment;
 
-import de.atomfrede.android.mensa.upb.adapter.MenuListAdapter;
-import de.atomfrede.android.mensa.upb.data.DailyMeal;
+import de.atomfrede.android.mensa.upb.data.meals.MealPlan;
 
-public class DailyMealListFragment extends SherlockListFragment {
-
-	public static DailyMealListFragment newInstance(DailyMeal meal) {
-		DailyMealListFragment newFragment = new DailyMealListFragment();
-		newFragment.meal = meal;
-		return newFragment;
-	}
-
-	DailyMeal meal;
+public class WokListFragment extends SherlockListFragment {
 
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-//		MenuListAdapter menuListAdapter = new MenuListAdapter(this.getActivity(), R.layout.list_item, meal.getMenues());
-		MenuListAdapter menuListAdapter = new MenuListAdapter(this.getActivity(), meal.getMenues());
-		setListAdapter(menuListAdapter);
-		setRetainInstance(true);
+		setListAdapter(new WokListAdapter(this.getActivity(), MealPlan.getInstance().getWokMeals()));
 	}
-
 }
