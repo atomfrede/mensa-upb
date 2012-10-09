@@ -34,12 +34,23 @@ public class DailyMealListFragment extends SherlockListFragment {
 
 	DailyMeal meal;
 
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		
+		if(savedInstanceState != null && meal == null){
+			meal = (DailyMeal)savedInstanceState.getSerializable("meal");
+		}
 //		MenuListAdapter menuListAdapter = new MenuListAdapter(this.getActivity(), R.layout.list_item, meal.getMenues());
 		MenuListAdapter menuListAdapter = new MenuListAdapter(this.getActivity(), meal.getMenues());
 		setListAdapter(menuListAdapter);
 		setRetainInstance(true);
 	}
+	
+	@Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("meal", meal);
+    }
 
 }
