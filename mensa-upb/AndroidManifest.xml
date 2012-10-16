@@ -1,37 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.atomfrede.android.mensa"
-    android:versionCode="7"
-    android:versionName="1.9-SNAPSHOT" >
-    <uses-sdk
-        android:maxSdkVersion="15"
-        android:minSdkVersion="10"
-        android:targetSdkVersion="15" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <application
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.mensa" >
-        <activity
-            android:name=".upb.mensa.MensaMainActivity"
-            android:label="@string/app_name" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="8" android:versionName="2.0.0-SNAPSHOT" package="de.atomfrede.android.mensa">
+    <uses-sdk android:maxSdkVersion="15" android:minSdkVersion="10" android:targetSdkVersion="15"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <application android:icon="@drawable/ic_launcher" android:label="@string/app_name" android:theme="@style/Theme.mensa">
+        <activity android:label="@string/app_name" android:name=".upb.mensa.MensaMainActivity">
         </activity>
-        <activity
-            android:name=".upb.common.LocationSelectionActivity"
-            android.activity.LocationSelectionActivitynActivity="" >
+        <activity android.activity.LocationSelectionActivitynActivity="" android:name=".upb.common.LocationSelectionActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".upb.hotspot.BistroMainActivity" >
+        <activity android:name=".upb.hotspot.BistroMainActivity">
         </activity>
-        <activity android:name=".upb.pub.PubMainActivity" >
+        <activity android:name=".upb.pub.PubMainActivity">
         </activity>
-        <activity android:name=".upb.snack.OneWaySnackActivity" >
+        <activity android:name=".upb.snack.OneWaySnackActivity">
         </activity>
-        <activity android:name=".upb.wok.WokActivity" >
+        <activity android:name=".upb.wok.WokActivity">
         </activity>
     </application>
 </manifest>
