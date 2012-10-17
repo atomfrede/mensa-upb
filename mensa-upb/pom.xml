@@ -136,10 +136,10 @@
                                     <includes>
                                         <include>target/*.apk</include>
                                     </includes>
-                                    <keystore>${user.home}/atomfrede-release-key.keystore</keystore>
-                                    <storepass>storepasword</storepass>
-                                    <keypass>keypassword</keypass>
-                                    <alias>key-alias</alias>
+                                    <keystore>${atomfrede.keystore}</keystore>
+                                    <storepass>${atomfrede.storepass}</storepass>
+                                    <keypass>${atomfrede.keypass}</keypass>
+                                    <alias>atomfrede-release</alias>
                                     <arguments>
                                       <argument>-sigalg</argument><argument>MD5withRSA</argument>
                                       <argument>-digestalg</argument><argument>SHA1</argument>
