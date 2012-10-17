@@ -83,7 +83,9 @@ public abstract class AbstractMealActivity extends SherlockFragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			super.onBackPressed();
+			Intent backToListIntent = new Intent(this, LocationSelectionActivity.class);
+			startActivity(backToListIntent);
+//			super.onBackPressed();
 			return true;
 		case R.id.menu_about:
 			showAboutDialog();
