@@ -8,6 +8,16 @@
     <packaging>apk</packaging>
     <name>Mensa UPB</name>
 
+	 <repositories>
+    		<repository>
+      		<id>atomfredes-repository</id>
+      		<url>http://localhost:8081/nexus/content/repositories/atomfrede/</url>
+    		</repository>
+  	</repositories>
+	
+
+	
+
    	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -58,7 +68,14 @@
 			<artifactId>androidannotations</artifactId>
 			<classifier>api</classifier>
 			<version>2.6</version>
-		</dependency> 
+		</dependency>
+		<dependency>
+  			<groupId>de.keyboardsurfer.android.widget</groupId>
+  			<artifactId>crouton</artifactId>
+  			<version>1.5</version>
+		</dependency>
+
+
     </dependencies>
 
     <build>
