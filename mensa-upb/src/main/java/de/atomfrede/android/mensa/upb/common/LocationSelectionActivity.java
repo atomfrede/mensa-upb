@@ -47,6 +47,8 @@ import de.atomfrede.android.mensa.upb.pub.PubMainActivity;
 import de.atomfrede.android.mensa.upb.snack.OneWaySnackActivity;
 import de.atomfrede.android.mensa.upb.wok.WokActivity;
 import de.atomfrede.android.mensa.upb.wok.WokMeal;
+import de.neofonie.mobile.app.android.widget.crouton.Crouton;
+import de.neofonie.mobile.app.android.widget.crouton.Style;
 
 public class LocationSelectionActivity extends SherlockListActivity {
 
@@ -76,8 +78,10 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if (position == 0) {
-			Intent mensaIntent = new Intent(this, MensaMainActivity.class);
-			startActivity(mensaIntent);
+			if(MealPlan.getInstance()!= null && MealPlan.getInstance().getMensaMeal() != null && MealPlan.getInstance().getMensaMeal().getMeals() != null){
+				Intent mensaIntent = new Intent(this, MensaMainActivity.class);
+				startActivity(mensaIntent);
+			}
 		}
 		if (position == 1) {
 			Intent bistroIntent = new Intent(this, BistroMainActivity.class);
@@ -173,6 +177,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public void downloadData(boolean reload) {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
 		if(reload && usingWebauth())
+			Crouton.makeText(this, R.id.crouton_info_webauth, Style.INFO);
 			//as a first workaorund, when using webauth we don't force reload
 			task.execute(false);
 		else
