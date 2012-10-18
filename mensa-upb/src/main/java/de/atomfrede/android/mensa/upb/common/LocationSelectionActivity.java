@@ -21,9 +21,10 @@ package de.atomfrede.android.mensa.upb.common;
 import java.util.*;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -171,7 +172,20 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 	public void downloadData(boolean reload) {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
-		task.execute(reload);
+		if(reload && usingWebauth())
+			//as a first workaorund, when using webauth we don't force reload
+			task.execute(false);
+		else
+			task.execute(reload);
+	}
+	
+	public boolean usingWebauth(){
+		WifiManager wifiMgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+		String name = wifiInfo.getSSID();
+		Log.d(TAG, "Wifi Name = "+name);
+		return name.equals("webauth");
+
 	}
 
 	private class LoadAndParseXmlTask extends AsyncTask<Boolean, Integer, MealPlan> {

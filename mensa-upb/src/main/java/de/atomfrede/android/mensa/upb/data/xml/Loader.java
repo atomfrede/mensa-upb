@@ -58,6 +58,7 @@ public class Loader {
 			connection.setConnectTimeout(1000);
 			connection.connect();
 			int statusCode = connection.getResponseCode();
+			Log.d(TAG, "Status code is "+statusCode);
 			if (statusCode != HttpURLConnection.HTTP_OK) {
 				Log.e(TAG, "Failed in getting data with status code " + statusCode);
 				return "Error: Failed getting data!";
