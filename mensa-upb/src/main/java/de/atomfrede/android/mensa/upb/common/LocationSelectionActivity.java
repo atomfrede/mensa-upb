@@ -176,12 +176,13 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 	public void downloadData(boolean reload) {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
-		if(reload && usingWebauth())
-			Crouton.makeText(this, R.id.crouton_info_webauth, Style.INFO);
+		if(reload && usingWebauth()){
+			Crouton.makeText(this, R.string.crouton_info_webauth, Style.INFO);
 			//as a first workaorund, when using webauth we don't force reload
 			task.execute(false);
-		else
+		}else{
 			task.execute(reload);
+		}
 	}
 	
 	public boolean usingWebauth(){
