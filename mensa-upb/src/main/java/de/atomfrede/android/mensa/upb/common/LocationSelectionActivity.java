@@ -55,8 +55,11 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public static String TAG = "LocationSelectionActivity";
 
 	private static final boolean refreshAlways = true;
+
+	private static final String mOptionsMenu = null;
 	String[] locations;
 	SharedPreferences settings;
+	com.actionbarsherlock.view.Menu optionsMenu;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,6 +108,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		optionsMenu = menu;
 		return true;
 	}
 
@@ -112,6 +116,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_refresh:
+			setRefreshActionButtonState(true);
 			downloadData(true);
 			return true;
 		case R.id.menu_about:
@@ -121,6 +126,21 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+	public void setRefreshActionButtonState(boolean refreshing) {
+        if (optionsMenu == null) {
+            return;
+        }
+
+        final MenuItem refreshItem = optionsMenu.findItem(R.id.menu_refresh);
+        if (refreshItem != null) {
+            if (refreshing) {
+                refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+            } else {
+                refreshItem.setActionView(null);
+            }
+        }
+    }
 
 	protected void showAboutDialog() {
 		Dialog dialog = new Dialog(this);
@@ -191,7 +211,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		if(wifiInfo != null){
 			String name = wifiInfo.getSSID();
 			Log.d(TAG, "Wifi Name = "+name);
-			return name.equals("webauth");
+			return "webauth".equals(name);
 		}else{
 			return false;
 		}
@@ -295,6 +315,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 		protected void onPostExecute(MealPlan result) {
 			settings.edit().putInt(MensaConstants.LAST_UPDATE_KEY, getWeekOfYear()).commit();
+			setRefreshActionButtonState(false);
 		}
 
 	}
