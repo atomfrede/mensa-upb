@@ -27,7 +27,7 @@
 		<android.platform>16</android.platform>
 		<android-support.version>r7</android-support.version>
 			
-		<android-maven.version>3.3.2</android-maven.version>
+		<android-maven.version>3.4.0</android-maven.version>
 		<junit.version>4.10</junit.version>
 		<project.codeVersion>8</project.codeVersion>
 		
