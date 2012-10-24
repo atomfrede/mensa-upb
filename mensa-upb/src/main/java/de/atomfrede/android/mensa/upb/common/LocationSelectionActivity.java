@@ -188,10 +188,13 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public boolean usingWebauth(){
 		WifiManager wifiMgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
-		String name = wifiInfo.getSSID();
-		Log.d(TAG, "Wifi Name = "+name);
-		return name.equals("webauth");
-
+		if(wifiInfo != null){
+			String name = wifiInfo.getSSID();
+			Log.d(TAG, "Wifi Name = "+name);
+			return name.equals("webauth");
+		}else{
+			return false;
+		}
 	}
 
 	private class LoadAndParseXmlTask extends AsyncTask<Boolean, Integer, MealPlan> {
