@@ -53,23 +53,6 @@
 			<type>apklib</type>
 		</dependency>
 		<dependency>
-  			<groupId>com.github.kevinsawicki</groupId>
-  			<artifactId>http-request</artifactId>
-  			<version>3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.androidannotations</groupId>
-			<artifactId>androidannotations</artifactId>
-			<version>2.6</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.googlecode.androidannotations</groupId>
-			<artifactId>androidannotations</artifactId>
-			<classifier>api</classifier>
-			<version>2.6</version>
-		</dependency>
-		<dependency>
   			<groupId>de.keyboardsurfer.android.widget</groupId>
   			<artifactId>crouton</artifactId>
   			<version>1.5</version>
