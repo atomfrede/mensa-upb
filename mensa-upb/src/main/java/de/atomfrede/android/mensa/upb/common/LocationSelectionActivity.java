@@ -21,9 +21,10 @@ package de.atomfrede.android.mensa.upb.common;
 import java.util.*;
 
 import android.app.Dialog;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,14 +47,19 @@ import de.atomfrede.android.mensa.upb.pub.PubMainActivity;
 import de.atomfrede.android.mensa.upb.snack.OneWaySnackActivity;
 import de.atomfrede.android.mensa.upb.wok.WokActivity;
 import de.atomfrede.android.mensa.upb.wok.WokMeal;
+import de.neofonie.mobile.app.android.widget.crouton.Crouton;
+import de.neofonie.mobile.app.android.widget.crouton.Style;
 
 public class LocationSelectionActivity extends SherlockListActivity {
 
 	public static String TAG = "LocationSelectionActivity";
 
 	private static final boolean refreshAlways = true;
+
+	private static final String mOptionsMenu = null;
 	String[] locations;
 	SharedPreferences settings;
+	com.actionbarsherlock.view.Menu optionsMenu;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,8 +81,10 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if (position == 0) {
-			Intent mensaIntent = new Intent(this, MensaMainActivity.class);
-			startActivity(mensaIntent);
+			if(MealPlan.getInstance()!= null && MealPlan.getInstance().getMensaMeal() != null && MealPlan.getInstance().getMensaMeal().getMeals() != null){
+				Intent mensaIntent = new Intent(this, MensaMainActivity.class);
+				startActivity(mensaIntent);
+			}
 		}
 		if (position == 1) {
 			Intent bistroIntent = new Intent(this, BistroMainActivity.class);
@@ -100,6 +108,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		MenuInflater inflater = getSupportMenuInflater();
 		inflater.inflate(R.menu.main, menu);
+		optionsMenu = menu;
 		return true;
 	}
 
@@ -107,6 +116,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menu_refresh:
+			setRefreshActionButtonState(true);
 			downloadData(true);
 			return true;
 		case R.id.menu_about:
@@ -116,6 +126,21 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
+
+	public void setRefreshActionButtonState(boolean refreshing) {
+        if (optionsMenu == null) {
+            return;
+        }
+
+        final MenuItem refreshItem = optionsMenu.findItem(R.id.menu_refresh);
+        if (refreshItem != null) {
+            if (refreshing) {
+                refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+            } else {
+                refreshItem.setActionView(null);
+            }
+        }
+    }
 
 	protected void showAboutDialog() {
 		Dialog dialog = new Dialog(this);
@@ -171,7 +196,25 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 	public void downloadData(boolean reload) {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
-		task.execute(reload);
+		if(reload && usingWebauth()){
+			Crouton.makeText(this, R.string.crouton_info_webauth, Style.INFO);
+			//as a first workaorund, when using webauth we don't force reload
+			task.execute(false);
+		}else{
+			task.execute(reload);
+		}
+	}
+	
+	public boolean usingWebauth(){
+		WifiManager wifiMgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+		WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
+		if(wifiInfo != null){
+			String name = wifiInfo.getSSID();
+			Log.d(TAG, "Wifi Name = "+name);
+			return "webauth".equals(name);
+		}else{
+			return false;
+		}
 	}
 
 	private class LoadAndParseXmlTask extends AsyncTask<Boolean, Integer, MealPlan> {
@@ -272,6 +315,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 		protected void onPostExecute(MealPlan result) {
 			settings.edit().putInt(MensaConstants.LAST_UPDATE_KEY, getWeekOfYear()).commit();
+			setRefreshActionButtonState(false);
 		}
 
 	}
