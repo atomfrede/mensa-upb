@@ -23,6 +23,8 @@ import java.util.*;
 import android.app.Dialog;
 import android.content.*;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
@@ -56,7 +58,6 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 	private static final boolean refreshAlways = true;
 
-	private static final String mOptionsMenu = null;
 	String[] locations;
 	SharedPreferences settings;
 	com.actionbarsherlock.view.Menu optionsMenu;
@@ -81,20 +82,30 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		if (position == 0) {
-			if(MealPlan.getInstance()!= null && MealPlan.getInstance().getMensaMeal() != null && MealPlan.getInstance().getMensaMeal().getMeals() != null){
+			if (MealPlan.getInstance() != null && MealPlan.getInstance().getMensaMeal() != null && MealPlan.getInstance().getMensaMeal().getMeals() != null) {
 				Intent mensaIntent = new Intent(this, MensaMainActivity.class);
 				startActivity(mensaIntent);
+			} else {
+				Crouton.makeText(this, R.string.crouton_error_mensa_failed, Style.ALERT).show();
 			}
 		}
 		if (position == 1) {
-			Intent bistroIntent = new Intent(this, BistroMainActivity.class);
-			startActivity(bistroIntent);
+			if (MealPlan.getInstance() != null && MealPlan.getInstance().getHotspotMeal() != null && MealPlan.getInstance().getHotspotMeal().getMeals() != null) {
+				Intent bistroIntent = new Intent(this, BistroMainActivity.class);
+				startActivity(bistroIntent);
+			}else{
+				Crouton.makeText(this, R.string.crouton_error_hotspot_failed, Style.ALERT).show();
+			}
 		}
 		if (position == 2) {
-			Intent pubIntent = new Intent(this, PubMainActivity.class);
-			startActivity(pubIntent);
+			if (MealPlan.getInstance() != null && MealPlan.getInstance().getPubMeal() != null && MealPlan.getInstance().getPubMeal().getMeals() != null) {
+				Intent pubIntent = new Intent(this, PubMainActivity.class);
+				startActivity(pubIntent);
+			}else{
+				Crouton.makeText(this, R.string.crouton_error_pub_failed, Style.ALERT).show();
+			}
 		}
-		if(position == 3){
+		if (position == 3) {
 			Intent wokIntent = new Intent(this, WokActivity.class);
 			startActivity(wokIntent);
 		}
@@ -128,19 +139,19 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	}
 
 	public void setRefreshActionButtonState(boolean refreshing) {
-        if (optionsMenu == null) {
-            return;
-        }
+		if (optionsMenu == null) {
+			return;
+		}
 
-        final MenuItem refreshItem = optionsMenu.findItem(R.id.menu_refresh);
-        if (refreshItem != null) {
-            if (refreshing) {
-                refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
-            } else {
-                refreshItem.setActionView(null);
-            }
-        }
-    }
+		final MenuItem refreshItem = optionsMenu.findItem(R.id.menu_refresh);
+		if (refreshItem != null) {
+			if (refreshing) {
+				refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+			} else {
+				refreshItem.setActionView(null);
+			}
+		}
+	}
 
 	protected void showAboutDialog() {
 		Dialog dialog = new Dialog(this);
@@ -196,23 +207,37 @@ public class LocationSelectionActivity extends SherlockListActivity {
 
 	public void downloadData(boolean reload) {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
-		if(reload && usingWebauth()){
+		if (reload && usingWebauth()) {
 			Crouton.makeText(this, R.string.crouton_info_webauth, Style.INFO);
-			//as a first workaorund, when using webauth we don't force reload
+			// as a first workaorund, when using webauth we don't force reload
 			task.execute(false);
-		}else{
-			task.execute(reload);
+		} else {
+			if (reload && !isOnline()) {
+				Crouton.makeText(this, R.string.crouton_info_offline, Style.INFO).show();
+				task.execute(false);
+			} else {
+				task.execute(reload);
+			}
 		}
 	}
-	
-	public boolean usingWebauth(){
+
+	public boolean isOnline() {
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnectedOrConnecting()) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean usingWebauth() {
 		WifiManager wifiMgr = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 		WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
-		if(wifiInfo != null){
+		if (wifiInfo != null) {
 			String name = wifiInfo.getSSID();
-			Log.d(TAG, "Wifi Name = "+name);
+			Log.d(TAG, "Wifi Name = " + name);
 			return "webauth".equals(name);
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -220,39 +245,39 @@ public class LocationSelectionActivity extends SherlockListActivity {
 	private class LoadAndParseXmlTask extends AsyncTask<Boolean, Integer, MealPlan> {
 
 		private WeeklyMeal loadMensaMeal(boolean reload) throws Exception {
-//			Log.d(TAG, "Loading Mensa Meal");
+			// Log.d(TAG, "Loading Mensa Meal");
 			String mensaXml;
 			if (reload)
 				mensaXml = Loader.downloadXml(MensaConstants.MENSA_URL);
 			else
 				mensaXml = settings.getString(MensaConstants.MENSA_XML_KEY, "");
-//			Log.d(TAG, "MensaXML is "+mensaXml);
+			// Log.d(TAG, "MensaXML is "+mensaXml);
 			WeeklyMeal mensaMeal = MealParser.parseXmlString(mensaXml);
 			settings.edit().putString(MensaConstants.MENSA_XML_KEY, mensaXml).commit();
 			return mensaMeal;
 		}
 
 		private WeeklyMeal loadHotspotMeal(boolean reload) throws Exception {
-//			Log.d(TAG, "Loading Hotspot Meal");
+			// Log.d(TAG, "Loading Hotspot Meal");
 			String hotspotXml;
 			if (reload)
 				hotspotXml = Loader.downloadXml(MensaConstants.HOTSPOT_URL);
 			else
 				hotspotXml = settings.getString(MensaConstants.HOTSPOT_XML_KEY, "");
-//			Log.d(TAG, "HotspotXML is "+hotspotXml);
+			// Log.d(TAG, "HotspotXML is "+hotspotXml);
 			WeeklyMeal hotSpotMeal = MealParser.parseXmlString(hotspotXml);
 			settings.edit().putString(MensaConstants.HOTSPOT_XML_KEY, hotspotXml).commit();
 			return hotSpotMeal;
 		}
 
 		private WeeklyMeal loadPubMeal(boolean reload) throws Exception {
-//			Log.d(TAG, "Loading PubMeal");
+			// Log.d(TAG, "Loading PubMeal");
 			String pubXml;
 			if (reload)
 				pubXml = Loader.downloadXml(MensaConstants.PUB_URL);
 			else
 				pubXml = settings.getString(MensaConstants.PUB_XML_KEY, "");
-//			Log.d(TAG, "PubXML is "+pubXml);
+			// Log.d(TAG, "PubXML is "+pubXml);
 			WeeklyMeal pubMeal = MealParser.parseXmlString(pubXml);
 			settings.edit().putString(MensaConstants.PUB_XML_KEY, pubXml).commit();
 

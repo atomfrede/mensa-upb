@@ -47,4 +47,8 @@
     <string name="feedback_provide_by">Send with...</string>
     <string name="crouton_info_webauth">Connected to webauth. Using cached data.</string>
    	<string name="about_crouton">Crouton</string>
+   	<string name="crouton_info_offline">You\'re currently offline. Using local cache.</string>
+   	<string name="crouton_error_mensa_failed">No meal available. Neither online nor in local cache.</string>
+   	<string name="crouton_error_hotspot_failed">No meal available. Neither online nor in local cache.</string>
+   	<string name="crouton_error_pub_failed">No meal available. Neither online nor in local cache.</string>
 </resources>

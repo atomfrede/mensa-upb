@@ -40,5 +40,10 @@
     <string name="menu_about">Über</string>
     <string name="about_feedback">Feedback</string>
     <string name="feedback_provide_by">Seden mit...</string>
-    <string name="crouton_info_webauth">Connected to webauth. Using cached data.</string>
+    <string name="crouton_info_webauth">Verbunden mit webauth. Daten aus dem lokalen Cache werden verwendet..</string>
+    <string name="about_crouton">Crouton</string>
+   	<string name="crouton_info_offline">Du bist momentan nicht mit dem Internet verbunden. Daten aus dem lokalen Cache werden verwendet.</string>
+   	<string name="crouton_error_mensa_failed">Kein Speiseplan verfügbar. Weder online noch im lokalen Cache.</string>
+   	<string name="crouton_error_hotspot_failed">Kein Speiseplan verfügbar. Weder online noch im lokalen Cache.</string>
+   	<string name="crouton_error_pub_failed">Kein Speiseplan verfügbar. Weder online noch im lokalen Cache.</string>
 </resources>
