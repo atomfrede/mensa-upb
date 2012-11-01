@@ -1,21 +1,3 @@
-/*
- *  Copyright 2012 Frederik Hahne
- *  
- *  This file is part of Mensa UPB.
- *
- *  Mensa UPB is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  Mensa UPB is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with Mensa UPB.  If not, see <http://www.gnu.org/licenses/>.
- */
 package de.atomfrede.android.mensa.upb.common;
 
 import java.util.*;
@@ -28,133 +10,54 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.*;
+import android.widget.Button;
+import android.widget.TextView;
 
-import com.actionbarsherlock.app.SherlockListActivity;
+import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
+import com.googlecode.androidannotations.annotations.*;
 
 import de.atomfrede.android.mensa.R;
 import de.atomfrede.android.mensa.upb.MensaConstants;
 import de.atomfrede.android.mensa.upb.data.meals.*;
 import de.atomfrede.android.mensa.upb.data.xml.Loader;
 import de.atomfrede.android.mensa.upb.data.xml.MealParser;
-import de.atomfrede.android.mensa.upb.hotspot.BistroMainActivity;
-import de.atomfrede.android.mensa.upb.mensa.MensaMainActivity;
-import de.atomfrede.android.mensa.upb.pub.PubMainActivity;
-import de.atomfrede.android.mensa.upb.snack.OneWaySnackActivity;
-import de.atomfrede.android.mensa.upb.wok.WokActivity;
 import de.atomfrede.android.mensa.upb.wok.WokMeal;
 import de.neofonie.mobile.app.android.widget.crouton.Crouton;
 import de.neofonie.mobile.app.android.widget.crouton.Style;
 
-@Deprecated
-public class LocationSelectionActivity extends SherlockListActivity {
-
-	public static String TAG = "LocationSelectionActivity";
-
-	private static final boolean refreshAlways = true;
-
-	String[] locations;
-	SharedPreferences settings;
-	com.actionbarsherlock.view.Menu optionsMenu;
-
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.location_selection);
-
-		locations = getResources().getStringArray(R.array.locations);
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.list_item_loc, android.R.id.text1, locations);
-		setListAdapter(adapter);
-
-		settings = getSharedPreferences(MensaConstants.MENSA_PREFS, LocationSelectionActivity.MODE_PRIVATE);
-
-		if (refreshAlways)
-			downloadData(true);
-		else
-			downloadData(refreshRequired());
-	}
-
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		if (position == 0) {
-			if (MealPlan.getInstance() != null && MealPlan.getInstance().getMensaMeal() != null && MealPlan.getInstance().getMensaMeal().getMeals() != null) {
-				Intent mensaIntent = new Intent(this, MensaMainActivity.class);
-				startActivity(mensaIntent);
-			} else {
-				Crouton.makeText(this, R.string.crouton_error_mensa_failed, Style.ALERT).show();
-			}
-		}
-		if (position == 1) {
-			if (MealPlan.getInstance() != null && MealPlan.getInstance().getHotspotMeal() != null && MealPlan.getInstance().getHotspotMeal().getMeals() != null) {
-				Intent bistroIntent = new Intent(this, BistroMainActivity.class);
-				startActivity(bistroIntent);
-			}else{
-				Crouton.makeText(this, R.string.crouton_error_hotspot_failed, Style.ALERT).show();
-			}
-		}
-		if (position == 2) {
-			if (MealPlan.getInstance() != null && MealPlan.getInstance().getPubMeal() != null && MealPlan.getInstance().getPubMeal().getMeals() != null) {
-				Intent pubIntent = new Intent(this, PubMainActivity.class);
-				startActivity(pubIntent);
-			}else{
-				Crouton.makeText(this, R.string.crouton_error_pub_failed, Style.ALERT).show();
-			}
-		}
-		if (position == 3) {
-			Intent wokIntent = new Intent(this, WokActivity.class);
-			startActivity(wokIntent);
-		}
-		if (position == 4) {
-			Intent onewaySnackIntent = new Intent(this, OneWaySnackActivity.class);
-			startActivity(onewaySnackIntent);
-		}
-	}
+@EActivity(R.layout.activity_main)
+@OptionsMenu(R.menu.main)
+public class MainActivity extends SherlockFragmentActivity {
+	
+	public static final String TAG = ("MainActivity");
+	
+	public SharedPreferences settings;
+	public com.actionbarsherlock.view.Menu optionsMenu;
+	
+	@FragmentById(R.id.location_fragment)
+	public LocationFragment locationFragment;
 
 	@Override
 	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
-		MenuInflater inflater = getSupportMenuInflater();
-		inflater.inflate(R.menu.main, menu);
+//		MenuInflater inflater = getSupportMenuInflater();
+//		sinflater.inflate(R.menu.main, menu);
 		optionsMenu = menu;
 		return true;
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_refresh:
-			setRefreshActionButtonState(true);
-			downloadData(true);
-			return true;
-		case R.id.menu_about:
-			showAboutDialog();
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+	
+	@OptionsItem(R.id.menu_refresh)
+	public void onRefreshClicked(){
+		setRefreshActionButtonState(true);
+		downloadData(true);
 	}
-
-	public void setRefreshActionButtonState(boolean refreshing) {
-		if (optionsMenu == null) {
-			return;
-		}
-
-		final MenuItem refreshItem = optionsMenu.findItem(R.id.menu_refresh);
-		if (refreshItem != null) {
-			if (refreshing) {
-				refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
-			} else {
-				refreshItem.setActionView(null);
-			}
-		}
-	}
-
-	protected void showAboutDialog() {
+	
+	@OptionsItem(R.id.menu_about)
+	public void showAboutDialog() {
 		Dialog dialog = new Dialog(this);
 
 		dialog.setContentView(R.layout.about_dialog);
@@ -181,31 +84,7 @@ public class LocationSelectionActivity extends SherlockListActivity {
 		versionName.setText("Version " + app_ver);
 		dialog.show();
 	}
-
-	protected void sendFeedbackMail() {
-		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-		emailIntent.setType("plain/text");
-		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "atomfrede@gmail.com" });
-
-		startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.feedback_provide_by)));
-	}
-
-	private boolean refreshRequired() {
-		if (!settings.contains(MensaConstants.LAST_UPDATE_KEY))
-			return true;
-
-		int lastUpdate = settings.getInt(MensaConstants.LAST_UPDATE_KEY, -1);
-		if (getWeekOfYear() > lastUpdate)
-			return true;
-		return false;
-
-	}
-
-	private int getWeekOfYear() {
-		Calendar now = Calendar.getInstance();
-		return now.get(Calendar.WEEK_OF_YEAR);
-	}
-
+	
 	public void downloadData(boolean reload) {
 		LoadAndParseXmlTask task = new LoadAndParseXmlTask();
 		if (reload && usingWebauth()) {
@@ -221,7 +100,29 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			}
 		}
 	}
+	
+	public void setRefreshActionButtonState(boolean refreshing) {
+		if (optionsMenu == null) {
+			return;
+		}
 
+		final MenuItem refreshItem = optionsMenu.findItem(R.id.menu_refresh);
+		if (refreshItem != null) {
+			if (refreshing) {
+				refreshItem.setActionView(R.layout.actionbar_indeterminate_progress);
+			} else {
+				refreshItem.setActionView(null);
+			}
+		}
+	}
+	
+	protected void sendFeedbackMail() {
+		Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+		emailIntent.setType("plain/text");
+		emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "atomfrede@gmail.com" });
+		startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.feedback_provide_by)));
+	}
+	
 	public boolean isOnline() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -242,7 +143,12 @@ public class LocationSelectionActivity extends SherlockListActivity {
 			return false;
 		}
 	}
-
+	
+	private int getWeekOfYear() {
+		Calendar now = Calendar.getInstance();
+		return now.get(Calendar.WEEK_OF_YEAR);
+	}
+	
 	private class LoadAndParseXmlTask extends AsyncTask<Boolean, Integer, MealPlan> {
 
 		private WeeklyMeal loadMensaMeal(boolean reload) throws Exception {
