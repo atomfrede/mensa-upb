@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="drawer_activated">#99CC00</color>
+    <color name="drawer_pressed">#669900</color>
+    <color name="pager_title_strip_bg">#000</color>
+    <color name="pager_title_strip_text">#99CC00</color>
+    <color name="pager_title_strip_indicator">#99CC00</color>
+    <color name="pinned_section_header">#d6d6d6</color>
+    <color name="drawer_background">#464646</color>
+</resources>
