@@ -11,9 +11,6 @@ import de.atomfrede.android.mensa.upb.contants.Locations;
 import de.atomfrede.android.mensa.upb.data.Mealplans;
 import de.atomfrede.android.mensa.upb.data.WeeklyMeal;
 
-/**
- * Created by fred on 16.02.14.
- */
 public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     private int location;
@@ -36,6 +33,10 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 return getDataFragment(Mealplans.getInstance().getMensa(), tab);
             case Locations.HOTSPOT:
                 return getDataFragment(Mealplans.getInstance().getHotspot(), tab);
+            case Locations.HAMM:
+                return getDataFragment(Mealplans.getInstance().getBasilica(), tab);
+            case Locations.PUB:
+                return getDataFragment(Mealplans.getInstance().getPub(), tab);
             default:
                 return null;
         }
@@ -48,6 +49,10 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 return Mealplans.getInstance().getMensa().getMeals().size();
             case Locations.HOTSPOT:
                 return Mealplans.getInstance().getHotspot().getMeals().size();
+            case Locations.HAMM:
+                return Mealplans.getInstance().getBasilica().getMeals().size();
+            case Locations.PUB:
+                return Mealplans.getInstance().getPub().getMeals().size();
             default:
                 return 5;
         }
@@ -63,6 +68,12 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             case Locations.HOTSPOT:
                 min = Math.min(Mealplans.getInstance().getHotspot().getMeals().size()-1, position);
                 return DateFormat.getDateInstance().format(Mealplans.getInstance().getHotspot().getMeals().get(min).getDate());
+            case Locations.PUB:
+                min = Math.min(Mealplans.getInstance().getPub().getMeals().size()-1, position);
+                return DateFormat.getDateInstance().format(Mealplans.getInstance().getPub().getMeals().get(min).getDate());
+            case Locations.HAMM:
+                min = Math.min(Mealplans.getInstance().getBasilica().getMeals().size()-1, position);
+                return DateFormat.getDateInstance().format(Mealplans.getInstance().getBasilica().getMeals().get(min).getDate());
         }
 
         return "Position "+position;
