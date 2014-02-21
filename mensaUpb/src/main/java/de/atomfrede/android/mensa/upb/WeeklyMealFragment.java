@@ -19,10 +19,12 @@ import org.androidannotations.annotations.ViewById;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 
 import de.atomfrede.android.mensa.upb.adapter.MealFragmentStatePagerAdapter;
 import de.atomfrede.android.mensa.upb.contants.CacheKeys;
 import de.atomfrede.android.mensa.upb.contants.Locations;
+import de.atomfrede.android.mensa.upb.data.DailyMeal;
 import de.atomfrede.android.mensa.upb.data.Mealplans;
 import de.atomfrede.android.mensa.upb.data.WeeklyMeal;
 import de.atomfrede.android.mensa.upb.loader.Loader;
@@ -89,7 +91,7 @@ public class WeeklyMealFragment extends Fragment {
         pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.pager_title_strip_indicator));
 
         loadingProgressbar.setVisibility(View.GONE);
-        //Log.d(TAG, "Progress gone");
+
         selectInitialDay();
         mPager.setVisibility(View.VISIBLE);
         mPager.setSaveEnabled(false);
@@ -243,27 +245,25 @@ public class WeeklyMealFragment extends Fragment {
     }
 
     protected void selectInitialDay() {
-        Calendar today = Calendar.getInstance();
-        int dayOfWeek = today.get(Calendar.DAY_OF_WEEK);
-        switch (dayOfWeek) {
-            case 2:
-                mPager.setCurrentItem(0);
-                break;
-            case 3:
-                mPager.setCurrentItem(1);
-                break;
-            case 4:
-                mPager.setCurrentItem(2);
-                break;
-            case 5:
-                mPager.setCurrentItem(3);
-                break;
-            case 6:
-                mPager.setCurrentItem(4);
-                break;
-            default:
-                mPager.setCurrentItem(0);
-                break;
-        }
+       int counter = -1;
+       Calendar today =  Calendar.getInstance();
+       for(DailyMeal meal:weeklyMeal.getMeals()) {
+           counter++;
+           Date d = meal.getDate();
+           Calendar mealDate = Calendar.getInstance();
+           mealDate.setTime(d);
+
+           int dayOfMonthOfMeal = mealDate.get(Calendar.DAY_OF_MONTH);
+           int dayOfMonthOfToday = today.get(Calendar.DAY_OF_MONTH);
+
+           if(dayOfMonthOfMeal == dayOfMonthOfToday) {
+                mPager.setCurrentItem(counter);
+           }
+
+
+       }
+
+
+
     }
 }

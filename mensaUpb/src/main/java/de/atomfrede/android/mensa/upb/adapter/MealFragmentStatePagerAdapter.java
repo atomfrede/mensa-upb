@@ -1,10 +1,16 @@
 package de.atomfrede.android.mensa.upb.adapter;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import java.text.DateFormat;
+import android.text.format.DateFormat;
+import android.util.Log;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import de.atomfrede.android.mensa.upb.DailyMenuListFragment_;
 import de.atomfrede.android.mensa.upb.contants.Locations;
@@ -17,7 +23,6 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     public MealFragmentStatePagerAdapter(FragmentManager fm, int location) {
         super(fm);
-
         this.location = location;
     }
 
@@ -61,22 +66,40 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         int min = 0;
+        getDateFormat();
         switch (location) {
             case Locations.MENSA:
                 min = Math.min(Mealplans.getInstance().getMensa().getMeals().size()-1, position);
-                return DateFormat.getDateInstance().format(Mealplans.getInstance().getMensa().getMeals().get(min).getDate());
+                return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getMensa().getMeals().get(min).getDate());
             case Locations.HOTSPOT:
                 min = Math.min(Mealplans.getInstance().getHotspot().getMeals().size()-1, position);
-                return DateFormat.getDateInstance().format(Mealplans.getInstance().getHotspot().getMeals().get(min).getDate());
+                return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getHotspot().getMeals().get(min).getDate());
             case Locations.PUB:
                 min = Math.min(Mealplans.getInstance().getPub().getMeals().size()-1, position);
-                return DateFormat.getDateInstance().format(Mealplans.getInstance().getPub().getMeals().get(min).getDate());
+                return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getPub().getMeals().get(min).getDate());
             case Locations.HAMM:
                 min = Math.min(Mealplans.getInstance().getBasilica().getMeals().size()-1, position);
-                return DateFormat.getDateInstance().format(Mealplans.getInstance().getBasilica().getMeals().get(min).getDate());
+                return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getBasilica().getMeals().get(min).getDate());
         }
 
         return "Position "+position;
+    }
+
+
+    private String getDateFormat() {
+        int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+        Log.d("API", "Current "+currentapiVersion);
+        if(currentapiVersion >= 18) {
+            return DateFormat.getBestDateTimePattern(Locale.getDefault(), "EEddMMM");
+        } else {
+            if(Locale.getDefault().getLanguage() == Locale.ENGLISH.getLanguage()) {
+                return "EEE, MMM dd";
+            } else if(Locale.getDefault().getLanguage() == Locale.GERMANY.getLanguage()) {
+                return "EEE, dd. MMM";
+            }
+        }
+
+        return "EEE, MMM dd";
     }
 
     private DailyMenuListFragment_ getDataFragment(WeeklyMeal meal, int tab) {

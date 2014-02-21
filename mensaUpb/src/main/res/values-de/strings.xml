@@ -37,4 +37,8 @@
     <string name="menu_about">Über</string>
     <string name="about_feedback">Feedback</string>
 
+    <string name="feedback_provide_by">Senden mit...</string>
+
+    <string name="opening_times_title">Öffnungszeiten</string>
+
 </resources>
