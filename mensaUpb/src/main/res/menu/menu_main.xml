@@ -3,6 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_opening"
+        android:icon="@drawable/ic_action_device_access_time"
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
+        android:title="@string/opening_times_title">
+    </item>
+
+    <item
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_action_about"
         android:showAsAction="ifRoom"

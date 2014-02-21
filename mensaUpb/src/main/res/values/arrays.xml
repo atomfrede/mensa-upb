@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mensa_opening_times">
+        <item>Monday - Thursday 11:15 AM - 2:00 PM</item>
+        <item>Friday 11:15 AM - 1:30 PM</item>
+    </string-array>
+    <string-array name="hotspot_opening_times">
+        <item>Monday - Sunday 11:30 AM - 2:00 PM</item>
+    </string-array>
+    <string-array name="pub_opening_times">
+        <item>Monday - Sunday 11:30 AM - 2:00 PM</item>
+    </string-array>
+    <string-array name="hamm_opening_times">
+        <item>Monday - Friday 8:00 AM - 2:30 PM</item>
+    </string-array>
+</resources>

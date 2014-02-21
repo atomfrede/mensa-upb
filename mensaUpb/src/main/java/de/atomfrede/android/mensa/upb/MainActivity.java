@@ -1,7 +1,9 @@
 package de.atomfrede.android.mensa.upb;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -46,6 +48,8 @@ public class MainActivity extends ActionBarActivity
 
     private String subTitle;
 
+    private int location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +69,7 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        Log.d("MainActivity", "Selected Position "+position);
+        location = position;
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, WeeklyMealFragment.newInstance(position))
@@ -77,22 +81,19 @@ public class MainActivity extends ActionBarActivity
     public void onSectionAttached(int number) {
         switch (number) {
             case Locations.MENSA:
-                //mTitle = getString(R.string.title_section1);
                 subTitle = getString(R.string.title_mensa);
                 break;
             case Locations.PUB:
-                //mTitle = getString(R.string.title_section2);
+                subTitle = getString(R.string.title_pub);
                 break;
             case Locations.HOTSPOT:
-                //mTitle = getString(R.string.title_section3);
                 subTitle = getString(R.string.title_hotspot);
                 break;
             case Locations.HAMM:
+                subTitle = getString(R.string.title_hamm);
                 break;
         }
 
-        //getSupportActionBar().setSubtitle(subTitle);
-        //restoreActionBar();
     }
 
     public void restoreActionBar() {
@@ -104,7 +105,6 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void restoreSubtitle(String subTitle) {
-        Log.d("MainActivity", "Restore Subtitle: "+subTitle);
         getSupportActionBar().setSubtitle(subTitle);
     }
 
@@ -127,6 +127,11 @@ public class MainActivity extends ActionBarActivity
         showAboutDialog();
     }
 
+    @OptionsItem(R.id.menu_opening)
+    public void onMenuItemOpeningTimes() {
+        showOpeningTimes();
+    }
+
     //@Override
     //public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -138,6 +143,37 @@ public class MainActivity extends ActionBarActivity
         //}
         //return super.onOptionsItemSelected(item);
     //}
+
+    public void showOpeningTimes() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+
+        builder.setTitle(R.string.opening_times_title);
+
+        String[] openingTimes = getOpeningTimes();
+        if(openingTimes.length == 1) {
+            builder.setMessage(openingTimes[0]);
+        } else {
+            builder.setMessage(openingTimes[0]+"\n"+openingTimes[1]);
+        }
+
+        builder.create().show();
+    }
+
+    private String[] getOpeningTimes() {
+        switch (location) {
+            case Locations.MENSA:
+                return getResources().getStringArray(R.array.mensa_opening_times);
+            case Locations.PUB:
+                return getResources().getStringArray(R.array.pub_opening_times);
+            case Locations.HOTSPOT:
+                return getResources().getStringArray(R.array.hotspot_opening_times);
+            case Locations.HAMM:
+                return getResources().getStringArray(R.array.hamm_opening_times);
+        }
+
+        return getResources().getStringArray(R.array.mensa_opening_times);
+    }
 
     public void showAboutDialog() {
         Dialog dialog = new Dialog(this);
@@ -151,7 +187,7 @@ public class MainActivity extends ActionBarActivity
 
             @Override
             public void onClick(View v) {
-                //sendFeedbackMail();
+                sendFeedbackMail();
             }
         });
 
@@ -169,48 +205,15 @@ public class MainActivity extends ActionBarActivity
         ((TextView)dialog.findViewById(R.id.textView9)).setMovementMethod(LinkMovementMethod.getInstance());
         ((TextView)dialog.findViewById(R.id.textView10)).setMovementMethod(LinkMovementMethod.getInstance());
         ((TextView)dialog.findViewById(R.id.textView11)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView)dialog.findViewById(R.id.textView12)).setMovementMethod(LinkMovementMethod.getInstance());
         dialog.show();
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    public void sendFeedbackMail() {
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("plain/text");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[] { "atomfrede@gmail.com" });
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
+        startActivity(Intent.createChooser(emailIntent, getResources().getString(R.string.feedback_provide_by)));
     }
 }
