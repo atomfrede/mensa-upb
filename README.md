@@ -7,9 +7,6 @@ A simple application for quering the meals for the mensa at Uni Paderborn.
 
 [![endorse](http://api.coderwall.com/atomfrede/endorsecount.png)](http://coderwall.com/atomfrede)
 
-![Location Selection Screen][1]
-
-
 License
 ========
 
