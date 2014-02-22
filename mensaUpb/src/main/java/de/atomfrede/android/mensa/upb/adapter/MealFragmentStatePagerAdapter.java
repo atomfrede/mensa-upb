@@ -1,13 +1,10 @@
 package de.atomfrede.android.mensa.upb.adapter;
 
-import android.annotation.TargetApi;
-import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import android.text.format.DateFormat;
-import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -66,7 +63,6 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         int min = 0;
-        getDateFormat();
         switch (location) {
             case Locations.MENSA:
                 min = Math.min(Mealplans.getInstance().getMensa().getMeals().size()-1, position);
@@ -88,7 +84,6 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     private String getDateFormat() {
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-        Log.d("API", "Current "+currentapiVersion);
         if(currentapiVersion >= 18) {
             return DateFormat.getBestDateTimePattern(Locale.getDefault(), "EEddMMM");
         } else {
