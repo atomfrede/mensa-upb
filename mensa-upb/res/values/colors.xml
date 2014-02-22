@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="upb_blue">#0e2c6c</color>
-    <color name="upb_grey">#d4d4d2</color>
-    <color name="upb_dark_grey">#babdbf</color>
-    <color name="text_color">#46494b</color>
-    <color name="text_color_light">#989898</color>
-</resources>
