@@ -250,7 +250,7 @@ public class Loader {
         Elements speiseplans = food.select(".speiseplan");
 
         for(Element plan:speiseplans) {
-            String mealElement = plan.select("thead tr th").first().text();
+            String mealElement = plan.select("tbody tr th").first().text();
             foodElements.add(mealElement);
         }
 
