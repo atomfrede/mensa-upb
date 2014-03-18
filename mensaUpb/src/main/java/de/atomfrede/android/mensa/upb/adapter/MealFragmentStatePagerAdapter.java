@@ -1,5 +1,6 @@
 package de.atomfrede.android.mensa.upb.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -82,6 +83,7 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     }
 
 
+    @SuppressLint("NewApi")
     private String getDateFormat() {
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
         if(currentapiVersion >= 18) {
