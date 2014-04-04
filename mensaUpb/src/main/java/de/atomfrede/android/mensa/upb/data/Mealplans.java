@@ -17,6 +17,7 @@ public class Mealplans {
     private WeeklyMeal hotspot;
     private WeeklyMeal basilica;
     private WeeklyMeal pub;
+    private WeeklyMeal atrium;
 
     public WeeklyMeal getMensa() {
         return mensa;
@@ -48,5 +49,13 @@ public class Mealplans {
 
     public void setPub(WeeklyMeal pub) {
         this.pub = pub;
+    }
+
+    public WeeklyMeal getAtrium() {
+        return atrium;
+    }
+
+    public void setAtrium(WeeklyMeal atrium) {
+        this.atrium = atrium;
     }
 }

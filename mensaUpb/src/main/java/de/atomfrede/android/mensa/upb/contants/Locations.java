@@ -6,5 +6,6 @@ public class Locations {
     public static final int PUB = 1;
     public static final int HOTSPOT = 2;
     public static final int HAMM = 3;
+    public static final int LIPPSTADT = 4;
 
 }

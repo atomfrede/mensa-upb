@@ -14,13 +14,14 @@
     <string name="title_pub">Pub</string>
     <string name="title_hotspot">Hotspot</string>
     <string name="title_hamm">Basilica</string>
+    <string name="title_lippstadt">Atrium</string>
 
     <string name="seperator_meals">Essen</string>
     <string name="seperator_sidedishes">Beilagen</string>
     <string name="seperator_soups">Suppen</string>
     <string name="seperator_deserts">Desserts</string>
 
-    <string name="about_version_info">Version 3.0.0</string>
+    <string name="about_version_info">Version 3.1.0</string>
     <string name="about_content_description">Mensa UPB Logo</string>
     <string name="about_homepage">atomfrede.github.com/mensa-upb</string>
     <string name="about_copyright">Copyright Frederik Hahne 2011 - 2014</string>

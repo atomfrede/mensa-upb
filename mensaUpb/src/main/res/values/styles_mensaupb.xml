@@ -21,14 +21,15 @@
 
     <style name="Theme.Mensaupb" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarItemBackground">@drawable/selectable_background_mensaupb</item>
-        <item name="popupMenuStyle">@style/PopupMenu.Mensaupb</item>
-        <item name="dropDownListViewStyle">@style/DropDownListView.Mensaupb</item>
+        <!--<item name="popupMenuStyle">@style/PopupMenu.Mensaupb</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Mensaupb</item>-->
         <item name="actionBarTabStyle">@style/ActionBarTabStyle.Mensaupb</item>
-        <item name="actionDropDownStyle">@style/DropDownNav.Mensaupb</item>
+        <!--<item name="actionDropDownStyle">@style/DropDownNav.Mensaupb</item>-->
         <item name="actionBarStyle">@style/ActionBar.Solid.Mensaupb</item>
         <item name="actionModeBackground">@drawable/cab_background_top_mensaupb</item>
         <item name="actionModeSplitBackground">@drawable/cab_background_bottom_mensaupb</item>
         <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Mensaupb</item>
+
 
                 <!-- Light.DarkActionBar specific -->
         <item name="actionBarWidgetTheme">@style/Theme.Mensaupb.Widget</item>

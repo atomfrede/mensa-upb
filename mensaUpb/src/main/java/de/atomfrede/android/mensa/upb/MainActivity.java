@@ -28,6 +28,7 @@ import android.widget.TextView;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
+import org.androidannotations.annotations.OptionsMenuItem;
 
 import de.atomfrede.android.mensa.upb.contants.Locations;
 
@@ -41,6 +42,10 @@ public class MainActivity extends ActionBarActivity
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
+    private WeeklyMealFragment_ currentFragment;
+
+    @OptionsMenuItem(R.id.menu_refresh)
+    protected MenuItem refreshMenuItem;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -71,8 +76,9 @@ public class MainActivity extends ActionBarActivity
         // update the main content by replacing fragments
         location = position;
         FragmentManager fragmentManager = getSupportFragmentManager();
+        currentFragment = WeeklyMealFragment.newInstance(position);
         fragmentManager.beginTransaction()
-                .replace(R.id.container, WeeklyMealFragment.newInstance(position))
+                .replace(R.id.container, currentFragment)
                 .commit();
 
 
@@ -91,6 +97,9 @@ public class MainActivity extends ActionBarActivity
                 break;
             case Locations.HAMM:
                 subTitle = getString(R.string.title_hamm);
+                break;
+            case Locations.LIPPSTADT:
+                subTitle = getString(R.string.title_lippstadt);
                 break;
         }
 
@@ -132,6 +141,22 @@ public class MainActivity extends ActionBarActivity
         showOpeningTimes();
     }
 
+    @OptionsItem(R.id.menu_refresh)
+    public void reloadData() {
+        if(currentFragment != null) {
+            currentFragment.reloadData();
+        }
+    }
+
+    public void setRefreshActionButtonState(boolean refreshing) {
+        if(refreshMenuItem != null) {
+            if(refreshing) {
+                refreshMenuItem.setActionView(R.layout.actionbar_indeterminate_progress);
+            } else {
+                refreshMenuItem.setActionView(null);
+            }
+        }
+    }
     //@Override
     //public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -170,6 +195,8 @@ public class MainActivity extends ActionBarActivity
                 return getResources().getStringArray(R.array.hotspot_opening_times);
             case Locations.HAMM:
                 return getResources().getStringArray(R.array.hamm_opening_times);
+            case Locations.LIPPSTADT:
+                return getResources().getStringArray(R.array.lippstadt_opening_times);
         }
 
         return getResources().getStringArray(R.array.mensa_opening_times);

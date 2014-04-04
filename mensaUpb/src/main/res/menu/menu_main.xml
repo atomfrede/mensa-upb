@@ -9,7 +9,12 @@
         app:showAsAction="ifRoom"
         android:title="@string/opening_times_title">
     </item>
-
+    <item
+        android:id="@+id/menu_refresh"
+        android:icon="@drawable/ic_navigation_refresh"
+        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
+        android:title="@string/menu_refresh"/>
     <item
         android:id="@+id/menu_about"
         android:icon="@drawable/ic_action_about"

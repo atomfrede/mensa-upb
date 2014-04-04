@@ -40,8 +40,47 @@ public class Loader {
                 return loadHotSpot();
             case Locations.HAMM:
                 return loadBasilica();
+            case Locations.LIPPSTADT:
+                return loadAtrium();
         }
         return null;
+    }
+
+    private static WeeklyMeal loadAtrium() throws IOException {
+        Log.d(TAG, "Load Basilica.");
+        WeeklyMeal atrium = new WeeklyMeal();
+
+        Document doc;
+        doc = Jsoup.connect(Urls.LIPPSTADT).timeout(0).get();
+
+        Elements days = doc.select(".scrollContainer > .panel");
+
+        for(Element day:days) {
+            String dayText = day.id();
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd_MM_yyyy");
+            DateTime dt = formatter.parseDateTime(dayText);
+
+            DailyMeal mealOfTheDay = new DailyMeal();
+            mealOfTheDay.setDate(dt.toDate());
+
+            Map<Integer, List<String>> foods = extractFood(day);
+
+            List<String> meals = foods.get(0);
+            List<String> sideDishes = foods.get(1);
+            List<String> soups = foods.get(2);
+            List<String> deserts = foods.get(3);
+
+            mealOfTheDay = addMeals(mealOfTheDay, meals);
+            mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
+            mealOfTheDay = addSoups(mealOfTheDay, soups);
+            mealOfTheDay = addDeserts(mealOfTheDay, deserts);
+
+            atrium.addMeal(mealOfTheDay);
+
+        }
+
+        Mealplans.getInstance().setAtrium(atrium);
+        return atrium;
     }
 
     private static WeeklyMeal loadBasilica() throws IOException {
@@ -82,7 +121,7 @@ public class Loader {
     }
 
     private static WeeklyMeal loadPub() throws IOException {
-        Log.d(TAG, "Load Hotspot.");
+        Log.d(TAG, "Load Pub.");
         WeeklyMeal pub = new WeeklyMeal();
 
         Document doc;

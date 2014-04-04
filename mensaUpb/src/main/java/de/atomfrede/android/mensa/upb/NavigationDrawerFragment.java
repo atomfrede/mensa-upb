@@ -111,6 +111,7 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_pub),
                         getString(R.string.title_hotspot),
                         getString(R.string.title_hamm),
+                        getString(R.string.title_lippstadt)
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -205,9 +206,6 @@ public class NavigationDrawerFragment extends Fragment {
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
         }
-
-        ;
-
     }
 
     @Override
@@ -252,11 +250,8 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
-        return super.onOptionsItemSelected(item);
     }
 
     /**

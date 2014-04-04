@@ -10,10 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
+import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -28,6 +30,8 @@ import de.atomfrede.android.mensa.upb.data.DailyMeal;
 import de.atomfrede.android.mensa.upb.data.Mealplans;
 import de.atomfrede.android.mensa.upb.data.WeeklyMeal;
 import de.atomfrede.android.mensa.upb.loader.Loader;
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 
 @EFragment(R.layout.fragment_weekly_meal)
 public class WeeklyMealFragment extends Fragment {
@@ -51,6 +55,9 @@ public class WeeklyMealFragment extends Fragment {
 
     @ViewById(R.id.refresh_progress_bar)
     protected ProgressBar loadingProgressbar;
+
+    @ViewById(R.id.warning_wrapper)
+    protected RelativeLayout warningWrapper;
 
     @ ViewById(R.id.pager_title_strip)
     protected PagerTabStrip pagerTabStrip;
@@ -77,7 +84,7 @@ public class WeeklyMealFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        loadData();
+        loadData(false);
     }
 
     @UiThread
@@ -99,12 +106,30 @@ public class WeeklyMealFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
     }
 
+    @UiThread
+    public void onDataFailed() {
+        Crouton.makeText(getActivity(), R.string.error_during_load, Style.ALERT).show();
+        loadingProgressbar.setVisibility(View.GONE);
+        warningWrapper.setVisibility(View.VISIBLE);
+    }
+
+    @OptionsItem(R.id.menu_refresh)
+    public void reloadData() {
+        Log.d("menu", "reload data");
+        loadingProgressbar.setVisibility(View.VISIBLE);
+        warningWrapper.setVisibility(View.GONE);
+
+        mPager.setVisibility(View.GONE);
+
+        loadData(true);
+    }
+
     @Background
-    public void loadData() {
+    public void loadData(boolean force) {
         try {
             WeeklyMeal fromCache = getFromCache();
 
-            if(fromCache == null) {
+            if(fromCache == null || force) {
                 weeklyMeal = Loader.reloadWeeklyMeal(location);
             } else {
                 weeklyMeal = fromCache;
@@ -114,6 +139,8 @@ public class WeeklyMealFragment extends Fragment {
             onDataLoaded();
         } catch(IOException ioe) {
             Log.e("Loader", "Cant Load data.", ioe);
+            onDataFailed();
+
         }
     }
 
@@ -130,6 +157,9 @@ public class WeeklyMealFragment extends Fragment {
                 break;
             case Locations.HAMM:
                 ((MainActivity_) getActivity()).restoreSubtitle(getString(R.string.title_hamm));
+                break;
+            case Locations.LIPPSTADT:
+                ((MainActivity_) getActivity()).restoreSubtitle(getString(R.string.title_lippstadt));
                 break;
         }
     }
@@ -180,6 +210,15 @@ public class WeeklyMealFragment extends Fragment {
                 }
                 break;
 
+            case Locations.LIPPSTADT:
+                if(sp.contains(CacheKeys.LIPPSTADT)) {
+                    String json = sp.getString(CacheKeys.LIPPSTADT, null);
+                    if(json != null) {
+                        meal = WeeklyMeal.fromJson(json);
+                        Mealplans.getInstance().setAtrium(meal);
+                    }
+                }
+                break;
         }
 
         return meal;
@@ -195,6 +234,8 @@ public class WeeklyMealFragment extends Fragment {
                 return updateRequired(CacheKeys.LAST_UPDATE_PUB);
             case Locations.HAMM:
                 return updateRequired(CacheKeys.LAST_UPDATE_HAMM);
+            case Locations.LIPPSTADT:
+                return updateRequired(CacheKeys.LAST_UPDATE_LIPPSTADT);
             default:
                 return true;
         }
@@ -208,11 +249,7 @@ public class WeeklyMealFragment extends Fragment {
 
         int lastUpdate = sp.getInt(cacheKey, -1);
 
-        if(CacheValueUtil.getCacheValue() > lastUpdate) {
-            return true;
-        }
-
-        return false;
+        return CacheValueUtil.getCacheValue() > lastUpdate;
     }
     private void cacheWeeklyMeal() {
         switch (location) {
@@ -231,6 +268,10 @@ public class WeeklyMealFragment extends Fragment {
             case Locations.HAMM:
                 sp.edit().putString(CacheKeys.HAMM, weeklyMeal.toJson()).commit();
                 sp.edit().putInt(CacheKeys.LAST_UPDATE_HAMM, CacheValueUtil.getCacheValue()).commit();
+                break;
+            case Locations.LIPPSTADT:
+                sp.edit().putString(CacheKeys.LIPPSTADT, weeklyMeal.toJson()).commit();
+                sp.edit().putInt(CacheKeys.LAST_UPDATE_LIPPSTADT, CacheValueUtil.getCacheValue()).commit();
                 break;
             default:
                 break;
@@ -259,11 +300,6 @@ public class WeeklyMealFragment extends Fragment {
            if(dayOfMonthOfMeal == dayOfMonthOfToday) {
                 mPager.setCurrentItem(counter);
            }
-
-
        }
-
-
-
     }
 }

@@ -21,7 +21,6 @@ public class CacheValueUtil {
         int weekOfYear = getWeekOfYear();
         int year = getYear();
 
-        int cacheKey = year + weekOfYear;
-        return cacheKey;
+        return year + weekOfYear;
     }
 }

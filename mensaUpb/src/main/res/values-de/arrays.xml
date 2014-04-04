@@ -13,4 +13,7 @@
     <string-array name="hamm_opening_times">
         <item>Montag - Freitag 8:00 -14:30 Uhr</item>
     </string-array>
+    <string-array name="lippstadt_opening_times">
+        <item>Monday - Friday 8:00 AM - 2:30 PM</item>
+    </string-array>
 </resources>

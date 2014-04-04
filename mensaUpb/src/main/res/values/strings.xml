@@ -14,13 +14,14 @@
     <string name="title_pub">Pub</string>
     <string name="title_hotspot">Hotspot</string>
     <string name="title_hamm">Basilica</string>
+    <string name="title_lippstadt">Atrium</string>
 
     <string name="seperator_meals">Meals</string>
     <string name="seperator_sidedishes">Sidedishes</string>
     <string name="seperator_soups">Soups</string>
     <string name="seperator_deserts">Deserts</string>
 
-    <string name="about_version_info">Version 3.0.0</string>
+    <string name="about_version_info">Version 3.1.0</string>
     <string name="about_content_description">Mensa UPB Logo</string>
     <string name="about_homepage">atomfrede.github.com/mensa-upb</string>
     <string name="about_copyright">Copyright Frederik Hahne 2011 - 2014</string>
@@ -40,4 +41,8 @@
 
     <string name="opening_times_title">Opening Times</string>
 
+    <string name="error_during_load">Can\'t load meals.</string>
+    <string name="error_warning_detail">Can\'t load meals. Check your connection and try again. If it still doesn\'t work there might be a problem with data provider.</string>
+
+    <string name="menu_refresh">Refresh</string>
 </resources>

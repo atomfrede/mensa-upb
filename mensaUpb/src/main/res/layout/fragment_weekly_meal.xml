@@ -12,6 +12,36 @@
         android:layout_gravity="center"
         android:visibility="visible"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:id="@+id/warning_wrapper">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:id="@+id/warning"
+            android:src="@drawable/ic_alerts_and_states_error"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/error_warning_detail"
+            android:layout_below="@id/warning"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal" />
+    </RelativeLayout>
+
+
+
+
+
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/pager"
@@ -28,5 +58,7 @@
             android:textColor="@color/pager_title_strip_text"/>
 
     </android.support.v4.view.ViewPager>
+
+
 
 </LinearLayout>
