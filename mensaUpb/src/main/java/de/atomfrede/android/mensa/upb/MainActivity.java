@@ -144,6 +144,7 @@ public class MainActivity extends ActionBarActivity
     @OptionsItem(R.id.menu_refresh)
     public void reloadData() {
         if(currentFragment != null) {
+            setRefreshActionButtonState(true);
             currentFragment.reloadData();
         }
     }

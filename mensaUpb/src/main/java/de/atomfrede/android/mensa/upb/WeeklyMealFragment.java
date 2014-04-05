@@ -104,6 +104,8 @@ public class WeeklyMealFragment extends Fragment {
         mPager.setSaveEnabled(false);
         mPager.invalidate();
         mAdapter.notifyDataSetChanged();
+
+        ((MainActivity_)getActivity()).setRefreshActionButtonState(false);
     }
 
     @UiThread
@@ -111,6 +113,8 @@ public class WeeklyMealFragment extends Fragment {
         Crouton.makeText(getActivity(), R.string.error_during_load, Style.ALERT).show();
         loadingProgressbar.setVisibility(View.GONE);
         warningWrapper.setVisibility(View.VISIBLE);
+
+        ((MainActivity_)getActivity()).setRefreshActionButtonState(false);
     }
 
     @OptionsItem(R.id.menu_refresh)
