@@ -42,4 +42,9 @@
 
     <string name="opening_times_title">Öffnungszeiten</string>
 
+    <string name="error_during_load">Speisepläne konnten nicht geladen werden.</string>
+    <string name="error_warning_detail">Speisepläne konnten nicht geladen werden. Überprüfe deine Internetverbindung und versuche es nochmal. Falls es dann immer noch nicht klappt, dann könnte es ein Problem mit der Webseite des Studentenwerks geben.</string>
+
+    <string name="menu_refresh">Aktualisieren</string>
+
 </resources>
