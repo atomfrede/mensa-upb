@@ -89,23 +89,27 @@ public class WeeklyMealFragment extends Fragment {
 
     @UiThread
     public void onDataLoaded() {
-        restoreSubtitle();
+        try {
+            restoreSubtitle();
 
-        mAdapter = new MealFragmentStatePagerAdapter(getActivity().getSupportFragmentManager(), location);
-        mPager.setAdapter(mAdapter);
+            mAdapter = new MealFragmentStatePagerAdapter(getActivity().getSupportFragmentManager(), location);
+            mPager.setAdapter(mAdapter);
 
-        pagerTabStrip.setDrawFullUnderline(true);
-        pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.pager_title_strip_indicator));
+            pagerTabStrip.setDrawFullUnderline(true);
+            pagerTabStrip.setTabIndicatorColor(getResources().getColor(R.color.pager_title_strip_indicator));
 
-        loadingProgressbar.setVisibility(View.GONE);
+            loadingProgressbar.setVisibility(View.GONE);
 
-        selectInitialDay();
-        mPager.setVisibility(View.VISIBLE);
-        mPager.setSaveEnabled(false);
-        mPager.invalidate();
-        mAdapter.notifyDataSetChanged();
+            selectInitialDay();
+            mPager.setVisibility(View.VISIBLE);
+            mPager.setSaveEnabled(false);
+            mPager.invalidate();
+            mAdapter.notifyDataSetChanged();
 
-        ((MainActivity_)getActivity()).setRefreshActionButtonState(false);
+            ((MainActivity_) getActivity()).setRefreshActionButtonState(false);
+        } catch (IllegalStateException ste) {
+            Log.e("WeeklyMealFragment", "Error on data loaded CB. ", ste);
+        }
     }
 
     @UiThread
