@@ -47,4 +47,11 @@
 
     <string name="menu_refresh">Aktualisieren</string>
 
+    <string name="marker_kalorienarm">kalorienarm</string>
+    <string name="marker_fettarm">fettarm</string>
+    <string name="marker_vegetarisch">vegetarisch</string>
+    <string name="marker_vegan">vegan</string>
+    <string name="marker_lactosefrei">lactosefrei</string>
+    <string name="marker_glutenfrei">glutenfrei</string>
+
 </resources>

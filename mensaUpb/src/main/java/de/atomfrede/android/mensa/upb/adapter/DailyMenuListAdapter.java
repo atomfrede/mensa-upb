@@ -1,11 +1,13 @@
 package de.atomfrede.android.mensa.upb.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hb.views.PinnedSectionListView;
@@ -49,11 +51,53 @@ public class DailyMenuListAdapter extends ArrayAdapter<AbstractMeal> implements 
 
         View rowView = inflater.inflate(R.layout.mensa_row_layout, parent, false);
         TextView titleTxt = (TextView) rowView.findViewById(R.id.menu_title);
+        TextView markerTxt = (TextView) rowView.findViewById(R.id.menu_marker);
+        ImageView markerImage = (ImageView) rowView.findViewById(R.id.marker_image);
 
         if (item.getType() == AbstractMeal.Type.SEPERATOR) {
             rowView.setBackgroundColor(context.getResources().getColor(R.color.pinned_section_header));
         }
         titleTxt.setText(values.get(position).getTitle());
+
+
+
+        AbstractMeal.Marker marker = values.get(position).getMarker();
+
+        if(marker != null) {
+            if(values.get(position).getMarker() != AbstractMeal.Marker.NONE) {
+                markerTxt.setText(values.get(position).getMarker().toString().toLowerCase());
+            } else {
+                markerTxt.setVisibility(View.GONE);
+            }
+
+            switch (values.get(position).getMarker()) {
+                case NONE:
+                    markerImage.setVisibility(View.GONE);
+                    break;
+                case FETTARM:
+                    markerImage.setImageResource(R.drawable.ic_fettarm);
+                    break;
+                case GLUTENFREI:
+                    markerImage.setImageResource(R.drawable.ic_glutenfrei);
+                    break;
+                case KALORIENARM:
+                    markerImage.setImageResource(R.drawable.ic_kalorienarm);
+                    break;
+                case LACTOSEFREI:
+                    markerImage.setImageResource(R.drawable.ic_lactosefrei);
+                    break;
+                case VEGAN:
+                    markerImage.setImageResource(R.drawable.ic_vegan);
+                    break;
+                case VEGETARISCH:
+                    markerImage.setImageResource(R.drawable.ic_vegetarisch);
+                    break;
+            }
+        } else {
+            markerImage.setVisibility(View.GONE);
+            markerTxt.setVisibility(View.GONE);
+        }
+
         return rowView;
     }
 }

@@ -45,4 +45,11 @@
     <string name="error_warning_detail">Can\'t load meals. Check your connection and try again. If it still doesn\'t work there might be a problem with data provider.</string>
 
     <string name="menu_refresh">Refresh</string>
+
+    <string name="marker_kalorienarm">low-calorie</string>
+    <string name="marker_fettarm">low-fat</string>
+    <string name="marker_vegetarisch">vegetarian</string>
+    <string name="marker_vegan">vegan</string>
+    <string name="marker_lactosefrei">lactose free</string>
+    <string name="marker_glutenfrei">gluten free</string>
 </resources>

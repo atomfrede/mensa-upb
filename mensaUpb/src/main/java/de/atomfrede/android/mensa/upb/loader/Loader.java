@@ -253,6 +253,13 @@ public class Loader {
         for(Pair<String, String> sideDish:sideDishes) {
             SideDish m = new SideDish();
             m.setTitle(sideDish.first);
+
+            if(!sideDish.second.trim().equals("")) {
+                m.setMarker(AbstractMeal.Marker.valueOf(sideDish.second.toUpperCase()));
+            } else {
+                m.setMarker(AbstractMeal.Marker.NONE);
+            }
+
             mealOfTheDay.addSideDisch(m);
         }
 
@@ -263,6 +270,13 @@ public class Loader {
         for(Pair<String, String> soup:soups) {
             Soup m = new Soup();
             m.setTitle(soup.first);
+
+            if(!soup.second.trim().equals("")) {
+                m.setMarker(AbstractMeal.Marker.valueOf(soup.second.toUpperCase()));
+            } else {
+                m.setMarker(AbstractMeal.Marker.NONE);
+            }
+
             mealOfTheDay.addSoup(m);
         }
 
@@ -273,6 +287,13 @@ public class Loader {
         for(Pair<String, String> desert:deserts) {
             Desert m = new Desert();
             m.setTitle(desert.first);
+
+            if(!desert.second.trim().equals("")) {
+                m.setMarker(AbstractMeal.Marker.valueOf(desert.second.toUpperCase()));
+            } else {
+                m.setMarker(AbstractMeal.Marker.NONE);
+            }
+
             mealOfTheDay.addDesert(m);
         }
 
@@ -297,6 +318,7 @@ public class Loader {
         List<Pair<String, String>> foodElements = new ArrayList<>();
         Elements speiseplans = food.select(".speiseplan");
 
+        //Log.e("Speiseplan ", speiseplans+"");
 
         for(Element plan:speiseplans) {
             String mealElement = plan.select("tbody tr th").first().text();
@@ -313,7 +335,7 @@ public class Loader {
                 }
             }
 
-            foodElements.add(new Pair<String, String>(mealElement, markerElement));
+            foodElements.add(new Pair<>(mealElement, markerElement));
         }
 
         return foodElements;
