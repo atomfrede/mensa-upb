@@ -7,6 +7,23 @@ import java.io.Serializable;
 
 public class AbstractMeal implements Serializable {
 
+    public enum Marker {
+        @SerializedName("KALORIENARM")
+        KALORIENARM,
+        @SerializedName("FETTARM")
+        FETTARM,
+        @SerializedName("VEGETARISCH")
+        VEGETARISCH,
+        @SerializedName("VEGAN")
+        VEGAN,
+        @SerializedName("LACTOSEFREI")
+        LACTOSEFREI,
+        @SerializedName("GLUTENFREI")
+        GLUTENFREI,
+        @SerializedName("NONE")
+        NONE
+    }
+
     public enum Type {
         @SerializedName("SEPERATOR")
         SEPERATOR,
@@ -24,6 +41,8 @@ public class AbstractMeal implements Serializable {
 
     protected Type type;
 
+    protected Marker marker;
+
     public String getTitle() {
         return title;
     }
@@ -38,6 +57,14 @@ public class AbstractMeal implements Serializable {
 
     public void setType(Type type) {
         this.type = type;
+    }
+
+    public Marker getMarker() {
+        return marker;
+    }
+
+    public void setMarker(Marker marker) {
+        this.marker = marker;
     }
 
     public String toJson() {

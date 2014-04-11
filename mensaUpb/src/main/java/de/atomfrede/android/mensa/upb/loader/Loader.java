@@ -1,6 +1,7 @@
 package de.atomfrede.android.mensa.upb.loader;
 
 import android.util.Log;
+import android.util.Pair;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 import de.atomfrede.android.mensa.upb.contants.Locations;
 import de.atomfrede.android.mensa.upb.contants.Urls;
+import de.atomfrede.android.mensa.upb.data.AbstractMeal;
 import de.atomfrede.android.mensa.upb.data.DailyMeal;
 import de.atomfrede.android.mensa.upb.data.Desert;
 import de.atomfrede.android.mensa.upb.data.Meal;
@@ -63,12 +65,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<String>> foods = extractFood(day);
+            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
 
-            List<String> meals = foods.get(0);
-            List<String> sideDishes = foods.get(1);
-            List<String> soups = foods.get(2);
-            List<String> deserts = foods.get(3);
+            List<Pair<String, String>> meals = foods.get(0);
+            List<Pair<String, String>> sideDishes = foods.get(1);
+            List<Pair<String, String>> soups = foods.get(2);
+            List<Pair<String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -100,12 +102,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<String>> foods = extractFood(day);
+            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
 
-            List<String> meals = foods.get(0);
-            List<String> sideDishes = foods.get(1);
-            List<String> soups = foods.get(2);
-            List<String> deserts = foods.get(3);
+            List<Pair<String, String>> meals = foods.get(0);
+            List<Pair<String, String>> sideDishes = foods.get(1);
+            List<Pair<String, String>> soups = foods.get(2);
+            List<Pair<String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -137,12 +139,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<String>> foods = extractFood(day);
+            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
 
-            List<String> meals = foods.get(0);
-            List<String> sideDishes = foods.get(1);
-            List<String> soups = foods.get(2);
-            List<String> deserts = foods.get(3);
+            List<Pair<String, String>> meals = foods.get(0);
+            List<Pair<String, String>> sideDishes = foods.get(1);
+            List<Pair<String, String>> soups = foods.get(2);
+            List<Pair<String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -174,12 +176,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<String>> foods = extractFood(day);
+            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
 
-            List<String> meals = foods.get(0);
-            List<String> sideDishes = foods.get(1);
-            List<String> soups = foods.get(2);
-            List<String> deserts = foods.get(3);
+            List<Pair<String, String>> meals = foods.get(0);
+            List<Pair<String, String>> sideDishes = foods.get(1);
+            List<Pair<String, String>> soups = foods.get(2);
+            List<Pair<String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -210,12 +212,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<String>> foods = extractFood(day);
+            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
 
-            List<String> meals = foods.get(0);
-            List<String> sideDishes = foods.get(1);
-            List<String> soups = foods.get(2);
-            List<String> deserts = foods.get(3);
+            List<Pair<String, String>> meals = foods.get(0);
+            List<Pair<String, String>> sideDishes = foods.get(1);
+            List<Pair<String, String>> soups = foods.get(2);
+            List<Pair<String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -230,53 +232,60 @@ public class Loader {
         return mensaMeal;
     }
 
-    private static DailyMeal addMeals(DailyMeal mealOfTheDay, List<String> meals) {
-        for(String meal:meals) {
+    private static DailyMeal addMeals(DailyMeal mealOfTheDay, List<Pair<String, String>> meals) {
+        for(Pair<String, String> meal:meals) {
             Meal m = new Meal();
-            m.setTitle(meal);
+            m.setTitle(meal.first);
+
+            if(!meal.second.trim().equals("")) {
+                m.setMarker(AbstractMeal.Marker.valueOf(meal.second.toUpperCase()));
+            } else {
+                m.setMarker(AbstractMeal.Marker.NONE);
+            }
+
             mealOfTheDay.addMeal(m);
         }
 
         return mealOfTheDay;
     }
 
-    private static DailyMeal addSideDishes(DailyMeal mealOfTheDay, List<String> sideDishes) {
-        for(String sideDish:sideDishes) {
+    private static DailyMeal addSideDishes(DailyMeal mealOfTheDay, List<Pair<String, String>> sideDishes) {
+        for(Pair<String, String> sideDish:sideDishes) {
             SideDish m = new SideDish();
-            m.setTitle(sideDish);
+            m.setTitle(sideDish.first);
             mealOfTheDay.addSideDisch(m);
         }
 
         return mealOfTheDay;
     }
 
-    private static DailyMeal addSoups(DailyMeal mealOfTheDay, List<String> soups) {
-        for(String soup:soups) {
+    private static DailyMeal addSoups(DailyMeal mealOfTheDay, List<Pair<String, String>> soups) {
+        for(Pair<String, String> soup:soups) {
             Soup m = new Soup();
-            m.setTitle(soup);
+            m.setTitle(soup.first);
             mealOfTheDay.addSoup(m);
         }
 
         return mealOfTheDay;
     }
 
-    private static DailyMeal addDeserts(DailyMeal mealOfTheDay, List<String> deserts) {
-        for(String desert:deserts) {
+    private static DailyMeal addDeserts(DailyMeal mealOfTheDay, List<Pair<String, String>> deserts) {
+        for(Pair<String, String> desert:deserts) {
             Desert m = new Desert();
-            m.setTitle(desert);
+            m.setTitle(desert.first);
             mealOfTheDay.addDesert(m);
         }
 
         return mealOfTheDay;
     }
 
-    private static Map<Integer, List<String>> extractFood(Element day) {
-        HashMap<Integer, List<String>> meals = new HashMap<>();
+    private static Map<Integer, List<Pair<String, String>>> extractFood(Element day) {
+        HashMap<Integer, List<Pair<String, String>>> meals = new HashMap<>();
         Elements foods = day.select(".food_txt");
         int counter = 0;
 
         for(Element food:foods) {
-            List<String> elems = extractFoodElement(food);
+            List<Pair<String, String>> elems = extractFoodElement(food);
             meals.put(counter, elems);
             counter++;
         }
@@ -284,13 +293,27 @@ public class Loader {
         return meals;
     }
 
-    private static List<String> extractFoodElement(Element food) {
-        List<String> foodElements = new ArrayList<>();
+    private static List<Pair<String, String>> extractFoodElement(Element food) {
+        List<Pair<String, String>> foodElements = new ArrayList<>();
         Elements speiseplans = food.select(".speiseplan");
+
 
         for(Element plan:speiseplans) {
             String mealElement = plan.select("tbody tr th").first().text();
-            foodElements.add(mealElement);
+            String markerElement = "";
+
+
+            Elements zutatImg = plan.select("tbody tr th.zutat img");
+            if(zutatImg != null) {
+                String title = zutatImg.attr("title");
+                if(title.trim().equals("")) {
+                    markerElement = "";
+                } else {
+                    markerElement = title;
+                }
+            }
+
+            foodElements.add(new Pair<String, String>(mealElement, markerElement));
         }
 
         return foodElements;
