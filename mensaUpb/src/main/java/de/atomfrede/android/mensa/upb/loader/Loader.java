@@ -233,70 +233,77 @@ public class Loader {
     }
 
     private static DailyMeal addMeals(DailyMeal mealOfTheDay, List<Pair<String, String>> meals) {
-        for(Pair<String, String> meal:meals) {
-            Meal m = new Meal();
-            m.setTitle(meal.first);
+        Log.e("Loader", "Add Meals "+meals);
+        if(meals != null) {
+            for (Pair<String, String> meal : meals) {
+                Meal m = new Meal();
+                m.setTitle(meal.first);
 
-            if(!meal.second.trim().equals("")) {
-                m.setMarker(AbstractMeal.Marker.valueOf(meal.second.toUpperCase()));
-            } else {
-                m.setMarker(AbstractMeal.Marker.NONE);
+                if (!meal.second.trim().equals("")) {
+                    m.setMarker(AbstractMeal.Marker.valueOf(meal.second.toUpperCase()));
+                } else {
+                    m.setMarker(AbstractMeal.Marker.NONE);
+                }
+
+                mealOfTheDay.addMeal(m);
             }
-
-            mealOfTheDay.addMeal(m);
         }
 
         return mealOfTheDay;
+
     }
 
     private static DailyMeal addSideDishes(DailyMeal mealOfTheDay, List<Pair<String, String>> sideDishes) {
-        for(Pair<String, String> sideDish:sideDishes) {
-            SideDish m = new SideDish();
-            m.setTitle(sideDish.first);
+        if(sideDishes != null) {
+            for (Pair<String, String> sideDish : sideDishes) {
+                SideDish m = new SideDish();
+                m.setTitle(sideDish.first);
 
-            if(!sideDish.second.trim().equals("")) {
-                m.setMarker(AbstractMeal.Marker.valueOf(sideDish.second.toUpperCase()));
-            } else {
-                m.setMarker(AbstractMeal.Marker.NONE);
+                if (!sideDish.second.trim().equals("")) {
+                    m.setMarker(AbstractMeal.Marker.valueOf(sideDish.second.toUpperCase()));
+                } else {
+                    m.setMarker(AbstractMeal.Marker.NONE);
+                }
+
+                mealOfTheDay.addSideDisch(m);
             }
-
-            mealOfTheDay.addSideDisch(m);
         }
-
         return mealOfTheDay;
     }
 
     private static DailyMeal addSoups(DailyMeal mealOfTheDay, List<Pair<String, String>> soups) {
-        for(Pair<String, String> soup:soups) {
-            Soup m = new Soup();
-            m.setTitle(soup.first);
+        if(soups != null) {
+            for (Pair<String, String> soup : soups) {
+                Soup m = new Soup();
+                m.setTitle(soup.first);
 
-            if(!soup.second.trim().equals("")) {
-                m.setMarker(AbstractMeal.Marker.valueOf(soup.second.toUpperCase()));
-            } else {
-                m.setMarker(AbstractMeal.Marker.NONE);
+                if (!soup.second.trim().equals("")) {
+                    m.setMarker(AbstractMeal.Marker.valueOf(soup.second.toUpperCase()));
+                } else {
+                    m.setMarker(AbstractMeal.Marker.NONE);
+                }
+
+                mealOfTheDay.addSoup(m);
             }
-
-            mealOfTheDay.addSoup(m);
         }
-
         return mealOfTheDay;
     }
 
     private static DailyMeal addDeserts(DailyMeal mealOfTheDay, List<Pair<String, String>> deserts) {
-        for(Pair<String, String> desert:deserts) {
-            Desert m = new Desert();
-            m.setTitle(desert.first);
+        if(deserts != null) {
+            for (Pair<String, String> desert : deserts) {
+                Desert m = new Desert();
+                m.setTitle(desert.first);
 
-            if(!desert.second.trim().equals("")) {
-                m.setMarker(AbstractMeal.Marker.valueOf(desert.second.toUpperCase()));
-            } else {
-                m.setMarker(AbstractMeal.Marker.NONE);
+                if (!desert.second.trim().equals("")) {
+                    m.setMarker(AbstractMeal.Marker.valueOf(desert.second.toUpperCase()));
+                } else {
+                    m.setMarker(AbstractMeal.Marker.NONE);
+                }
+
+                mealOfTheDay.addDesert(m);
             }
-
-            mealOfTheDay.addDesert(m);
         }
-
         return mealOfTheDay;
     }
 
