@@ -52,4 +52,6 @@
     <string name="marker_vegan">vegan</string>
     <string name="marker_lactosefrei">lactose free</string>
     <string name="marker_glutenfrei">gluten free</string>
+
+    <string name="closed_today">This restaurant is closed today.</string>
 </resources>

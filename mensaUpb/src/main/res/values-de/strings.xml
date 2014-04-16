@@ -54,4 +54,6 @@
     <string name="marker_lactosefrei">lactosefrei</string>
     <string name="marker_glutenfrei">glutenfrei</string>
 
+    <string name="closed_today">Heute leider geschlossen.</string>
+
 </resources>

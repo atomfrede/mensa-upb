@@ -5,7 +5,9 @@
         <item>Friday 11:15 AM - 1:30 PM</item>
     </string-array>
     <string-array name="hotspot_opening_times">
-        <item>Monday - Sunday 11:30 AM - 2:00 PM</item>
+        <item>Monday 09:00 AM - 3:30 PM</item>
+        <item>Tuesday - Friday 09:00 AM - 5:00 PM</item>
+        <item>Saturday - Sunday 11:00 AM - 5:00 PM</item>
     </string-array>
     <string-array name="pub_opening_times">
         <item>Monday - Sunday 11:30 AM - 2:00 PM</item>

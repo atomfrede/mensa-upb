@@ -5,7 +5,9 @@
         <item>Freitag 11:15 – 13:30 Uhr</item>
     </string-array>
     <string-array name="hotspot_opening_times">
-        <item>Montag – Sonntag 11:30 – 14:00 Uhr</item>
+        <item>Montag 09:00 – 15:30 Uhr</item>
+        <item>Dienstag - Freitag 09:00 – 17:00 Uhr</item>
+        <item>Samstag - Sonntag 11:00 – 17:00 Uhr</item>
     </string-array>
     <string-array name="pub_opening_times">
         <item>Montag – Freitag 11:30 – 14:00 Uhr</item>

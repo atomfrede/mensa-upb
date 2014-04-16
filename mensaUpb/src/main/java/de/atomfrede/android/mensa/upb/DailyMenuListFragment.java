@@ -2,6 +2,8 @@ package de.atomfrede.android.mensa.upb;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.hb.views.PinnedSectionListView;
 
@@ -30,6 +32,9 @@ public class DailyMenuListFragment extends Fragment {
     @ViewById(R.id.mealList)
     protected PinnedSectionListView listView;
 
+    @ViewById(R.id.closed_wrapper)
+    protected RelativeLayout closedWrapper;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -43,18 +48,47 @@ public class DailyMenuListFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
+
+        if(menu.getMeals().isEmpty() && menu.getSideDishes().isEmpty() && menu.getSoups().isEmpty() && menu.getDeserts().isEmpty()) {
+            setupClosed();
+        } else {
+            setupMeals();
+        }
+    }
+
+    private void setupMeals() {
+        listView.setVisibility(View.VISIBLE);
+        closedWrapper.setVisibility(View.GONE);
+
         List<AbstractMeal> meals = new ArrayList<>();
-        meals.add(generateSeperator(getResources().getString(R.string.seperator_meals)));
-        meals.addAll(menu.getMeals());
-        meals.add(generateSeperator(getResources().getString(R.string.seperator_sidedishes)));
-        meals.addAll(menu.getSideDishes());
-        meals.add(generateSeperator(getResources().getString(R.string.seperator_soups)));
-        meals.addAll(menu.getSoups());
-        meals.add(generateSeperator(getResources().getString(R.string.seperator_deserts)));
-        meals.addAll(menu.getDeserts());
+
+        if(!menu.getMeals().isEmpty()){
+            meals.add(generateSeperator(getResources().getString(R.string.seperator_meals)));
+            meals.addAll(menu.getMeals());
+        }
+
+        if(!menu.getSideDishes().isEmpty()) {
+            meals.add(generateSeperator(getResources().getString(R.string.seperator_sidedishes)));
+            meals.addAll(menu.getSideDishes());
+        }
+
+        if(!menu.getSoups().isEmpty()) {
+            meals.add(generateSeperator(getResources().getString(R.string.seperator_soups)));
+            meals.addAll(menu.getSoups());
+        }
+
+        if(!menu.getDeserts().isEmpty()) {
+            meals.add(generateSeperator(getResources().getString(R.string.seperator_deserts)));
+            meals.addAll(menu.getDeserts());
+        }
+
         DailyMenuListAdapter menuListAdapter = new DailyMenuListAdapter(this.getActivity(), meals);
         listView.setAdapter(menuListAdapter);
-//		setRetainInstance(true);
+    }
+
+    private void setupClosed() {
+        listView.setVisibility(View.GONE);
+        closedWrapper.setVisibility(View.VISIBLE);
     }
 
     private AbstractMeal generateSeperator(String title) {
