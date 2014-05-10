@@ -54,4 +54,6 @@
     <string name="marker_glutenfrei">gluten free</string>
 
     <string name="closed_today">This restaurant is closed today.</string>
+
+    <string name="stwpb">Data and Icons from the Homepage of the <a href="www.stwpb.de">Studentenwerk Paderborn</a></string>
 </resources>

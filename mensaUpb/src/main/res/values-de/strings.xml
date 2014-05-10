@@ -56,4 +56,6 @@
 
     <string name="closed_today">Heute leider geschlossen.</string>
 
+    <string name="stwpb">Daten und Icons stammen von der Homepage des <a href="www.stwpb.de">Studentenwerks Paderborn</a></string>
+
 </resources>
