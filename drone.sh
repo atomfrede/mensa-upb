@@ -26,9 +26,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/build-tools
 
 # Install Android SDK components
-echo y | android update sdk --filter 
-platform-tools,build-tools-$ANDROID_BUILD_TOOLS_VERSION,android-$ANDROID_API_LEVEL,android-$EMULATOR_API_LEVEL,sysimg-$EMULATOR_API_LEVEL,extra-android-m2repository --no-ui --force 
---all > /dev/null
+echo y | android update sdk --filter platform-tools,build-tools-$ANDROID_BUILD_TOOLS_VERSION,android-$ANDROID_API_LEVEL,android-$EMULATOR_API_LEVEL,sysimg-$EMULATOR_API_LEVEL,extra-android-m2repository --no-ui --force --all > /dev/null
 
 # Setup AVD device
 #echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL
