@@ -1,12 +1,12 @@
+[![Build Status](https://travis-ci.org/atomfrede/mensa-upb.svg?branch=master)](https://travis-ci.org/atomfrede/mensa-upb)
 [![Stories in Ready](https://badge.waffle.io/atomfrede/mensa-upb.png?label=ready&title=Ready)](https://waffle.io/atomfrede/mensa-upb)
+[![endorse](http://api.coderwall.com/atomfrede/endorsecount.png)](http://coderwall.com/atomfrede)
 Mensa-UPB
 ========
 
 A simple application for quering the meals for the mensa at Uni Paderborn.
 
 **See http://atomfrede.github.com/mensa-upb/ for more information.**
-
-[![endorse](http://api.coderwall.com/atomfrede/endorsecount.png)](http://coderwall.com/atomfrede)
 
 License
 ========
