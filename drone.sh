@@ -18,8 +18,8 @@ set -v
 PATH=$(echo $PATH | sed 's/\/opt\/android-sdk-linux//')
 sudo apt-get update -qq
 if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
-wget https://dl.google.com/android/android-sdk_r$ANDROID_SDK_TOOLS_VERSION-linux.tgz -nv
-tar xzf android-sdk_r$ANDROID_SDK_TOOLS_VERSION-linux.tgz
+wget https://dl.google.com/android/android-sdk_r$22.6.2-linux.tgz -nv
+tar xzf android-sdk_r$22.6.2-linux.tgz
 export ANDROID_HOME=$PWD/android-sdk-linux
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
