@@ -31,9 +31,9 @@ platform-tools,build-tools-$ANDROID_BUILD_TOOLS_VERSION,android-$ANDROID_API_LEV
 --all > /dev/null
 
 # Setup AVD device
-echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL
+#echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL
 
-emulator -avd test -no-skin -no-audio -no-window &
+#emulator -avd test -no-skin -no-audio -no-window &
 
 #cp gradle.properties.template gradle.properties
 #sed -i 's/Insert your OAuth consumer key here/'"$API_KEY"'/g' gradle.properties
