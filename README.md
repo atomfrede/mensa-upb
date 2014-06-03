@@ -1,3 +1,4 @@
+[![Build Status](https://drone.io/github.com/atomfrede/mensa-upb/status.png)](https://drone.io/github.com/atomfrede/mensa-upb/latest)
 [![Build Status](https://travis-ci.org/atomfrede/mensa-upb.svg?branch=master)](https://travis-ci.org/atomfrede/mensa-upb)
 [![Stories in Ready](https://badge.waffle.io/atomfrede/mensa-upb.png?label=ready&title=Ready)](https://waffle.io/atomfrede/mensa-upb)
 [![endorse](http://api.coderwall.com/atomfrede/endorsecount.png)](http://coderwall.com/atomfrede)
