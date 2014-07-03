@@ -34,6 +34,7 @@
     <string name="about_crouton"><a href="https://github.com/keyboardsurfer/Crouton">Crouton by Benjamin Weiss</a></string>
     <string name="about_jsoup"><a href="http://jsoup.org/">jsoup by Jonathan Hedley</a></string>
     <string name="about_gson"><a href="https://code.google.com/p/google-gson/">gson by Google Inc.</a></string>
+    <string name="about_ironjan"><a href="https://github.com/ironjan/MensaUPB">MensaUPB by ironjan</a></string>
 
     <string name="menu_about">Über</string>
     <string name="about_feedback">Feedback</string>

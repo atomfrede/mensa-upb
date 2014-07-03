@@ -179,6 +179,14 @@
                 android:layout_below="@+id/textView11"
                 android:text="@string/about_gson"
                 android:textSize="12sp" />
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/textView4"
+                android:layout_below="@+id/textView12"
+                android:text="@string/about_ironjan"
+                android:textSize="12sp"/>
         </RelativeLayout>
     </ScrollView>
 
