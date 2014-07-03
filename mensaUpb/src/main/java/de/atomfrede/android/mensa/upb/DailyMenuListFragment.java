@@ -2,12 +2,15 @@ package de.atomfrede.android.mensa.upb;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 
 import com.hb.views.PinnedSectionListView;
 
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
@@ -84,6 +87,13 @@ public class DailyMenuListFragment extends Fragment {
 
         DailyMenuListAdapter menuListAdapter = new DailyMenuListAdapter(this.getActivity(), meals);
         listView.setAdapter(menuListAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                listItemClicked(i);
+            }
+        });
     }
 
     private void setupClosed() {
@@ -102,5 +112,19 @@ public class DailyMenuListFragment extends Fragment {
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("menu", menu);
+    }
+
+    void listItemClicked(int pos) {
+
+        AbstractMeal item = (AbstractMeal)listView.getItemAtPosition(pos);
+
+        if(item != null && item.getType() != AbstractMeal.Type.SEPERATOR) {
+            FragmentManager fm = getActivity().getSupportFragmentManager();
+            MenuDetailFragment fragment = MenuDetailFragment.newInstance(item.getTitle(), item.getAllergeneList());
+            fragment.show(fm, "fragment_edit_name");
+        }
+
+
+
     }
 }

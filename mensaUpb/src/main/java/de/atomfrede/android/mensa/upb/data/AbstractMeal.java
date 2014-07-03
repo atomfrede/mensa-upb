@@ -37,6 +37,14 @@ public class AbstractMeal implements Serializable {
         DESERT
     }
 
+    protected String studentPrice;
+    protected String price;
+    protected String guestPrice;
+
+    protected boolean pricePerWeight;
+
+    protected String allergeneList;
+
     protected String title;
 
     protected Type type;
@@ -65,6 +73,46 @@ public class AbstractMeal implements Serializable {
 
     public void setMarker(Marker marker) {
         this.marker = marker;
+    }
+
+    public String getStudentPrice() {
+        return studentPrice;
+    }
+
+    public void setStudentPrice(String studentPrice) {
+        this.studentPrice = studentPrice;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getGuestPrice() {
+        return guestPrice;
+    }
+
+    public void setGuestPrice(String guestPrice) {
+        this.guestPrice = guestPrice;
+    }
+
+    public boolean isPricePerWeight() {
+        return pricePerWeight;
+    }
+
+    public void setPricePerWeight(boolean pricePerWeight) {
+        this.pricePerWeight = pricePerWeight;
+    }
+
+    public String getAllergeneList() {
+        return allergeneList;
+    }
+
+    public void setAllergeneList(String allergeneList) {
+        this.allergeneList = allergeneList;
     }
 
     public String toJson() {

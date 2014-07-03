@@ -21,7 +21,7 @@
     <string name="seperator_soups">Soups</string>
     <string name="seperator_deserts">Deserts</string>
 
-    <string name="about_version_info">Version 3.1.0</string>
+    <string name="about_version_info">Version 3.3.0</string>
     <string name="about_content_description">Mensa UPB Logo</string>
     <string name="about_homepage">atomfrede.github.com/mensa-upb</string>
     <string name="about_copyright">Copyright Frederik Hahne 2011 – 2014</string>
@@ -34,6 +34,7 @@
     <string name="about_crouton"><a href="https://github.com/keyboardsurfer/Crouton">Crouton by Benjamin Weiss</a></string>
     <string name="about_jsoup"><a href="http://jsoup.org/">jsoup by Jonathan Hedley</a></string>
     <string name="about_gson"><a href="https://code.google.com/p/google-gson/">gson by Google Inc.</a></string>
+    <string name="about_ironjan"><a href="https://github.com/ironjan/MensaUPB">MensaUPB by ironjan</a></string>
 
     <string name="menu_about">About</string>
     <string name="about_feedback">Feedback</string>
@@ -54,4 +55,14 @@
     <string name="marker_glutenfrei">gluten free</string>
 
     <string name="closed_today">This restaurant is closed today.</string>
+
+    <string name="stwpb">Data and Icons from the Homepage of the <a href="www.stwpb.de">Studentenwerk Paderborn</a></string>
+    <string name="stwp_header">Note</string>
+
+    <string name="price_students">Students</string>
+    <string name="price_employees">Employees</string>
+    <string name="price_guests">Guests</string>
+
+    <string name="price_header">Price: </string>
+    <string name="price_per_weight_header">Prices per 100g: </string>
 </resources>
