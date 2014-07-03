@@ -52,14 +52,45 @@ public class DailyMenuListAdapter extends ArrayAdapter<AbstractMeal> implements 
         View rowView = inflater.inflate(R.layout.mensa_row_layout, parent, false);
         TextView titleTxt = (TextView) rowView.findViewById(R.id.menu_title);
         TextView markerTxt = (TextView) rowView.findViewById(R.id.menu_marker);
+        TextView pricesTxt = (TextView) rowView.findViewById(R.id.menu_prices);
         ImageView markerImage = (ImageView) rowView.findViewById(R.id.marker_image);
 
         if (item.getType() == AbstractMeal.Type.SEPERATOR) {
             rowView.setBackgroundColor(context.getResources().getColor(R.color.pinned_section_header));
+            pricesTxt.setVisibility(View.GONE);
+            markerTxt.setVisibility(View.GONE);
+        } else {
+            pricesTxt.setVisibility(View.VISIBLE);
         }
         titleTxt.setText(values.get(position).getTitle());
 
+        if(item.getType() != AbstractMeal.Type.SEPERATOR) {
+            StringBuilder sb = new StringBuilder();
 
+            if (item.isPricePerWeight()) {
+                sb.append(context.getResources().getString(R.string.price_per_weight_header));
+            } else {
+                sb.append(context.getResources().getString(R.string.price_header));
+            }
+
+            sb.append("\n");
+
+            sb.append(context.getResources().getString(R.string.price_students));
+            sb.append(": ");
+            sb.append(item.getStudentPrice());
+            sb.append("\n");
+
+            sb.append(context.getResources().getString(R.string.price_employees));
+            sb.append(": ");
+            sb.append(item.getPrice());
+            sb.append("\n");
+
+            sb.append(context.getResources().getString(R.string.price_guests));
+            sb.append(": ");
+            sb.append(item.getGuestPrice());
+
+            pricesTxt.setText(sb.toString());
+        }
 
         AbstractMeal.Marker marker = values.get(position).getMarker();
 

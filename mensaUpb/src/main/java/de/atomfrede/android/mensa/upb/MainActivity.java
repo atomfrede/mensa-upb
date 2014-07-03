@@ -234,6 +234,7 @@ public class MainActivity extends ActionBarActivity
         ((TextView)dialog.findViewById(R.id.textView10)).setMovementMethod(LinkMovementMethod.getInstance());
         ((TextView)dialog.findViewById(R.id.textView11)).setMovementMethod(LinkMovementMethod.getInstance());
         ((TextView)dialog.findViewById(R.id.textView12)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((TextView)dialog.findViewById(R.id.stwp_text)).setMovementMethod(LinkMovementMethod.getInstance());
         dialog.show();
     }
 

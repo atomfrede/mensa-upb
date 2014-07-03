@@ -65,12 +65,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
+            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
 
-            List<Pair<String, String>> meals = foods.get(0);
-            List<Pair<String, String>> sideDishes = foods.get(1);
-            List<Pair<String, String>> soups = foods.get(2);
-            List<Pair<String, String>> deserts = foods.get(3);
+            List<Quadruple<String, String, String, String>> meals = foods.get(0);
+            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
+            List<Quadruple<String, String, String, String>> soups = foods.get(2);
+            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -102,12 +102,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
+            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
 
-            List<Pair<String, String>> meals = foods.get(0);
-            List<Pair<String, String>> sideDishes = foods.get(1);
-            List<Pair<String, String>> soups = foods.get(2);
-            List<Pair<String, String>> deserts = foods.get(3);
+            List<Quadruple<String, String, String, String>> meals = foods.get(0);
+            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
+            List<Quadruple<String, String, String, String>> soups = foods.get(2);
+            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -139,12 +139,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
+            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
 
-            List<Pair<String, String>> meals = foods.get(0);
-            List<Pair<String, String>> sideDishes = foods.get(1);
-            List<Pair<String, String>> soups = foods.get(2);
-            List<Pair<String, String>> deserts = foods.get(3);
+            List<Quadruple<String, String, String, String>> meals = foods.get(0);
+            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
+            List<Quadruple<String, String, String, String>> soups = foods.get(2);
+            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -176,12 +176,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
+            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
 
-            List<Pair<String, String>> meals = foods.get(0);
-            List<Pair<String, String>> sideDishes = foods.get(1);
-            List<Pair<String, String>> soups = foods.get(2);
-            List<Pair<String, String>> deserts = foods.get(3);
+            List<Quadruple<String, String, String, String>> meals = foods.get(0);
+            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
+            List<Quadruple<String, String, String, String>> soups = foods.get(2);
+            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -212,12 +212,12 @@ public class Loader {
             DailyMeal mealOfTheDay = new DailyMeal();
             mealOfTheDay.setDate(dt.toDate());
 
-            Map<Integer, List<Pair<String, String>>> foods = extractFood(day);
+            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
 
-            List<Pair<String, String>> meals = foods.get(0);
-            List<Pair<String, String>> sideDishes = foods.get(1);
-            List<Pair<String, String>> soups = foods.get(2);
-            List<Pair<String, String>> deserts = foods.get(3);
+            List<Quadruple<String, String, String, String>> meals = foods.get(0);
+            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
+            List<Quadruple<String, String, String, String>> soups = foods.get(2);
+            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
 
             mealOfTheDay = addMeals(mealOfTheDay, meals);
             mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
@@ -232,10 +232,10 @@ public class Loader {
         return mensaMeal;
     }
 
-    private static DailyMeal addMeals(DailyMeal mealOfTheDay, List<Pair<String, String>> meals) {
+    private static DailyMeal addMeals(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> meals) {
         Log.e("Loader", "Add Meals "+meals);
         if(meals != null) {
-            for (Pair<String, String> meal : meals) {
+            for (Quadruple<String, String, String, String> meal : meals) {
                 Meal m = new Meal();
                 m.setTitle(meal.first);
 
@@ -243,6 +243,23 @@ public class Loader {
                     m.setMarker(AbstractMeal.Marker.valueOf(meal.second.toUpperCase()));
                 } else {
                     m.setMarker(AbstractMeal.Marker.NONE);
+                }
+
+                String rawPrices = meal.third;
+                Log.d("loader", "RawPrices "+rawPrices);
+
+                String[] prices =  rawPrices.split(":");
+                String amount = prices[1];
+                String[] singlePrices = amount.split("/");
+
+                m.setStudentPrice(singlePrices[0]);
+                m.setPrice(singlePrices[1]);
+                m.setGuestPrice(singlePrices[2]);
+
+                if(rawPrices.contains("Preis pro 100 g")) {
+                    m.setPricePerWeight(true);
+                } else {
+                    m.setPricePerWeight(false);
                 }
 
                 mealOfTheDay.addMeal(m);
@@ -253,9 +270,9 @@ public class Loader {
 
     }
 
-    private static DailyMeal addSideDishes(DailyMeal mealOfTheDay, List<Pair<String, String>> sideDishes) {
+    private static DailyMeal addSideDishes(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> sideDishes) {
         if(sideDishes != null) {
-            for (Pair<String, String> sideDish : sideDishes) {
+            for (Quadruple<String, String, String, String> sideDish : sideDishes) {
                 SideDish m = new SideDish();
                 m.setTitle(sideDish.first);
 
@@ -265,15 +282,30 @@ public class Loader {
                     m.setMarker(AbstractMeal.Marker.NONE);
                 }
 
+                String rawPrices = sideDish.third;
+                String[] prices =  rawPrices.split(":");
+                String amount = prices[1];
+                String[] singlePrices = amount.split("/");
+
+                m.setStudentPrice(singlePrices[0]);
+                m.setPrice(singlePrices[1]);
+                m.setGuestPrice(singlePrices[2]);
+
+                if(rawPrices.contains("Preis pro 100 g")) {
+                    m.setPricePerWeight(true);
+                } else {
+                    m.setPricePerWeight(false);
+                }
+
                 mealOfTheDay.addSideDisch(m);
             }
         }
         return mealOfTheDay;
     }
 
-    private static DailyMeal addSoups(DailyMeal mealOfTheDay, List<Pair<String, String>> soups) {
+    private static DailyMeal addSoups(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> soups) {
         if(soups != null) {
-            for (Pair<String, String> soup : soups) {
+            for (Quadruple<String, String, String, String> soup : soups) {
                 Soup m = new Soup();
                 m.setTitle(soup.first);
 
@@ -283,15 +315,30 @@ public class Loader {
                     m.setMarker(AbstractMeal.Marker.NONE);
                 }
 
+                String rawPrices = soup.third;
+                String[] prices =  rawPrices.split(":");
+                String amount = prices[1];
+                String[] singlePrices = amount.split("/");
+
+                m.setStudentPrice(singlePrices[0]);
+                m.setPrice(singlePrices[1]);
+                m.setGuestPrice(singlePrices[2]);
+
+                if(rawPrices.contains("Preis pro 100 g")) {
+                    m.setPricePerWeight(true);
+                } else {
+                    m.setPricePerWeight(false);
+                }
+
                 mealOfTheDay.addSoup(m);
             }
         }
         return mealOfTheDay;
     }
 
-    private static DailyMeal addDeserts(DailyMeal mealOfTheDay, List<Pair<String, String>> deserts) {
+    private static DailyMeal addDeserts(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> deserts) {
         if(deserts != null) {
-            for (Pair<String, String> desert : deserts) {
+            for (Quadruple<String, String, String, String> desert : deserts) {
                 Desert m = new Desert();
                 m.setTitle(desert.first);
 
@@ -301,24 +348,76 @@ public class Loader {
                     m.setMarker(AbstractMeal.Marker.NONE);
                 }
 
+                String rawPrices = desert.third;
+                String[] prices =  rawPrices.split(":");
+                String amount = prices[1];
+                String[] singlePrices = amount.split("/");
+
+                m.setStudentPrice(singlePrices[0]);
+                m.setPrice(singlePrices[1]);
+                m.setGuestPrice(singlePrices[2]);
+
+                if(rawPrices.contains("Preis pro 100 g")) {
+                    m.setPricePerWeight(true);
+                } else {
+                    m.setPricePerWeight(false);
+                }
+
                 mealOfTheDay.addDesert(m);
             }
         }
         return mealOfTheDay;
     }
 
-    private static Map<Integer, List<Pair<String, String>>> extractFood(Element day) {
-        HashMap<Integer, List<Pair<String, String>>> meals = new HashMap<>();
+    private static Map<Integer, List<Quadruple<String, String, String, String>>> extractFood(Element day) {
+        HashMap<Integer, List<Quadruple<String, String, String, String>>> meals = new HashMap<>();
         Elements foods = day.select(".food_txt");
         int counter = 0;
 
         for(Element food:foods) {
-            List<Pair<String, String>> elems = extractFoodElement(food);
+            //List<Pair<String, String>> elems = extractFoodElement(food);
+            List<Quadruple<String, String, String, String>> elems = extractFoodElement_2(food);
             meals.put(counter, elems);
             counter++;
         }
 
         return meals;
+    }
+
+    private static List<Quadruple<String, String, String, String>> extractFoodElement_2(Element food) {
+        List<Quadruple<String, String, String, String>> foodElements = new ArrayList<>();
+        Elements speiseplans = food.select(".speiseplan");
+
+        //Log.e("Speiseplan ", speiseplans+"");
+
+        for(Element plan:speiseplans) {
+            String mealElement = plan.select("tbody tr th").first().text();
+            String markerElement = "";
+            String priceElement = "";
+            String addOnsElement = "";
+
+
+            Elements zutatImg = plan.select("tbody tr th.zutat img");
+            if(zutatImg != null) {
+                String title = zutatImg.attr("title");
+                if(title.trim().equals("")) {
+                    markerElement = "";
+                } else {
+                    markerElement = title;
+                }
+            }
+
+            priceElement = plan.select("tbody tr td").get(0).text();
+            if(!plan.select("tbody tr td a").isEmpty()) {
+                addOnsElement = plan.select("tbody tr td a").get(0).text();
+            } else {
+                addOnsElement = "";
+            }
+
+            foodElements.add(new Quadruple<>(mealElement, markerElement, priceElement, addOnsElement));
+        }
+
+        return foodElements;
     }
 
     private static List<Pair<String, String>> extractFoodElement(Element food) {
