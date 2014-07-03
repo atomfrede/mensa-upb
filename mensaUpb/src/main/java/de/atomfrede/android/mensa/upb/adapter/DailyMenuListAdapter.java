@@ -53,12 +53,14 @@ public class DailyMenuListAdapter extends ArrayAdapter<AbstractMeal> implements 
         TextView titleTxt = (TextView) rowView.findViewById(R.id.menu_title);
         TextView markerTxt = (TextView) rowView.findViewById(R.id.menu_marker);
         TextView pricesTxt = (TextView) rowView.findViewById(R.id.menu_prices);
+        TextView allergeneTxt = (TextView) rowView.findViewById(R.id.menu_allergene);
         ImageView markerImage = (ImageView) rowView.findViewById(R.id.marker_image);
 
         if (item.getType() == AbstractMeal.Type.SEPERATOR) {
             rowView.setBackgroundColor(context.getResources().getColor(R.color.pinned_section_header));
             pricesTxt.setVisibility(View.GONE);
             markerTxt.setVisibility(View.GONE);
+            allergeneTxt.setVisibility(View.GONE);
         } else {
             pricesTxt.setVisibility(View.VISIBLE);
         }
@@ -90,6 +92,13 @@ public class DailyMenuListAdapter extends ArrayAdapter<AbstractMeal> implements 
             sb.append(item.getGuestPrice());
 
             pricesTxt.setText(sb.toString());
+        }
+
+        if(item.getType() != AbstractMeal.Type.SEPERATOR && item.getAllergeneList() != null && !item.getAllergeneList().isEmpty()) {
+            allergeneTxt.setVisibility(View.VISIBLE);
+            allergeneTxt.setText(item.getAllergeneList());
+        } else {
+            allergeneTxt.setVisibility(View.GONE);
         }
 
         AbstractMeal.Marker marker = values.get(position).getMarker();

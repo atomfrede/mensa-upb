@@ -43,6 +43,8 @@ public class AbstractMeal implements Serializable {
 
     protected boolean pricePerWeight;
 
+    protected String allergeneList;
+
     protected String title;
 
     protected Type type;
@@ -103,6 +105,14 @@ public class AbstractMeal implements Serializable {
 
     public void setPricePerWeight(boolean pricePerWeight) {
         this.pricePerWeight = pricePerWeight;
+    }
+
+    public String getAllergeneList() {
+        return allergeneList;
+    }
+
+    public void setAllergeneList(String allergeneList) {
+        this.allergeneList = allergeneList;
     }
 
     public String toJson() {

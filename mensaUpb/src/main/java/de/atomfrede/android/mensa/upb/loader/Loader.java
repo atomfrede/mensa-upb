@@ -262,6 +262,8 @@ public class Loader {
                     m.setPricePerWeight(false);
                 }
 
+                m.setAllergeneList(meal.fourth);
+
                 mealOfTheDay.addMeal(m);
             }
         }
@@ -297,6 +299,8 @@ public class Loader {
                     m.setPricePerWeight(false);
                 }
 
+                m.setAllergeneList(sideDish.fourth);
+
                 mealOfTheDay.addSideDisch(m);
             }
         }
@@ -330,6 +334,8 @@ public class Loader {
                     m.setPricePerWeight(false);
                 }
 
+                m.setAllergeneList(soup.fourth);
+
                 mealOfTheDay.addSoup(m);
             }
         }
@@ -362,6 +368,8 @@ public class Loader {
                 } else {
                     m.setPricePerWeight(false);
                 }
+
+                m.setAllergeneList(desert.fourth);
 
                 mealOfTheDay.addDesert(m);
             }
