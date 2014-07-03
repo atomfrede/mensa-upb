@@ -1,37 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="robots" content="index, follow">
-    <meta name="description" content="Simple android application to display meals of uni paderborn's mensa">
-    <meta name="keywords" content="Android, android, UPB, Mensa, Uni Paderborn, Paderborn ">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/identica.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-	<link rel="shortcut icon" href="favicon.ico" />
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<html lang="en">
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mensa Uni Paderborn Android App">
+    <meta name="author" content="Frederik Hahne">
 
+     <link rel="shortcut icon" href="favicon.ico" />
+    <title>Mensa Uni Paderborn for Android</title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
 
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-   <script type="text/javascript">
-/* <![CDATA[ */
-    (function() {
-        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = 'http://api.flattr.com/js/0.6/load.js?mode=auto';
-        t.parentNode.insertBefore(s, t);
-    })();
-/* ]]> */</script>
+    <!-- Custom Google Web Font -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic' rel='stylesheet' type='text/css'>
 
+    <!-- Add custom CSS here -->
+    <link href="css/landing-page.css" rel="stylesheet">
 
 <script type="text/javascript">
   window.___gcfg = {lang: 'de'};
@@ -44,185 +31,244 @@
 </script>
 
 
-    
 
+</head>
 
+<body>
 
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Mensa Uni Paderborn for Android</a>
+            </div>
 
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#about">About</a>
+                    </li>
+                    <li><a href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
+    <div class="intro-header">
 
-    <title>Mensa UPB by atomfrede</title>
-  </head>
+        <div class="container">
 
-  <body>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/de_DE/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Mensa Uni Paderborn</h1>
+                        <h3><i class="fa fa-2x fa-spoon"></i> for Android <i class="fa fa-2x fa-android"></i></h3>
+                        <hr class="intro-divider">
+                        <ul class="list-inline intro-social-buttons">
+                            <li><a href="https://github.com/atomfrede/mensa-upb/releases" class="btn btn-default btn-lg"><i class="fa fa-2x fa-info-circle"></i> <span class="network-name header-button">Release Notes</span></a>
+                            </li>
+                            <li><a href="https://github.com/atomfrede/mensa-upb/" class="btn btn-default btn-lg"><i class="fa fa-2x fa-github"></i> <span class="network-name header-button">Github</span></a>
+                            </li>
+                            <li><a href="https://github.com/atomfrede/mensa-upb/releases/download/v3.3.0/mensaUpb-release.apk" class="btn btn-default btn-lg"><i class="fa fa-2x fa fa-cloud-download"></i> <span class="network-name header-button">Download .apk</span></a>
+                            </li>
+                            <li><a href="https://play.google.com/store/apps/details?id=de.atomfrede.android.mensa.upb" class="btn btn-default btn-lg"><i class="fa fa-2x fa-android"></i> <span class="network-name header-button">Google Play</span></a>
+                            </li>
 
-    <header>
-      <div class="inner">
-        <h1>Mensa-UPB</h1>
-        <h2>A simple application for quering the meals for the mensa (and other facilities) at University Paderborn. </h2>
-        <a href="https://github.com/atomfrede/mensa-upb" class="button"><small>View project on</small>GitHub</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-	
-      </div>
-    </header>
+        </div>
+        <!-- /.container -->
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-
-
-
-
-	
-          <h3>Welcome to Mensa UPB.</h3>
-
-<p>Mensa UPB is a simple GPL licensed Android application to display the meals of the mensa at the University of Paderborn on a weekly base.</p>
-
-<h3>Screenshots</h3>
-
-<img src="images/mensa-upb-3-screen-11.png" width="250" alt="Screenshot: Example Meal Plan"/> 
-<img src="images/mensa-upb-3-screen-22.png" width="250" alt="Screenshot: Opening Times"/>
-
-<h3>Support and Contact</h3>
-
-<p>If you have any problems with Mensa UPB don't hesitate to contact me or file an issue.</p>
-
-<p>
-<a href="https://plus.google.com/u/0/115785689485803131261/posts" target="_blank">
-<img src="images/googleplus.png" alt="Google+ Profile"/>
-</a>
-
-<a href="https://twitter.com/#!/atomfrede" target="_blank">
-<img src="images/twitter.png" alt="Twitter Profile"/>
-</a>
-<a href="https://www.facebook.com/frederik.hahne" target="_blank">
-<img src="images/facebook.png" alt="Facebook Profile"/>
-</a>
-<a href="mailto:atomfrede@gmail.com" target="_blank">
-<img src="images/gmail.png" alt="Gmail Profile"/>
-</a>
-<a href="xmpp:atomfrede@jabber.org">
-<img src="images/gajim.png" alt="JabberID"/>
-</a>
-</p>
-
-
-
-</th>
-</tr>
-</table>
-
-<p style="font-size:10px">Facebook, Twitter, GMail and Gaijm Icon taken from the <a href="http://tiheum.deviantart.com/art/Faenza-Icons-173323228">Faenza Icon Theme by tiheum</a> released under GPLv3<br/>
-Google+ Icon <a href="">by r4hamid</a> released under CC BY-NC 3.0
-</p>
-
-
-
-
-
-<h3>License</h3>
-<pre>
-    Copyright 2012 - 2014 Frederik Hahne
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program. If not, see http://www.gnu.org/licenses/.
-</pre>
-        </section>
-
-        <aside id="sidebar">
-
-<ul style="list-style-type: none;">
-<li style="list-style-type: none;">
-	<a href="https://github.com/atomfrede/mensa-upb/releases/tag/v3.2.2" class="button info">
-		<small>Release Notes</small>
-		v3.2.2
-	</a>
-
-<a href="https://github.com/atomfrede/mensa-upb/releases/download/v3.2.2/mensaUpb-release.apk" class="button">
-		<small>Download</small>
-		.apk
-	</a>
-
-<a href="https://play.google.com/store/apps/details?id=de.atomfrede.android.mensa.upb">
-  <img alt="Get it on Google Play"
-       src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" />
-</a>
-
-		
-</li>
-
-<li style="list-style-type: none;">
-<!-- Platzieren Sie dieses Tag an der Stelle, an der die +1-Schaltfläche angezeigt werden soll. -->
-<div class="g-plusone" data-href="http://atomfrede.github.com/mensa-upb/"></div>
-</li>
-
-<li style="list-style-type: none; padding-top: 10px">
-<div class="fb-like" data-href="http://atomfrede.github.com/mensa-upb/" data-send="false" data-layout="button_count" data-width="250" data-show-faces="false"></div>
-</li>
-
-<li style="list-style-type: none; padding-top: 10px;">
-<!-- identica-share-button -->
-</head><body><div id="identica-share-button">
-
-	<div class="btn-o"><!-- Button -->
-		<a class="btn" href="javascript:var%20requesturl=new%20XMLHttpRequest();var%20geturl;var%20shortenedurl;requesturl.onload=function(){var%20json=requesturl.responseText;geturl=eval('('%20+%20json%20+%20')');shortenedurl=geturl.shorturl;shortenedurl=shortenedurl.replace('http://',%20'');};requesturl.open('GET','http://is.gd/create.php?format=json&amp;url='+document.location.href,%20false);requesturl.send();/*Encode%20the%20title*/var%20d=document,%20e=window.getSelection,%20k=d.getSelection,%20x=d.selection,%20s=(e?e():(k)?k():(x?x.createRange().text:0)),%20l=d.location,%20e=encodeURIComponent,%20pagetitle=((e(s))?e(s):e(d.title));/*Your%20Identi.ca%20username*/var%20username='@influencepc';/*Build%20the%20url%20for%20the%20new%20window*/var%20status='http://identi.ca/index.php?action=newnotice&amp;status_textarea='+pagetitle+'%20'+shortenedurl+'%20'+username;/*Build%20the%20new%20window*/if(!window.open(status,'t','toolbar=0,resizable=0,scrollbars=0,status=0,width=785,height=480')){l.href=status;}void(0);">
-			<i></i>
-			<span class="label">Identi.ca</span>
-		</a>
-	</div><!-- /Button --><!-- Counter --><div class="count-o">
-												<i></i>
-												<u></u>
-												<a id="count" aria-describedby="count-desc" href="javascript:document.location.href='http://identi.ca/search/notice?q='+document.title;" title="Cette page a été partagée. Voir ces messages.">0</a>
-											</div>
-							<!-- /Counter -->
-
-</div>
-<!-- /identica-share-button -->
-</li>
-
-<li style="list-style-type: none; padding-top: 10px;">
-<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://atomfrede.github.com/mensa-upb/" data-text="Mensa UPB zeigt dir den Speiseplan der Mensa Paderborn auf deinem Android Phone an!" data-via="atomfrede" data-lang="de">Twittern</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-</li>
-
-
-
-
-
-<li style="list-style-type: none; padding-top: 10px;">
-
-<a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://atomfrede.github.com/mensa-upb/"></a>
-<noscript><a href="http://flattr.com/thing/732850/Mensa-UPB" target="_blank">
-<img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-</li>
-</ul>
-
-          <p class="repo-owner"><a href="https://github.com/atomfrede/mensa-upb">Mensa UPB</a> is maintained by <a href="https://github.com/atomfrede">atomfrede</a>.</p>
-
-          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="http://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
     </div>
+    <!-- /.intro-header -->
 
-  
-  </body>
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="featurette-heading">Pure Android <span class="text-muted">Pure Holo</span></h2>
+                    <p class="lead">Speisepläne ohne Schnick-Schnack. Pures Android Design, einfach und schnell zu benutzen.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="img/unnamed.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+
+    <div class="content-section-b">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Alle Infos <span class="text-muted"> auf einen Blick</span></h2>
+                    <p class="lead">Preise, Allergene und Zusatzstoffe sind einfach einsehbar.</p>
+                </div>
+                <div class="col-lg-5 col-sm-pull-6  col-sm-6">
+                    <img class="img-responsive" src="img/all-screens.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-b -->
+
+    <div class="content-section-a">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-5 col-sm-6">
+                    <hr class="section-heading-spacer">
+                    <div class="clearfix"></div>
+                    <h2 class="section-heading">Free Software <span class="text-muted">Open Source</span></h2>
+                    <p class="lead">Der <a href="https://github.com/atomfrede/mensa-ubi">Quellcode</a> ist auf Github verfügbar. Jeder kann Verbesserungen beitragen oder <a href="https://github.com/atomfrede/mensa-ubi/issues">Fehler melden</a>.</p>
+                </div>
+                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                    <img class="img-responsive" src="img/git-mark.png" alt="">
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.content-section-a -->
+<div id="about" class="content-section-b">
+  <div class="container">
+    <h3>About</h3>
+    <p class="lead">Dein Mensaplan für Paderbon und Umgebung. Die Speisepläne werden lokal gespeichert, sodass diese nicht jedesmal heruntergeladen werden müssen.
+      <br/><br/>
+    Die Speisepläne von folgenden Hochschulen und Universitäten werden von der App bereitgestellt:<br/>
+
+    <ul>
+    <li>
+    Uni Paderborn
+  </li>
+    <ul>
+    <li>Mensa</li>
+    <li>Hotspot</li>
+    <li>Pub</li>
+  </ul>
+
+    <li>Hochschule Hamm/Lippstadt</li>
+    <ul>
+    <li>Basilica Hamm</li>
+    <li>Atrium Lippstadt</li>
+  </ul>
+
+  </ul>
+  </p>
+  </div>
+</div>
+
+<div id="about" class="content-section-a">
+  <div class="container">
+      <h3>Build on top of</h3>
+         <ul>
+<li><a href="https://github.com/beworker/pinned-section-listview">Pinned Section ListView by Sergeij Shafarenka</a></li>
+<li><a href="https://github.com/keyboardsurfer/Crouton">Crouton by Benjamin Weiss</a></li>
+<li><a href="http://jsoup.org/">jsoup by Jonathan Hedley</a></li>
+<li><a href="https://code.google.com/p/google-gson/">gson by Google Inc.</a></li>
+<li><a href="http://androidannotations.org/">AndroidAnnotations by excilys</a></li>
+<li><a href="https://github.com/ironjan/MensaUPB">MensaUPB by ironjan</a></li>
+</ul>
+  </div>
+</div>
+
+
+
+    <div class="banner">
+
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2 id="contact">Support and Contact:</h2>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="list-inline banner-social-buttons">
+                        <li><a href="https://twitter.com/atomfrede" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name"></span></a>
+                        </li>
+                        <li><a href="https://github.com/atomfrede" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name"></span></a>
+                        </li>
+                        <li><a href="https://www.facebook.com/frederik.hahne" class="btn btn-default btn-lg"><i class="fa fa-facebook-square fa-fw"></i> <span class="network-name"></span></a>
+                        </li>
+                        <li><a href="https://www.facebook.com/frederik.hahne" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name"></span></a>
+                        </li>
+                        <li><a href="mailto:atomfrede@gmail.com" class="btn btn-default btn-lg"><i class="fa fa-envelope fa-fw"></i> <span class="network-name"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <!-- /.container -->
+
+    </div>
+    <!-- /.banner -->
+
+
+
+    <footer>
+        <div class="container">
+
+                  <h4>License</h4>
+                  <pre>Copyright 2012 - 2014 Frederik Hahne
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/;</pre>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://atomfrede.github.com/mensa-upb/" data-text="Mensa UPB zeigt dir die Speisepläne des Studentenwerks Paderborn auf deinem Android Phone an!" data-via="atomfrede" data-lang="de">Twittern</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    <div class="g-plusone" data-size="medium" data-href="http://atomfrede.github.com/mensa-upb/"></div>
+                    <p class="copyright text-muted small">Hosted on <a href="https://pages.github.com/">GitHub Pages</a>. This project is maintained by <a href="https://github.com/atomfrede">atomfrede</a>.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+</body>
 
 </html>
