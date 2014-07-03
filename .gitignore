@@ -25,3 +25,5 @@ gradle.properties
 signing.properties
 
 .gradletasknamecache
+
+build
