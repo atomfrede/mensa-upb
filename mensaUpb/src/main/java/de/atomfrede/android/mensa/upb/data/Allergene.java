@@ -20,7 +20,7 @@ public class Allergene {
         mapping.put("1"
                 , "Farbstoff");
         mapping.put("2"
-                , "konserviert");
+                , "mit Konservierungsstoffen");
         mapping.put("3"
                 , "Antioxidationsmittel");
         mapping.put("4"
