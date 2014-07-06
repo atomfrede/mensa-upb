@@ -5,10 +5,6 @@
 #    source drone.sh
 #
 # Requires following environment variables:
-#    ANDROID_SDK_TOOLS_VERSION
-#    ANDROID_BUILD_TOOLS_VERSION
-#    ANDROID_API_LEVEL
-#    EMULATOR_API_LEVEL
 #    API_KEY
 #    API_SECRET
 
@@ -17,21 +13,17 @@ set -v
 
 PATH=$(echo $PATH | sed 's/\/opt\/android-sdk-linux//')
 sudo apt-get update -qq
+sudo apt-get install -qq --force-yes expect
 if [ `uname -m` = x86_64 ]; then sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch > /dev/null; fi
-wget https://dl.google.com/android/android-sdk_r22.6.2-linux.tgz -nv
-tar xzf android-sdk_r22.6.2-linux.tgz
-export ANDROID_HOME=$PWD/android-sdk-linux
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/build-tools
 
-# Install Android SDK components
-echo y | android update sdk --filter platform-tools,build-tools-$ANDROID_BUILD_TOOLS_VERSION,android-$ANDROID_API_LEVEL,android-$EMULATOR_API_LEVEL,sysimg-$EMULATOR_API_LEVEL,extra-android-m2repository --no-ui --force --all > /dev/null
+# Install Android SDK components, including emulator for tests
+COMPONENTS="build-tools-19.1.0,android-19,android-16,sys-img-armeabi-v7a-android-16,extra-android-m2repository"
+LICENSES="android-sdk-license-5be876d5|android-sdk-preview-license-52d11cd2"
+curl -3L https://raw.github.com/embarkmobile/android-sdk-installer/version-2/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS --accept=$LICENSES && source ~/.android-sdk-installer/env
 
 # Setup AVD device
-#echo no | android create avd --force -n test -t android-$EMULATOR_API_LEVEL
-
-#emulator -avd test -no-skin -no-audio -no-window &
+echo no | android create avd --force -n test -t android-16
+emulator -avd test -no-skin -no-audio -no-window &
 
 #cp gradle.properties.template gradle.properties
 #sed -i 's/Insert your OAuth consumer key here/'"$API_KEY"'/g' gradle.properties
@@ -57,9 +49,10 @@ echo y | android update sdk --filter platform-tools,build-tools-$ANDROID_BUILD_T
 #./gradlew --daemon connectedAndroidTest
 
 # Provide test results as an downloadable Artifact
-#mv build/lint-results-debug.html build/reports/
-#mv build/lint-results-debug_files/ build/reports/
-#cd build/reports/
+#mv build/outputs/lint-results-debug.html build/outputs/reports/
+#mv build/outputs/lint-results-debug_files/ build/outputs/reports/
+#cd build/outputs/reports/
 #tar czf testResults.tar.gz *
 
 exit 0
+

@@ -35,25 +35,33 @@ public class Loader {
     public static WeeklyMeal reloadWeeklyMeal(int location) throws IOException {
         switch (location){
             case Locations.MENSA:
-                return loadMensa();
+                WeeklyMeal m = loadByUrl(Urls.MENSA);
+                Mealplans.getInstance().setMensa(m);
+                return m;
             case Locations.PUB:
-                return loadPub();
+                WeeklyMeal pub = loadByUrl(Urls.PUB);
+                Mealplans.getInstance().setPub(pub);
+                return pub;
             case Locations.HOTSPOT:
-                return loadHotSpot();
+                WeeklyMeal hotspot = loadByUrl(Urls.HOTSPOT);
+                Mealplans.getInstance().setHotspot(hotspot);
+                return hotspot;
             case Locations.HAMM:
-                return loadBasilica();
+                WeeklyMeal hamm = loadByUrl(Urls.HAMM);
+                Mealplans.getInstance().setBasilica(hamm);
+                return hamm;
             case Locations.LIPPSTADT:
-                return loadAtrium();
+                WeeklyMeal lipp = loadByUrl(Urls.LIPPSTADT);
+                Mealplans.getInstance().setAtrium(lipp);
+                return lipp;
         }
         return null;
     }
 
-    private static WeeklyMeal loadAtrium() throws IOException {
-        Log.d(TAG, "Load Basilica.");
-        WeeklyMeal atrium = new WeeklyMeal();
-
+    private static WeeklyMeal loadByUrl(final String url) throws IOException {
+        WeeklyMeal weeklyMeal = new WeeklyMeal();
         Document doc;
-        doc = Jsoup.connect(Urls.LIPPSTADT).timeout(0).get();
+        doc = Jsoup.connect(url).timeout(0).get();
 
         Elements days = doc.select(".scrollContainer > .panel");
 
@@ -77,231 +85,27 @@ public class Loader {
             mealOfTheDay = addSoups(mealOfTheDay, soups);
             mealOfTheDay = addDeserts(mealOfTheDay, deserts);
 
-            atrium.addMeal(mealOfTheDay);
+            weeklyMeal.addMeal(mealOfTheDay);
 
         }
 
-        Mealplans.getInstance().setAtrium(atrium);
-        return atrium;
-    }
-
-    private static WeeklyMeal loadBasilica() throws IOException {
-        Log.d(TAG, "Load Basilica.");
-        WeeklyMeal basilica = new WeeklyMeal();
-
-        Document doc;
-        doc = Jsoup.connect(Urls.HAMM).timeout(0).get();
-
-        Elements days = doc.select(".scrollContainer > .panel");
-
-        for(Element day:days) {
-            String dayText = day.id();
-            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd_MM_yyyy");
-            DateTime dt = formatter.parseDateTime(dayText);
-
-            DailyMeal mealOfTheDay = new DailyMeal();
-            mealOfTheDay.setDate(dt.toDate());
-
-            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
-
-            List<Quadruple<String, String, String, String>> meals = foods.get(0);
-            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
-            List<Quadruple<String, String, String, String>> soups = foods.get(2);
-            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
-
-            mealOfTheDay = addMeals(mealOfTheDay, meals);
-            mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
-            mealOfTheDay = addSoups(mealOfTheDay, soups);
-            mealOfTheDay = addDeserts(mealOfTheDay, deserts);
-
-            basilica.addMeal(mealOfTheDay);
-
-        }
-
-        Mealplans.getInstance().setBasilica(basilica);
-        return basilica;
-    }
-
-    private static WeeklyMeal loadPub() throws IOException {
-        Log.d(TAG, "Load Pub.");
-        WeeklyMeal pub = new WeeklyMeal();
-
-        Document doc;
-        doc = Jsoup.connect(Urls.PUB).timeout(0).get();
-
-        Elements days = doc.select(".scrollContainer > .panel");
-
-        for(Element day:days) {
-            String dayText = day.id();
-            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd_MM_yyyy");
-            DateTime dt = formatter.parseDateTime(dayText);
-
-            DailyMeal mealOfTheDay = new DailyMeal();
-            mealOfTheDay.setDate(dt.toDate());
-
-            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
-
-            List<Quadruple<String, String, String, String>> meals = foods.get(0);
-            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
-            List<Quadruple<String, String, String, String>> soups = foods.get(2);
-            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
-
-            mealOfTheDay = addMeals(mealOfTheDay, meals);
-            mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
-            mealOfTheDay = addSoups(mealOfTheDay, soups);
-            mealOfTheDay = addDeserts(mealOfTheDay, deserts);
-
-            pub.addMeal(mealOfTheDay);
-
-        }
-
-        Mealplans.getInstance().setPub(pub);
-        return pub;
-    }
-
-    private static WeeklyMeal loadHotSpot() throws IOException {
-        Log.d(TAG, "Load Hotspot.");
-        WeeklyMeal hotspot = new WeeklyMeal();
-
-        Document doc;
-        doc = Jsoup.connect(Urls.HOTSPOT).timeout(0).get();
-
-        Elements days = doc.select(".scrollContainer > .panel");
-
-        for(Element day:days) {
-            String dayText = day.id();
-            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd_MM_yyyy");
-            DateTime dt = formatter.parseDateTime(dayText);
-
-            DailyMeal mealOfTheDay = new DailyMeal();
-            mealOfTheDay.setDate(dt.toDate());
-
-            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
-
-            List<Quadruple<String, String, String, String>> meals = foods.get(0);
-            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
-            List<Quadruple<String, String, String, String>> soups = foods.get(2);
-            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
-
-            mealOfTheDay = addMeals(mealOfTheDay, meals);
-            mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
-            mealOfTheDay = addSoups(mealOfTheDay, soups);
-            mealOfTheDay = addDeserts(mealOfTheDay, deserts);
-
-            hotspot.addMeal(mealOfTheDay);
-
-        }
-
-        Mealplans.getInstance().setHotspot(hotspot);
-        return hotspot;
-    }
-
-    private static WeeklyMeal loadMensa() throws IOException{
-        WeeklyMeal mensaMeal = new WeeklyMeal();
-
-        Document doc;
-        doc = Jsoup.connect(Urls.MENSA).timeout(0).get();
-
-        Elements days = doc.select(".scrollContainer > .panel");
-
-        for(Element day:days) {
-            String dayText = day.id();
-            DateTimeFormatter formatter = DateTimeFormat.forPattern("dd_MM_yyyy");
-            DateTime dt = formatter.parseDateTime(dayText);
-
-            DailyMeal mealOfTheDay = new DailyMeal();
-            mealOfTheDay.setDate(dt.toDate());
-
-            Map<Integer, List<Quadruple<String, String, String, String>>> foods = extractFood(day);
-
-            List<Quadruple<String, String, String, String>> meals = foods.get(0);
-            List<Quadruple<String, String, String, String>> sideDishes = foods.get(1);
-            List<Quadruple<String, String, String, String>> soups = foods.get(2);
-            List<Quadruple<String, String, String, String>> deserts = foods.get(3);
-
-            mealOfTheDay = addMeals(mealOfTheDay, meals);
-            mealOfTheDay = addSideDishes(mealOfTheDay, sideDishes);
-            mealOfTheDay = addSoups(mealOfTheDay, soups);
-            mealOfTheDay = addDeserts(mealOfTheDay, deserts);
-
-            mensaMeal.addMeal(mealOfTheDay);
-
-        }
-
-        Mealplans.getInstance().setMensa(mensaMeal);
-        return mensaMeal;
+        return weeklyMeal;
     }
 
     private static DailyMeal addMeals(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> meals) {
-        Log.e("Loader", "Add Meals "+meals);
         if(meals != null) {
             for (Quadruple<String, String, String, String> meal : meals) {
-                Meal m = new Meal();
-                m.setTitle(meal.first);
-
-                if (!meal.second.trim().equals("")) {
-                    m.setMarker(AbstractMeal.Marker.valueOf(meal.second.toUpperCase()));
-                } else {
-                    m.setMarker(AbstractMeal.Marker.NONE);
-                }
-
-                String rawPrices = meal.third;
-                Log.d("loader", "RawPrices "+rawPrices);
-
-                String[] prices =  rawPrices.split(":");
-                String amount = prices[1];
-                String[] singlePrices = amount.split("/");
-
-                m.setStudentPrice(singlePrices[0]);
-                m.setPrice(singlePrices[1]);
-                m.setGuestPrice(singlePrices[2]);
-
-                if(rawPrices.contains("Preis pro 100 g")) {
-                    m.setPricePerWeight(true);
-                } else {
-                    m.setPricePerWeight(false);
-                }
-
-                m.setAllergeneList(meal.fourth);
-
-                mealOfTheDay.addMeal(m);
+                mealOfTheDay.addMeal(MealFactory.createMeal(meal));
             }
         }
 
         return mealOfTheDay;
-
     }
 
     private static DailyMeal addSideDishes(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> sideDishes) {
         if(sideDishes != null) {
             for (Quadruple<String, String, String, String> sideDish : sideDishes) {
-                SideDish m = new SideDish();
-                m.setTitle(sideDish.first);
-
-                if (!sideDish.second.trim().equals("")) {
-                    m.setMarker(AbstractMeal.Marker.valueOf(sideDish.second.toUpperCase()));
-                } else {
-                    m.setMarker(AbstractMeal.Marker.NONE);
-                }
-
-                String rawPrices = sideDish.third;
-                String[] prices =  rawPrices.split(":");
-                String amount = prices[1];
-                String[] singlePrices = amount.split("/");
-
-                m.setStudentPrice(singlePrices[0]);
-                m.setPrice(singlePrices[1]);
-                m.setGuestPrice(singlePrices[2]);
-
-                if(rawPrices.contains("Preis pro 100 g")) {
-                    m.setPricePerWeight(true);
-                } else {
-                    m.setPricePerWeight(false);
-                }
-
-                m.setAllergeneList(sideDish.fourth);
-
-                mealOfTheDay.addSideDisch(m);
+                mealOfTheDay.addSideDisch(MealFactory.createSideDish(sideDish));
             }
         }
         return mealOfTheDay;
@@ -310,33 +114,7 @@ public class Loader {
     private static DailyMeal addSoups(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> soups) {
         if(soups != null) {
             for (Quadruple<String, String, String, String> soup : soups) {
-                Soup m = new Soup();
-                m.setTitle(soup.first);
-
-                if (!soup.second.trim().equals("")) {
-                    m.setMarker(AbstractMeal.Marker.valueOf(soup.second.toUpperCase()));
-                } else {
-                    m.setMarker(AbstractMeal.Marker.NONE);
-                }
-
-                String rawPrices = soup.third;
-                String[] prices =  rawPrices.split(":");
-                String amount = prices[1];
-                String[] singlePrices = amount.split("/");
-
-                m.setStudentPrice(singlePrices[0]);
-                m.setPrice(singlePrices[1]);
-                m.setGuestPrice(singlePrices[2]);
-
-                if(rawPrices.contains("Preis pro 100 g")) {
-                    m.setPricePerWeight(true);
-                } else {
-                    m.setPricePerWeight(false);
-                }
-
-                m.setAllergeneList(soup.fourth);
-
-                mealOfTheDay.addSoup(m);
+                mealOfTheDay.addSoup(MealFactory.createSoup(soup));
             }
         }
         return mealOfTheDay;
@@ -345,33 +123,7 @@ public class Loader {
     private static DailyMeal addDeserts(DailyMeal mealOfTheDay, List<Quadruple<String, String, String, String>> deserts) {
         if(deserts != null) {
             for (Quadruple<String, String, String, String> desert : deserts) {
-                Desert m = new Desert();
-                m.setTitle(desert.first);
-
-                if (!desert.second.trim().equals("")) {
-                    m.setMarker(AbstractMeal.Marker.valueOf(desert.second.toUpperCase()));
-                } else {
-                    m.setMarker(AbstractMeal.Marker.NONE);
-                }
-
-                String rawPrices = desert.third;
-                String[] prices =  rawPrices.split(":");
-                String amount = prices[1];
-                String[] singlePrices = amount.split("/");
-
-                m.setStudentPrice(singlePrices[0]);
-                m.setPrice(singlePrices[1]);
-                m.setGuestPrice(singlePrices[2]);
-
-                if(rawPrices.contains("Preis pro 100 g")) {
-                    m.setPricePerWeight(true);
-                } else {
-                    m.setPricePerWeight(false);
-                }
-
-                m.setAllergeneList(desert.fourth);
-
-                mealOfTheDay.addDesert(m);
+                mealOfTheDay.addDesert(MealFactory.createDesert(desert));
             }
         }
         return mealOfTheDay;
@@ -383,8 +135,7 @@ public class Loader {
         int counter = 0;
 
         for(Element food:foods) {
-            //List<Pair<String, String>> elems = extractFoodElement(food);
-            List<Quadruple<String, String, String, String>> elems = extractFoodElement_2(food);
+            List<Quadruple<String, String, String, String>> elems = extractFoodElement(food);
             meals.put(counter, elems);
             counter++;
         }
@@ -392,18 +143,15 @@ public class Loader {
         return meals;
     }
 
-    private static List<Quadruple<String, String, String, String>> extractFoodElement_2(Element food) {
+    private static List<Quadruple<String, String, String, String>> extractFoodElement(Element food) {
         List<Quadruple<String, String, String, String>> foodElements = new ArrayList<>();
         Elements speiseplans = food.select(".speiseplan");
-
-        //Log.e("Speiseplan ", speiseplans+"");
 
         for(Element plan:speiseplans) {
             String mealElement = plan.select("tbody tr th").first().text();
             String markerElement = "";
             String priceElement = "";
             String addOnsElement = "";
-
 
             Elements zutatImg = plan.select("tbody tr th.zutat img");
             if(zutatImg != null) {
@@ -423,33 +171,6 @@ public class Loader {
             }
 
             foodElements.add(new Quadruple<>(mealElement, markerElement, priceElement, addOnsElement));
-        }
-
-        return foodElements;
-    }
-
-    private static List<Pair<String, String>> extractFoodElement(Element food) {
-        List<Pair<String, String>> foodElements = new ArrayList<>();
-        Elements speiseplans = food.select(".speiseplan");
-
-        //Log.e("Speiseplan ", speiseplans+"");
-
-        for(Element plan:speiseplans) {
-            String mealElement = plan.select("tbody tr th").first().text();
-            String markerElement = "";
-
-
-            Elements zutatImg = plan.select("tbody tr th.zutat img");
-            if(zutatImg != null) {
-                String title = zutatImg.attr("title");
-                if(title.trim().equals("")) {
-                    markerElement = "";
-                } else {
-                    markerElement = title;
-                }
-            }
-
-            foodElements.add(new Pair<>(mealElement, markerElement));
         }
 
         return foodElements;
