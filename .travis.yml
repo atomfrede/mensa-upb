@@ -1,2 +1,3 @@
+install: chmod ugo+x drone.sh
 script: "./drone.sh"
 
