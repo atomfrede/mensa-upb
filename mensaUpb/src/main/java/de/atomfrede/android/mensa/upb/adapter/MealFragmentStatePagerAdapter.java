@@ -42,6 +42,8 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 return getDataFragment(Mealplans.getInstance().getPub(), tab);
             case Locations.LIPPSTADT:
                 return getDataFragment(Mealplans.getInstance().getAtrium(), tab);
+            case Locations.FORUM:
+                return getDataFragment(Mealplans.getInstance().getForum(), tab);
             default:
                 return null;
         }
@@ -60,6 +62,8 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 return Mealplans.getInstance().getPub().getMeals().size();
             case Locations.LIPPSTADT:
                 return Mealplans.getInstance().getAtrium().getMeals().size();
+            case Locations.FORUM:
+                return Mealplans.getInstance().getForum().getMeals().size();
             default:
                 return 5;
         }
@@ -84,6 +88,9 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             case Locations.LIPPSTADT:
                 min = Math.min(Mealplans.getInstance().getAtrium().getMeals().size()-1, position);
                 return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getAtrium().getMeals().get(min).getDate());
+            case Locations.FORUM:
+                min = Math.min(Mealplans.getInstance().getAtrium().getMeals().size()-1, position);
+                return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getForum().getMeals().get(min).getDate());
         }
 
         return "Position "+position;

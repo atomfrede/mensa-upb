@@ -19,6 +19,10 @@
         <item>Montag – Donnerstag 8:00 – 17:00 Uhr</item>
         <item>Freitag 8:00 – 14:30 Uhr</item>
     </string-array>
+    <string-array name="forum_opening_times">
+        <item>Montag – Donnerstag 11:15 – 14:00 Uhr</item>
+        <item>Freitag 11:15 – 13:30 Uhr</item>
+    </string-array>
 
 
 </resources>

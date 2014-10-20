@@ -132,6 +132,9 @@ public class DailyMenuListAdapter extends ArrayAdapter<AbstractMeal> implements 
                 case VEGETARISCH:
                     markerImage.setImageResource(R.drawable.ic_vegetarisch);
                     break;
+                case VITAL:
+                    markerImage.setImageResource(R.drawable.ic_vital);
+                    break;
             }
         } else {
             markerImage.setVisibility(View.GONE);

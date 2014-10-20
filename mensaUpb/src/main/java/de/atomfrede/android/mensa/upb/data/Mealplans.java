@@ -18,6 +18,7 @@ public class Mealplans {
     private WeeklyMeal basilica;
     private WeeklyMeal pub;
     private WeeklyMeal atrium;
+    private WeeklyMeal forum;
 
     public WeeklyMeal getMensa() {
         return mensa;
@@ -57,5 +58,13 @@ public class Mealplans {
 
     public void setAtrium(WeeklyMeal atrium) {
         this.atrium = atrium;
+    }
+
+    public WeeklyMeal getForum() {
+        return forum;
+    }
+
+    public void setForum(WeeklyMeal forum) {
+        this.forum = forum;
     }
 }

@@ -169,6 +169,9 @@ public class WeeklyMealFragment extends Fragment {
             case Locations.LIPPSTADT:
                 ((MainActivity_) getActivity()).restoreSubtitle(getString(R.string.title_lippstadt));
                 break;
+            case Locations.FORUM:
+                ((MainActivity_) getActivity()).restoreSubtitle(getString(R.string.title_forum));
+                break;
         }
     }
     private WeeklyMeal getFromCache() {
@@ -227,6 +230,15 @@ public class WeeklyMealFragment extends Fragment {
                     }
                 }
                 break;
+            case Locations.FORUM:
+                if(sp.contains(CacheKeys.FORUM)) {
+                    String json = sp.getString(CacheKeys.FORUM, null);
+                    if(json != null) {
+                        meal = WeeklyMeal.fromJson(json);
+                        Mealplans.getInstance().setForum(meal);
+                    }
+                }
+                break;
         }
 
         return meal;
@@ -244,6 +256,8 @@ public class WeeklyMealFragment extends Fragment {
                 return updateRequired(CacheKeys.LAST_UPDATE_HAMM);
             case Locations.LIPPSTADT:
                 return updateRequired(CacheKeys.LAST_UPDATE_LIPPSTADT);
+            case Locations.FORUM:
+                return updateRequired(CacheKeys.LAST_UPDATE_FORUM);
             default:
                 return true;
         }
@@ -280,6 +294,10 @@ public class WeeklyMealFragment extends Fragment {
             case Locations.LIPPSTADT:
                 sp.edit().putString(CacheKeys.LIPPSTADT, weeklyMeal.toJson()).commit();
                 sp.edit().putInt(CacheKeys.LAST_UPDATE_LIPPSTADT, CacheValueUtil.getCacheValue()).commit();
+                break;
+            case Locations.FORUM:
+                sp.edit().putString(CacheKeys.FORUM, weeklyMeal.toJson()).commit();
+                sp.edit().putInt(CacheKeys.LAST_UPDATE_FORUM, CacheValueUtil.getCacheValue()).commit();
                 break;
             default:
                 break;

@@ -20,6 +20,8 @@ public class AbstractMeal implements Serializable {
         LACTOSEFREI,
         @SerializedName("GLUTENFREI")
         GLUTENFREI,
+        @SerializedName("VITAL")
+        VITAL,
         @SerializedName("NONE")
         NONE
     }

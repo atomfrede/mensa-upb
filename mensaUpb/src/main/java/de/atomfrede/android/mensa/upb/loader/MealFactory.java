@@ -37,7 +37,7 @@ public class MealFactory {
         m.setTitle(data.first);
 
         if (!data.second.trim().equals("")) {
-            m.setMarker(AbstractMeal.Marker.valueOf(data.second.toUpperCase()));
+            m.setMarker(toMarker(data.second));
         } else {
             m.setMarker(AbstractMeal.Marker.NONE);
         }
@@ -60,5 +60,27 @@ public class MealFactory {
         m.setAllergeneList(data.fourth);
 
         return m;
+    }
+
+    private static AbstractMeal.Marker toMarker(String value) {
+
+        switch (value) {
+            case "lactosefrei":
+                return AbstractMeal.Marker.LACTOSEFREI;
+            case "vegetarisch":
+                return AbstractMeal.Marker.VEGETARISCH;
+            case "glutenfrei":
+                return AbstractMeal.Marker.GLUTENFREI;
+            case "fettarm":
+                return AbstractMeal.Marker.FETTARM;
+            case "vital food":
+                return AbstractMeal.Marker.VITAL;
+            case "kalorienarm":
+                return AbstractMeal.Marker.KALORIENARM;
+            case "vegan":
+                return AbstractMeal.Marker.VEGAN;
+            default:
+                return AbstractMeal.Marker.NONE;
+        }
     }
 }

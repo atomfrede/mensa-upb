@@ -54,6 +54,10 @@ public class Loader {
                 WeeklyMeal lipp = loadByUrl(Urls.LIPPSTADT);
                 Mealplans.getInstance().setAtrium(lipp);
                 return lipp;
+            case Locations.FORUM:
+                WeeklyMeal forum = loadByUrl(Urls.FORUM);
+                Mealplans.getInstance().setForum(forum);
+                return forum;
         }
         return null;
     }

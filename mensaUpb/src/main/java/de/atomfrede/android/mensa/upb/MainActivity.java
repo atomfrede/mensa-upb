@@ -101,6 +101,9 @@ public class MainActivity extends ActionBarActivity
             case Locations.LIPPSTADT:
                 subTitle = getString(R.string.title_lippstadt);
                 break;
+            case Locations.FORUM:
+                subTitle = getString(R.string.title_forum);
+                break;
         }
 
     }
@@ -198,6 +201,8 @@ public class MainActivity extends ActionBarActivity
                 return getResources().getStringArray(R.array.hamm_opening_times);
             case Locations.LIPPSTADT:
                 return getResources().getStringArray(R.array.lippstadt_opening_times);
+            case Locations.FORUM:
+                return getResources().getStringArray(R.array.forum_opening_times);
         }
 
         return getResources().getStringArray(R.array.mensa_opening_times);
