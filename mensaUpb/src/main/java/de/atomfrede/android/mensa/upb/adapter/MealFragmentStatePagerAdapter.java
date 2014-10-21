@@ -31,7 +31,7 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int tab) {
-        switch (location){
+        switch (location) {
             case Locations.MENSA:
                 return getDataFragment(Mealplans.getInstance().getMensa(), tab);
             case Locations.HOTSPOT:
@@ -74,38 +74,38 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         int min = 0;
         switch (location) {
             case Locations.MENSA:
-                min = Math.min(Mealplans.getInstance().getMensa().getMeals().size()-1, position);
+                min = Math.min(Mealplans.getInstance().getMensa().getMeals().size() - 1, position);
                 return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getMensa().getMeals().get(min).getDate());
             case Locations.HOTSPOT:
-                min = Math.min(Mealplans.getInstance().getHotspot().getMeals().size()-1, position);
+                min = Math.min(Mealplans.getInstance().getHotspot().getMeals().size() - 1, position);
                 return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getHotspot().getMeals().get(min).getDate());
             case Locations.PUB:
-                min = Math.min(Mealplans.getInstance().getPub().getMeals().size()-1, position);
+                min = Math.min(Mealplans.getInstance().getPub().getMeals().size() - 1, position);
                 return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getPub().getMeals().get(min).getDate());
             case Locations.HAMM:
-                min = Math.min(Mealplans.getInstance().getBasilica().getMeals().size()-1, position);
+                min = Math.min(Mealplans.getInstance().getBasilica().getMeals().size() - 1, position);
                 return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getBasilica().getMeals().get(min).getDate());
             case Locations.LIPPSTADT:
-                min = Math.min(Mealplans.getInstance().getAtrium().getMeals().size()-1, position);
+                min = Math.min(Mealplans.getInstance().getAtrium().getMeals().size() - 1, position);
                 return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getAtrium().getMeals().get(min).getDate());
             case Locations.FORUM:
-                min = Math.min(Mealplans.getInstance().getAtrium().getMeals().size()-1, position);
+                min = Math.min(Mealplans.getInstance().getForum().getMeals().size() - 1, position);
                 return new SimpleDateFormat(getDateFormat()).format(Mealplans.getInstance().getForum().getMeals().get(min).getDate());
         }
 
-        return "Position "+position;
+        return "Position " + position;
     }
 
 
     @SuppressLint("NewApi")
     private String getDateFormat() {
         int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-        if(currentapiVersion >= 18) {
+        if (currentapiVersion >= 18) {
             return DateFormat.getBestDateTimePattern(Locale.getDefault(), "EEddMMM");
         } else {
-            if(Locale.getDefault().getLanguage() == Locale.ENGLISH.getLanguage()) {
+            if (Locale.getDefault().getLanguage() == Locale.ENGLISH.getLanguage()) {
                 return "EEE, MMM dd";
-            } else if(Locale.getDefault().getLanguage() == Locale.GERMANY.getLanguage()) {
+            } else if (Locale.getDefault().getLanguage() == Locale.GERMANY.getLanguage()) {
                 return "EEE, dd. MMM";
             }
         }
@@ -114,7 +114,7 @@ public class MealFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     }
 
     private DailyMenuListFragment_ getDataFragment(WeeklyMeal meal, int tab) {
-        int min = Math.min(meal.getMeals().size()-1, tab);
+        int min = Math.min(meal.getMeals().size() - 1, tab);
 
         switch (tab) {
             case 0:
