@@ -271,6 +271,10 @@ public class WeeklyMealFragment extends Fragment {
 
         int lastUpdate = sp.getInt(cacheKey, -1);
 
+        if (lastUpdate > 2000) {
+            return true;
+        }
+
         return CacheValueUtil.getCacheValue() > lastUpdate;
     }
     private void cacheWeeklyMeal() {
