@@ -49,7 +49,13 @@ public class MealFactory {
 
         m.setStudentPrice(singlePrices[0]);
         m.setPrice(singlePrices[1]);
-        m.setGuestPrice(singlePrices[2]);
+
+        if (singlePrices.length > 2) {
+            m.setGuestPrice(singlePrices[2]);
+        } else {
+            m.setGuestPrice("");
+        }
+
 
         if(rawPrices.contains("Preis pro 100 g")) {
             m.setPricePerWeight(true);
