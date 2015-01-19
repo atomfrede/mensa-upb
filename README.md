@@ -9,6 +9,11 @@ A simple application for quering the meals for the mensa at Uni Paderborn.
 
 **See http://atomfrede.github.com/mensa-upb/ for more information.**
 
+Translation at crowdin
+==========
+
+https://crowdin.com/project/mensa-upb
+
 License
 ========
 

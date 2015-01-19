@@ -1,0 +1,12 @@
+project_identifier: mensa-upb
+base_path: src/main
+
+files:
+    -
+        source: '/res/values/*.xml
+        translations: '/res/values-%android_code%/%original_file_name%'
+        languages_mapping:
+            android_code:
+                de: de
+                en: en
+                fr: fr
