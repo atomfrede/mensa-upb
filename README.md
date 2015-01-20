@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/atomfrede/mensa-upb.svg?branch=master)](https://travis-ci.org/atomfrede/mensa-upb)
 [![Stories in Ready](https://badge.waffle.io/atomfrede/mensa-upb.png?label=ready&title=Ready)](https://waffle.io/atomfrede/mensa-upb)
 [![endorse](http://api.coderwall.com/atomfrede/endorsecount.png)](http://coderwall.com/atomfrede)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/mensa-upb/localized.png)](https://crowdin.com/project/mensa-upb)
 Mensa-UPB
 ========
 
