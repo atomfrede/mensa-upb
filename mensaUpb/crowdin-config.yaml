@@ -2,11 +2,16 @@ project_identifier: mensa-upb
 base_path: src/main
 
 files:
-    -
-        source: '/res/values/*.xml
-        translations: '/res/values-%android_code%/%original_file_name%'
-        languages_mapping:
-            android_code:
-                de: de
-                en: en
-                fr: fr
+  -
+   source: '/res/values-de/*.xml'
+   translation: '/res/values-%android_code%/%original_file_name%'
+   ignore:
+           - /res/values/colors.xml
+           - /res/values/dimens.xml 
+           - /res/values/styles.xml
+           - /res/values/styles_mensaupb.xml
+   languages_mapping:
+     android_code:
+       de: de
+       fr: fr
+       en: en

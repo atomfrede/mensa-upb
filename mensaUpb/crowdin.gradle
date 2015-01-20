@@ -1,0 +1,21 @@
+configurations {
+    crowdin
+    
+}
+
+task uploadTranslationFiles(type: JavaExec) {
+    group = "crowdin"
+    classpath = files("crowdin-cli.jar")
+    
+}
+
+task downloadTranslations(type: JavaExec) {
+    group = "crowdin"
+    classpath = files("crowdin-cli.jar")
+}
+
+task listTranslations(type: JavaExec) {
+    group = "crowdin"
+    classpath = files("crowdin-cli.jar")
+    
+}
