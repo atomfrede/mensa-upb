@@ -1,21 +1,76 @@
 configurations {
     crowdin
+}
+
+task crowdinUploadSources(type: JavaExec) {
+    group = "crowdin"
+    classpath = files("crowdin-cli.jar")
+
+    main = "JarMain"
+
+    args "--config=crowdin-config.yaml"
+    args "--identity=crowdin-account.yaml"
+    args "upload"
+    args "sources"
+}
+
+task crowdinUploadTranslations(type: JavaExec) {
+    group = "crowdin"
+    classpath = files("crowdin-cli.jar")
+
+    main = "JarMain"
+
+    args "--config=crowdin-config.yaml"
+    args "--identity=crowdin-account.yaml"
+    args "upload"
+    args "translations"
+}
+
+task crowdinDownloadTranslations(type: JavaExec) {
+    group = "crowdin"
+    classpath = files("crowdin-cli.jar")
+
+    main = "JarMain"
+
+    args "--config=crowdin-config.yaml"
+    args "--identity=crowdin-account.yaml"
+    args "download"
     
 }
 
-task uploadTranslationFiles(type: JavaExec) {
+task crowdinListSources(type: JavaExec) {
     group = "crowdin"
     classpath = files("crowdin-cli.jar")
     
+    main = "JarMain"
+    
+    args "--config=crowdin-config.yaml"
+    args "--identity=crowdin-account.yaml"
+    args "list"
+    args "sources"
 }
 
-task downloadTranslations(type: JavaExec) {
+task crowdinListTranslations(type: JavaExec) {
     group = "crowdin"
     classpath = files("crowdin-cli.jar")
+
+    main = "JarMain"
+
+    args "--config=crowdin-config.yaml"
+    args "--identity=crowdin-account.yaml"
+    args "list"
+    args "translations"
 }
 
-task listTranslations(type: JavaExec) {
+task crowdinListProject(type: JavaExec) {
     group = "crowdin"
     classpath = files("crowdin-cli.jar")
+
+    main = "JarMain"
+
+    args "--config=crowdin-config.yaml"
+    args "--identity=crowdin-account.yaml"
+    args "list"
+    args "project"
     
 }
